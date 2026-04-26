@@ -306,7 +306,7 @@ export function LegalCredentials({
       {items.map((label, i) => (
         <React.Fragment key={label}>
           {i > 0 && <span className={cn("h-3.5 w-px", sepCls)} aria-hidden />}
-          <span className={cn("inline-flex items-center gap-1.5 text-sm font-semibold leading-none", textCls)}>
+          <span className={cn("inline-flex items-center gap-1.5 text-sm font-semibold leading-none tracking-[0.01em]", textCls)}>
             <ShieldCheck className={cn("size-4", iconCls)} strokeWidth={2.25} />
             <span>{label}</span>
           </span>
@@ -1408,33 +1408,33 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-12">
           <div className="space-y-5 md:col-span-5">
             <Logo />
-            <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+            <p className="max-w-md text-sm leading-[1.6] text-[#6B7280]">
               Creemos que ningún director debería quedar expuesto personalmente por operar un proceso que,
               hasta hoy, no tenía solución viable. Por eso creamos Ekole.
             </p>
-            <p className="text-xs font-medium text-foreground">— El equipo de Ekole</p>
+            <p className="text-sm font-medium text-[#6B7280]">— El equipo de Ekole</p>
           </div>
 
           <div className="md:col-span-3">
-            <h3 className="text-sm font-semibold text-foreground">Producto</h3>
-            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+            <h3 className="text-sm font-bold text-foreground">Producto</h3>
+            <ul className="mt-4 space-y-3 text-sm text-[#6B7280]">
               <li>
-                <a href="/#problema" className="transition-colors hover:text-foreground">
+                <a href="/#problema" className="transition-colors hover:text-primary">
                   Problema
                 </a>
               </li>
               <li>
-                <a href="/diagnostico" className="transition-colors hover:text-foreground">
+                <a href="/diagnostico" className="transition-colors hover:text-primary">
                   Diagnóstico
                 </a>
               </li>
               <li>
-                <a href="/#solucion" className="transition-colors hover:text-foreground">
+                <a href="/#solucion" className="transition-colors hover:text-primary">
                   Solución
                 </a>
               </li>
               <li>
-                <a href="/#preguntas" className="transition-colors hover:text-foreground">
+                <a href="/#preguntas" className="transition-colors hover:text-primary">
                   Preguntas
                 </a>
               </li>
@@ -1442,17 +1442,17 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-4">
-            <h3 className="text-sm font-semibold text-foreground">Contacto</h3>
-            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+            <h3 className="text-sm font-bold text-foreground">Contacto</h3>
+            <ul className="mt-4 space-y-3 text-sm text-[#6B7280]">
               <li>
-                <a href={DEMO_CTA_HREF} className="transition-colors hover:text-foreground">
+                <a href={DEMO_CTA_HREF} className="transition-colors hover:text-primary">
                   Solicitar demo
                 </a>
               </li>
               <li>
                 <a
                   href="https://www.ekole.app/privacy-and-policy"
-                  className="transition-colors hover:text-foreground"
+                  className="transition-colors hover:text-primary"
                 >
                   Política de Privacidad
                 </a>
@@ -1460,7 +1460,7 @@ export function Footer() {
               <li>
                 <a
                   href="https://www.ekole.app/terms-and-conditions"
-                  className="transition-colors hover:text-foreground"
+                  className="transition-colors hover:text-primary"
                 >
                   Términos y condiciones
                 </a>
@@ -1470,13 +1470,13 @@ export function Footer() {
         </div>
 
         {/* legal notice */}
-        <div className="mt-14 rounded-2xl border border-border bg-background/60 p-5 text-xs leading-relaxed text-muted-foreground">
+        <div className="mt-14 rounded-[8px] border border-border bg-[#F3F4F6] px-5 py-4 text-xs leading-[1.5] text-[#9CA3AF]">
           <div className="flex items-start gap-3">
             <span className="mt-0.5 flex size-5 flex-shrink-0 items-center justify-center rounded-full border border-border text-[10px] font-semibold">
               i
             </span>
             <p>
-              <strong className="text-foreground">Aviso legal.</strong> La información legal presentada en
+              <strong className="font-semibold text-[#6B7280]">Aviso legal.</strong> La información legal presentada en
               esta página — incluyendo referencias al Art. 1921 del Código Civil Federal, la Ley Federal de
               Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y los deberes de
               custodia escolar — es orientativa y tiene fines informativos. No constituye asesoría jurídica
@@ -1486,12 +1486,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-8 text-xs text-muted-foreground md:flex-row">
-          <div>© {new Date().getFullYear()} Ekole. Todos los derechos reservados.</div>
-          <div className="flex items-center gap-1.5">
+        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-8 text-xs md:flex-row">
+          <div className="text-[#9CA3AF]">© {new Date().getFullYear()} Ekole. Todos los derechos reservados.</div>
+          <div className="flex items-center gap-1.5 font-semibold text-[#10B981]">
             <span className="relative flex size-2 items-center justify-center">
-              <span className="absolute inline-flex size-2 animate-pulse-dot rounded-full bg-safe/60" />
-              <span className="relative inline-flex size-1.5 rounded-full bg-safe" />
+              <span className="absolute inline-flex size-2 animate-pulse-dot rounded-full bg-[#10B981]/60" />
+              <span className="relative inline-flex size-1.5 rounded-full bg-[#10B981]" />
             </span>
             Cupos abiertos · ciclo 2026-2027
           </div>

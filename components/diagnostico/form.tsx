@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { ArrowRight, Check, Lock, Share2, Shield } from "lucide-react"
-import { Pill, Reveal, SectionLabel } from "@/components/software-development-website"
+import { Reveal, SectionLabel } from "@/components/software-development-website"
 import type { Nivel, QId } from "./data"
 import { WEIGHTS } from "./data"
 import { cn } from "./parts"
@@ -319,13 +319,15 @@ export function ThankYou({
         </Reveal>
 
         <Reveal delay={0.25}>
-          <div className="mt-8 rounded-2xl border border-border bg-card p-5">
-            <div className="flex items-center gap-2">
-              <Pill tone={urgent ? "risk" : "primary"}>Nivel {nivel}</Pill>
-              <Pill>
+          <div className="mt-8 rounded-lg border border-border bg-card p-5">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center rounded-full bg-[rgba(245,158,11,0.1)] px-2 py-0.5 text-xs font-semibold text-[#92400e]">
+                Nivel {nivel}
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-[rgba(23,62,117,0.1)] px-2 py-0.5 text-xs font-semibold text-primary">
                 <strong className="font-semibold">{riskCount}</strong>
                 <span>áreas con deficiencias</span>
-              </Pill>
+              </span>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-foreground/80">
               La guía le ayudará a identificar los pasos concretos para reducir esa exposición — y cuáles
@@ -335,9 +337,11 @@ export function ThankYou({
         </Reveal>
 
         <Reveal delay={0.35}>
-          <div className="mt-6 rounded-2xl border border-border bg-card p-6">
-            <Pill tone="risk">Mientras llega su guía</Pill>
-            <h3 className="mt-3 text-lg font-medium tracking-tight text-foreground">
+          <div className="mt-6 rounded-lg border border-border bg-card p-6">
+            <span className="inline-flex items-center rounded-full bg-[rgba(245,158,11,0.1)] px-2 py-0.5 text-xs font-semibold text-[#92400e]">
+              Mientras llega su guía
+            </span>
+            <h3 className="mt-3 text-xl font-bold leading-[1.4] tracking-tight text-[#1F2937]">
               2 acciones que puede hacer hoy
             </h3>
             <ul className="mt-4 space-y-3">
@@ -346,10 +350,10 @@ export function ThankYou({
                 "Pida al personal de vialidad que hoy, al final de la salida, anoten en una hoja el nombre de los últimos 10 alumnos entregados y quién los recogió. Ese papel ya es más defensa legal que no tener nada.",
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="flex size-6 flex-shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+                  <span className="text-base font-bold text-primary flex-shrink-0 w-5">
                     {i + 1}
                   </span>
-                  <span className="text-sm leading-relaxed text-foreground/85">{t}</span>
+                  <span className="text-base leading-[1.6] text-[#1F2937]">{t}</span>
                 </li>
               ))}
             </ul>
@@ -357,12 +361,14 @@ export function ThankYou({
         </Reveal>
 
         <Reveal delay={0.45}>
-          <div className="mt-6 rounded-2xl border border-border bg-card p-6">
-            <Pill tone="primary">En las próximas 48 horas</Pill>
-            <p className="mt-3 text-sm leading-relaxed text-foreground/85">
+          <div className="mt-6 rounded-lg border border-border bg-card p-6">
+            <span className="inline-flex items-center rounded-full bg-[rgba(23,62,117,0.1)] px-2 py-0.5 text-xs font-semibold text-primary">
+              En las próximas 48 horas
+            </span>
+            <p className="mt-3 text-base leading-[1.6] text-[#4B5563]">
               Le enviaremos un análisis basado en su matrícula de{" "}
-              <strong className="font-semibold text-foreground">{matriculaLabel.toLowerCase()}</strong> y las{" "}
-              <strong className="font-semibold text-foreground">{riskCount} áreas</strong> de riesgo que
+              <strong className="font-semibold text-[#1F2937]">{matriculaLabel.toLowerCase()}</strong> y las{" "}
+              <strong className="font-semibold text-[#1F2937]">{riskCount} áreas</strong> de riesgo que
               identificó — con los pasos concretos que otros colegios ya ejecutaron para cerrar esas brechas.
             </p>
           </div>
@@ -370,14 +376,14 @@ export function ThankYou({
 
         <Reveal delay={0.55}>
           <div className="mt-10 border-t border-border pt-8 text-center">
-            <p className="mb-3 text-sm text-muted-foreground">
+            <p className="mb-3 text-sm text-[#6B7280]">
               ¿Conoce a otro director que debería evaluar su colegio?
             </p>
             <a
               href={shareUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-5 py-2.5 text-sm font-medium text-foreground/90 transition-all hover:border-primary/40 hover:bg-card hover:text-primary"
+              className="inline-flex items-center justify-center gap-2 rounded-[8px] border-2 border-primary bg-transparent px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary/[0.06] hover:shadow-sm"
             >
               <Share2 className="size-4" />
               Compartir esta herramienta

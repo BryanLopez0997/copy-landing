@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { ArrowRight, ShieldAlert } from "lucide-react"
-import { Reveal, SectionLabel } from "@/components/software-development-website"
+import { Reveal } from "@/components/software-development-website"
 import {
   INVERTED,
   SECTIONS,
@@ -117,11 +117,15 @@ export default function DiagnosticoTool() {
       <section className="py-10 md:py-16">
         <div className="mx-auto max-w-3xl px-6">
           <Reveal>
-            <SectionLabel>Evaluación · 8 preguntas</SectionLabel>
-            <h2 className="mt-5 text-balance text-center text-2xl font-medium leading-tight tracking-tight text-foreground md:text-3xl">
+            <div className="flex items-center justify-center gap-3 text-[11px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+              <span className="h-px w-8 bg-border" />
+              Evaluación · 8 preguntas
+              <span className="h-px w-8 bg-border" />
+            </div>
+            <h2 className="mt-5 text-balance text-center text-[24px] font-extrabold leading-[1.2] tracking-tight text-[#111827] md:text-[32px]">
               Responda con la operación real de su colegio hoy
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-balance text-center text-sm leading-relaxed text-muted-foreground md:text-base">
+            <p className="mx-auto mt-4 max-w-[65ch] text-balance text-center text-base leading-[1.6] text-[#4B5563]">
               No lo que planea hacer — lo que efectivamente tiene documentado y en operación. Sus respuestas
               no se almacenan.
             </p>
@@ -162,10 +166,10 @@ export default function DiagnosticoTool() {
                 onClick={calcular}
                 disabled={!allAnswered}
                 className={cn(
-                  "group inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2",
+                  "group inline-flex items-center justify-center gap-2 rounded-[8px] px-8 py-4 text-base font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2",
                   allAnswered
-                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/35 active:translate-y-px active:shadow-sm"
-                    : "cursor-not-allowed bg-muted text-muted-foreground",
+                    ? "border-2 border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/35 active:translate-y-px active:shadow-sm"
+                    : "cursor-not-allowed border-2 border-transparent bg-muted text-muted-foreground",
                 )}
               >
                 Generar diagnóstico
@@ -180,7 +184,7 @@ export default function DiagnosticoTool() {
                   para generar su diagnóstico
                 </p>
               ) : (
-                <p className="mt-3 text-xs text-muted-foreground">
+                <p className="mt-3 text-xs leading-[1.5] text-[#6B7280]">
                   Sus respuestas no se registran · El diagnóstico se genera en su dispositivo
                 </p>
               )}
