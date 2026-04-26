@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import DiagnosticoTool from "@/components/diagnostico-tool"
-import { HeroHeader, Footer } from "@/components/software-development-website"
+import { DiagnosticoHeader, DiagnosticoFooter } from "@/components/diagnostico/parts"
 
 export const metadata: Metadata = {
   title: "Diagnóstico de Exposición Legal — Ekole para Colegios",
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <HeroHeader />
+      <DiagnosticoHeader />
       <main className="pt-16">
         <DiagnosticoTool />
       </main>
-      <Footer />
+      <DiagnosticoFooter />
     </>
   )
 }

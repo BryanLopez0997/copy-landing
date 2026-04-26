@@ -237,8 +237,9 @@ export default function DiagnosticoTool() {
 
       <div className="mx-auto max-w-3xl px-6 pb-12 pt-8">
         <p className="border-t border-border pt-6 text-center text-xs italic leading-relaxed text-muted-foreground">
-          Esta herramienta es orientativa y no sustituye asesoría legal profesional. Los rangos de multas
-          corresponden a la legislación federal y local vigente a 2025.
+          Esta herramienta tiene fines informativos únicamente y no constituye asesoría jurídica. Consulte
+          con un abogado especializado para su caso concreto. Los rangos de multas corresponden a la
+          legislación federal y local vigente a 2025.
         </p>
       </div>
 
