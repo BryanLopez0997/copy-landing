@@ -126,16 +126,22 @@ export function DocHeader() {
         </p>
 
         <p className="mx-auto mt-6 max-w-[65ch] text-balance text-base leading-relaxed text-muted-foreground md:text-lg">
-          Evaluación de 8 áreas de cumplimiento. Resultados basados en legislación federal vigente. La
-          responsabilidad no recae solo en el colegio.
+          Evaluación de 8 áreas de cumplimiento basada en los lineamientos de la SEP para entornos
+          escolares seguros y la legislación federal vigente.
+        </p>
+        <p className="mx-auto mt-3 max-w-[65ch] text-balance text-base font-semibold leading-relaxed text-[#1F2937] md:text-lg">
+          Bajo este marco, la responsabilidad no recae solo en el colegio — también en{" "}
+          <span className="text-primary-light">el director</span>.
         </p>
 
-        {/* DS: Legal Credentials con escudo + separador (no pills) */}
-        <LegalCredentials
-          tone="light"
-          className="mt-7 justify-center"
-          items={["LFPDPPP", "Derechos ARCO", "NOM-081-SEMARNAT", "DOF vigente 2025"]}
-        />
+        {/* Credenciales legales — bloque navy con escudo blanco */}
+        <div className="mt-7 inline-flex max-w-full rounded-2xl bg-primary px-5 py-3 shadow-sm">
+          <LegalCredentials
+            tone="navy"
+            className="justify-center"
+            items={["SEP", "LFPDPPP", "Derechos ARCO", "NOM-081", "DOF vigente 2025"]}
+          />
+        </div>
 
         <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-[rgba(23,62,117,0.1)] px-2 py-0.5 text-xs font-semibold text-primary">
           <Lock className="size-[14px] flex-shrink-0" />

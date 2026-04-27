@@ -61,15 +61,15 @@ export const SECTIONS: Section[] = [
   },
   {
     num: "ÁREA 02",
-    title: "Operación de salida escolar",
-    subtitle: "Registro y control de entregas",
+    title: "Salida escolar segura",
+    subtitle: "Protocolo SEP · Registro y control de entregas",
     questions: [
       {
         id: "q3",
         num: "03 / 08",
         ref: "CCF Art. 1920 · LFPDPPP Art. 35",
         refTooltip:
-          "Art. 1920: la responsabilidad civil recae personalmente en el director mientras el menor está bajo su vigilancia. Art. 35: los derechos ARCO permiten al padre exigir registros formales.",
+          "Art. 1920: la responsabilidad civil recae personalmente en el director mientras el menor está bajo su vigilancia. Art. 35: los derechos ARCO permiten al padre exigir registros formales. Además, los lineamientos de la SEP para entornos escolares seguros establecen que el director debe garantizar control visual de quién recoge a cada alumno y mantener el flujo de salida documentado.",
         text: "¿Tienen registro formal de quién recogió a cada alumno, con hora exacta y nombre del responsable del colegio que autorizó la entrega?",
         hintCollapsible: true,
         hint: "Haga el ejercicio: ¿puede abrir ahora mismo el registro del martes pasado y decirme quién recogió al alumno Pérez a las 2:47 pm? No vale la memoria del personal ni un chat de WhatsApp — los mensajes se borran, se editan, y no identifican quién del colegio validó la entrega. Si un padre ejerce sus derechos ARCO, usted tiene 20 días hábiles para entregar el registro.",
@@ -106,9 +106,9 @@ export const SECTIONS: Section[] = [
       {
         id: "q6",
         num: "06 / 08",
-        ref: "Protocolo de responsabilidad civil",
+        ref: "Protocolo SEP/AEFCM",
         refTooltip:
-          "Un protocolo documentado protege legalmente al colegio y al director ante situaciones de custodia, restricciones o emergencias.",
+          "El protocolo SEP/AEFCM establece que cada alumno debe tener un máximo de 3 personas autorizadas, registradas mediante documento firmado e identificación. Sin protocolo documentado, el director y el maestro quedan expuestos ante situaciones de custodia, restricciones o emergencias.",
         text: "¿Tienen protocolo documentado para custodias legales, restricciones de entrega o persona no registrada?",
         hint: "Un padre con orden de restricción, un menor con indicación médica, alguien que aparece sin estar en la lista.",
         feedback: "Sin protocolo documentado, el maestro queda expuesto penalmente",
