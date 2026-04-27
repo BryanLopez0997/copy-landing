@@ -116,7 +116,8 @@ export function LeadForm({
                   Guía de Protección Legal — 12 puntos prioritarios
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                  Cubre LFPDPPP + responsabilidad operativa. Lista para revisar con su abogado en 15 minutos.
+                  Cubre LFPDPPP, lineamientos SEP y responsabilidad operativa. Lista para revisar con su
+                  abogado en 15 minutos.
                 </p>
               </div>
             </div>
