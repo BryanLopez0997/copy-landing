@@ -61,15 +61,15 @@ export const SECTIONS: Section[] = [
   },
   {
     num: "ÁREA 02",
-    title: "Operación de salida escolar",
-    subtitle: "Registro y control de entregas",
+    title: "Salida escolar segura",
+    subtitle: "Protocolo SEP · Registro y control de entregas",
     questions: [
       {
         id: "q3",
         num: "03 / 08",
         ref: "CCF Art. 1920 · LFPDPPP Art. 35",
         refTooltip:
-          "Art. 1920: la responsabilidad civil recae personalmente en el director mientras el menor está bajo su vigilancia. Art. 35: los derechos ARCO permiten al padre exigir registros formales.",
+          "Art. 1920: la responsabilidad civil recae personalmente en el director mientras el menor está bajo su vigilancia. Art. 35: los derechos ARCO permiten al padre exigir registros formales. Además, los lineamientos de la SEP para entornos escolares seguros establecen que el director debe garantizar control visual de quién recoge a cada alumno y mantener el flujo de salida documentado.",
         text: "¿Tienen registro formal de quién recogió a cada alumno, con hora exacta y nombre del responsable del colegio que autorizó la entrega?",
         hintCollapsible: true,
         hint: "Haga el ejercicio: ¿puede abrir ahora mismo el registro del martes pasado y decirme quién recogió al alumno Pérez a las 2:47 pm? No vale la memoria del personal ni un chat de WhatsApp — los mensajes se borran, se editan, y no identifican quién del colegio validó la entrega. Si un padre ejerce sus derechos ARCO, usted tiene 20 días hábiles para entregar el registro.",
@@ -106,9 +106,9 @@ export const SECTIONS: Section[] = [
       {
         id: "q6",
         num: "06 / 08",
-        ref: "Protocolo de responsabilidad civil",
+        ref: "Protocolo SEP/AEFCM",
         refTooltip:
-          "Un protocolo documentado protege legalmente al colegio y al director ante situaciones de custodia, restricciones o emergencias.",
+          "El protocolo SEP/AEFCM establece que cada alumno debe tener un máximo de 3 personas autorizadas, registradas mediante documento firmado e identificación. Sin protocolo documentado, el director y el maestro quedan expuestos ante situaciones de custodia, restricciones o emergencias.",
         text: "¿Tienen protocolo documentado para custodias legales, restricciones de entrega o persona no registrada?",
         hint: "Un padre con orden de restricción, un menor con indicación médica, alguien que aparece sin estar en la lista.",
         feedback: "Sin protocolo documentado, el maestro queda expuesto penalmente",
@@ -152,6 +152,7 @@ export type Scenario = {
   trigger: (args: { score: number; isAtRisk: (q: QId) => boolean }) => boolean
   tone: ScenarioTone
   icon: string
+  category: string
   title: string
   body: string[]
   consequence: string
@@ -163,6 +164,7 @@ export const ALL_SCENARIOS: Scenario[] = [
     trigger: ({ isAtRisk }) => isAtRisk("q1") || isAtRisk("q3"),
     tone: "risk",
     icon: "⚖️",
+    category: "Civil",
     title: "El padre con abogado",
     body: [
       "Un padre en proceso de divorcio exige al colegio demostrar <strong>a quién le entregaron a su hijo el 15 de noviembre del año pasado a las 12:53 pm</strong>. No pregunta por la semana pasada — pregunta por hace meses. Porque ahí es donde el abogado sabe que el colegio ya no tiene nada.",
@@ -178,6 +180,7 @@ export const ALL_SCENARIOS: Scenario[] = [
     trigger: ({ isAtRisk }) => isAtRisk("q4"),
     tone: "amber",
     icon: "📱",
+    category: "Datos personales",
     title: "WhatsApp no es un canal neutro — es el registro que los incrimina",
     body: [
       "El colegio cree que WhatsApp es solo una herramienta de coordinación. La ley lo ve diferente: es tratamiento de datos personales de menores en dispositivos sin medidas de seguridad, sin base legal, y sin consentimiento específico.",
@@ -192,6 +195,7 @@ export const ALL_SCENARIOS: Scenario[] = [
     trigger: ({ isAtRisk }) => isAtRisk("q4"),
     tone: "risk",
     icon: "📲",
+    category: "Datos personales",
     title: "El dato que ya no puede recuperar",
     body: [
       "En este momento, los nombres de sus alumnos están en los teléfonos personales de sus maestros. No en un servidor del colegio — en dispositivos que usted no administra ni controla.",
@@ -207,6 +211,7 @@ export const ALL_SCENARIOS: Scenario[] = [
     trigger: ({ isAtRisk }) => isAtRisk("q3"),
     tone: "risk",
     icon: "📋",
+    category: "Civil",
     title: '"Nosotros sí llevamos control" — las 4 respuestas que no funcionan',
     body: [
       '<strong>"Las maestras avisan por el grupo de WhatsApp."</strong> Los mensajes se pueden editar, se pueden borrar. Si una maestra renuncia y cambia de teléfono, el "registro" de meses de operaciones desaparece.',
@@ -222,6 +227,7 @@ export const ALL_SCENARIOS: Scenario[] = [
     trigger: ({ isAtRisk }) => isAtRisk("q7"),
     tone: "amber",
     icon: "📢",
+    category: "Administrativa",
     title: "El megáfono: dos problemas que se combinan",
     body: [
       "<strong>Problema 1 — Ruido.</strong> La NOM-081 fija 55 dB en zonas residenciales. Un altavoz escolar supera ese límite. Una denuncia vecinal activa inspección.",
@@ -237,6 +243,7 @@ export const ALL_SCENARIOS: Scenario[] = [
     trigger: ({ isAtRisk }) => isAtRisk("q8") && !isAtRisk("q7"),
     tone: "risk",
     icon: "📁",
+    category: "Administrativa",
     title: "El antecedente que no desaparece",
     body: [
       "Ya recibieron una queja formal de ruido. Ese expediente existe en los registros de la autoridad.",
@@ -251,6 +258,7 @@ export const ALL_SCENARIOS: Scenario[] = [
     trigger: ({ score }) => score > 10,
     tone: "risk",
     icon: "⚠",
+    category: "Crítica",
     title: "Cuando se activan varios frentes a la vez",
     body: [
       "El escenario más costoso no es una multa grande — es cuando <strong>varios frentes se activan al mismo tiempo</strong>: un padre con ARCO mientras el vecino denuncia por ruido mientras una ex empleada reporta contraseñas compartidas.",
@@ -265,6 +273,7 @@ export const ALL_SCENARIOS: Scenario[] = [
     trigger: ({ isAtRisk }) => isAtRisk("q3") || isAtRisk("q6"),
     tone: "risk",
     icon: "👤",
+    category: "Civil",
     title: "La demanda que llega a su nombre, no al del colegio",
     body: [
       "La mayoría de los directores asumen que el colegio absorbe el problema. El Código Civil Federal no funciona así. El <strong>Art. 1920 transfiere la responsabilidad civil al director personalmente</strong>.",
@@ -280,6 +289,7 @@ export const ALL_SCENARIOS: Scenario[] = [
     trigger: ({ isAtRisk }) => isAtRisk("q3") || isAtRisk("q5") || isAtRisk("q6"),
     tone: "amber",
     icon: "🚨",
+    category: "Penal",
     title: "El maestro que entregó al niño a la persona equivocada",
     body: [
       'Un maestro recibe a un señor que dice ser el tío del alumno. No hay lista formal. El maestro lo conoce "de vista" y entrega al niño. Esa noche, la madre llama: ese señor no debía tener al niño.',
