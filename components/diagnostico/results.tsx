@@ -137,6 +137,10 @@ export function PersonalLiability({
     rows.push(
       "Sin registro documentado de entregas, no puede demostrar que actuó con diligencia. La carga de la prueba se invierte: <strong>usted debe probar que hizo bien las cosas</strong>, no el padre que lo demanda.",
     )
+  if (hasOp)
+    rows.push(
+      "<strong>Más allá de la responsabilidad civil:</strong> el incumplimiento de los lineamientos SEP en la salida escolar puede escalar a notificación al sistema DIF y Procuraduría de Protección de NNA — convirtiendo un problema operativo en uno de protección de menores.",
+    )
   if (hasData)
     rows.push(
       "El tratamiento de datos sin aviso de privacidad vigente es una infracción personal del responsable del tratamiento. La ley no limita la sanción a la persona moral.",
@@ -201,7 +205,7 @@ export function PersonalLiability({
 export function BreakdownGrid({ isAtRisk }: { isAtRisk: (q: QId) => boolean }) {
   const areas: { qs: QId[]; label: string; sub: string }[] = [
     { qs: ["q1", "q2"], label: "Documentación", sub: "Avisos y consentimientos" },
-    { qs: ["q3", "q4"], label: "Operación de salida", sub: "Registro y canales" },
+    { qs: ["q3", "q4"], label: "Salida escolar segura", sub: "Protocolo SEP · Registro y canales" },
     { qs: ["q5", "q6"], label: "Control de información", sub: "Acceso y protocolos" },
     { qs: ["q7", "q8"], label: "Ruido y ambiental", sub: "NOM-081" },
   ]
@@ -267,9 +271,9 @@ export function BreakdownGrid({ isAtRisk }: { isAtRisk: (q: QId) => boolean }) {
 export function Scenarios({ score, isAtRisk }: { score: number; isAtRisk: (q: QId) => boolean }) {
   const shown = ALL_SCENARIOS.filter((sc) => sc.trigger({ score, isAtRisk })).slice(0, 4)
 
-  const tones: Record<ScenarioTone, "risk" | "primary" | "safe"> = {
+  const tones: Record<ScenarioTone, "risk" | "primary" | "amber"> = {
     risk: "risk",
-    amber: "risk",
+    amber: "amber",
     navy: "primary",
   }
 
@@ -306,7 +310,7 @@ export function Scenarios({ score, isAtRisk }: { score: number; isAtRisk: (q: QI
                   <div className="flex flex-wrap items-center gap-2">
                     <Pill tone={tones[sc.tone]}>
                       <span>{sc.icon}</span>
-                      <span>Escenario</span>
+                      <span>{sc.category}</span>
                     </Pill>
                   </div>
                   <h3 className="mt-4 text-xl font-medium leading-snug tracking-tight text-foreground md:text-2xl">

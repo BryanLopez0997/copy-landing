@@ -205,13 +205,14 @@ export function Pill({
   tone = "default",
 }: {
   children: React.ReactNode
-  tone?: "default" | "safe" | "risk" | "primary"
+  tone?: "default" | "safe" | "risk" | "primary" | "amber"
 }) {
   const toneMap: Record<string, string> = {
     default: "border-border/80 bg-background text-foreground/80",
     safe: "border-safe/20 bg-safe-soft text-safe",
     risk: "border-risk/30 bg-risk-soft text-risk",
     primary: "border-primary/20 bg-primary/5 text-primary",
+    amber: "border-[rgba(245,158,11,0.25)] bg-[rgba(245,158,11,0.1)] text-[#92400e]",
   }
   return (
     <span
