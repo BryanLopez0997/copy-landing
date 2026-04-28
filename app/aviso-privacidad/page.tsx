@@ -26,7 +26,7 @@ export default function AvisoPrivacidadPage() {
           Aviso de Privacidad
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Última actualización: 27 de abril de 2026
+          Última actualización: 28 de abril de 2026
         </p>
 
         <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-foreground/85 [&_h2]:mb-3 [&_h2]:mt-8 [&_h2]:text-base [&_h2]:font-bold [&_h2]:text-foreground [&_strong]:font-semibold [&_strong]:text-foreground">
@@ -74,8 +74,10 @@ export default function AvisoPrivacidadPage() {
             </ul>
             <p className="mt-3">
               No compartimos sus datos con terceros comerciales. Únicamente los procesamos a través de
-              proveedores tecnológicos que nos ayudan a operar este servicio (Vercel, Inc. —
-              infraestructura de hospedaje y analítica anónima de uso del sitio).
+              proveedores tecnológicos que nos ayudan a operar este servicio: <strong>Vercel, Inc.</strong>{" "}
+              (infraestructura de hospedaje y analítica anónima) y <strong>Microsoft Corporation</strong>{" "}
+              (análisis de comportamiento mediante mapas de calor, con enmascaramiento activo de datos
+              personales del formulario).
             </p>
           </section>
 
@@ -85,6 +87,22 @@ export default function AvisoPrivacidadPage() {
               Utilizamos <strong>Vercel Analytics</strong> para medir el tráfico de esta página de
               forma anónima. Esta herramienta no recolecta datos personales identificables ni instala
               cookies en su dispositivo.
+            </p>
+            <p className="mt-3">
+              Utilizamos también <strong>Microsoft Clarity</strong> para analizar el comportamiento
+              de uso de la herramienta mediante mapas de calor y grabaciones de sesión. Clarity está
+              configurado con enmascaramiento total (<em>Mask all</em>): ningún campo del formulario
+              (nombre, colegio, teléfono) se registra ni aparece en las grabaciones. Microsoft
+              procesa esta información conforme a su{" "}
+              <a
+                href="https://privacy.microsoft.com/privacystatement"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                política de privacidad
+              </a>
+              .
             </p>
             <p className="mt-3">
               El almacenamiento local (localStorage) se usa exclusivamente para guardar la clave de

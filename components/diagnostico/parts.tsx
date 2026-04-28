@@ -421,7 +421,7 @@ export function DiagnosticoFooter() {
             aviso de privacidad
           </a>
           . Los datos del formulario se usan exclusivamente para enviarle su guía por WhatsApp.
-          Usamos Vercel Analytics (anónimo) y almacenamiento local para atribución de share.
+          Usamos Vercel Analytics (anónimo), Microsoft Clarity (mapas de calor con masking de datos personales) y almacenamiento local para atribución de share.
         </p>
       </div>
     </footer>
