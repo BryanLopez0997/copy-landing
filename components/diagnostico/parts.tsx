@@ -402,10 +402,10 @@ export function DiagnosticoFooter() {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="https://www.ekole.app/privacy-and-policy"
+              href="/aviso-privacidad"
               className="text-[#9CA3AF] transition-colors hover:text-primary"
             >
-              Política de Privacidad
+              Aviso de Privacidad
             </a>
             <a
               href="/"
@@ -415,6 +415,14 @@ export function DiagnosticoFooter() {
             </a>
           </div>
         </div>
+        <p className="mt-4 text-center text-[11px] leading-relaxed text-[#9CA3AF]">
+          Al usar esta herramienta aceptas nuestro{" "}
+          <a href="/aviso-privacidad" className="underline-offset-2 hover:underline">
+            aviso de privacidad
+          </a>
+          . Los datos del formulario se usan exclusivamente para enviarle su guía por WhatsApp.
+          Usamos Vercel Analytics (anónimo) y almacenamiento local para atribución de share.
+        </p>
       </div>
     </footer>
   )
