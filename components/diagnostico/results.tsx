@@ -507,7 +507,7 @@ export function ReputationCard() {
           </h2>
         </Reveal>
 
-        <div className="mt-10 space-y-5 text-balance text-[17px] leading-relaxed text-foreground/85 [&_strong]:font-semibold [&_strong]:text-foreground">
+        <div className="mt-10 space-y-5 text-[17px] leading-relaxed text-foreground/85 [&_strong]:font-semibold [&_strong]:text-foreground">
           <Reveal delay={0.1}>
             <p>
               Un incidente en la salida escolar no termina cuando la autoridad cierra el expediente. Termina

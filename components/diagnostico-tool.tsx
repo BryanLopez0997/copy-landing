@@ -31,6 +31,8 @@ import {
   VisionCard,
 } from "./diagnostico/results"
 import { LeadForm, ThankYou, buildWaMessage, type FormSubmitData } from "./diagnostico/form"
+import { ShareButton } from "./diagnostico/share-button"
+import { generateDirectorRef, setStoredRef } from "@/lib/attribution"
 
 type Phase = "quiz" | "results" | "thankyou"
 
@@ -39,6 +41,7 @@ export default function DiagnosticoTool() {
   const [phase, setPhase] = React.useState<Phase>("quiz")
   const [stickyVisible, setStickyVisible] = React.useState(false)
   const [submitData, setSubmitData] = React.useState<FormSubmitData | null>(null)
+  const [submittedRef, setSubmittedRef] = React.useState<string | undefined>(undefined)
   const [dateStr, setDateStr] = React.useState("")
 
   const resultsRef = React.useRef<HTMLDivElement | null>(null)
@@ -89,6 +92,9 @@ export default function DiagnosticoTool() {
   }
 
   function handleSubmit(data: FormSubmitData) {
+    const ref = generateDirectorRef(data.telefono)
+    setStoredRef(ref)
+    setSubmittedRef(ref)
     setSubmitData(data)
     setPhase("thankyou")
     setStickyVisible(false)
@@ -205,6 +211,7 @@ export default function DiagnosticoTool() {
           <FineReference isAtRisk={isAtRisk} />
           <VisionCard />
           <ReputationCard />
+          <ShareButton />
           <div ref={formRef}>
             <LeadForm nivel={nivel} onSubmit={handleSubmit} />
           </div>
@@ -215,7 +222,7 @@ export default function DiagnosticoTool() {
       {phase === "thankyou" && submitData && (
         <div ref={thankyouRef} className="border-t border-border">
           {(() => {
-            const { waUrl, shareUrl, matriculaLabel } = buildWaMessage(submitData, nivel, isAtRisk)
+            const { waUrl, shareUrl, matriculaLabel } = buildWaMessage(submitData, nivel, isAtRisk, submittedRef)
             const riskCount = (Object.keys(WEIGHTS) as QId[]).filter((q) => isAtRisk(q)).length
             const tel = submitData.telefono
             const phoneFormatted = `${tel.slice(0, 2)} ${tel.slice(2, 6)} ${tel.slice(6)}`

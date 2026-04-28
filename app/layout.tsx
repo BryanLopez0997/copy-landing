@@ -22,6 +22,9 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
+  // metadataBase permite que Next.js resuelva las URLs absolutas
+  // necesarias para que las imágenes Open Graph funcionen al compartir
+  metadataBase: new URL('https://www.ekole.app'),
   title: 'Ekole — Salida escolar más rápida, con registro de cada entrega',
   description:
     'Software de salida escolar que despacha más rápido y documenta cada entrega automáticamente. Sin apps para padres. Cumple LFPDPPP.',

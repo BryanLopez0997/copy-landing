@@ -376,18 +376,14 @@ export function ThankYou({
         </Reveal>
 
         <Reveal delay={0.55}>
-          <div className="mt-10 border-t border-border pt-8 text-center">
-            <p className="mb-3 text-sm text-[#6B7280]">
-              ¿Conoce a otro director que debería evaluar su colegio?
-            </p>
+          <div className="mt-8 border-t border-border pt-6 text-center">
             <a
               href={shareUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-[8px] border-2 border-primary bg-transparent px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary/[0.06] hover:shadow-sm"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
             >
-              <Share2 className="size-4" />
-              Compartir esta herramienta
+              → Recomiéndalo por WhatsApp
             </a>
           </div>
         </Reveal>
@@ -400,7 +396,7 @@ export function ThankYou({
    WHATSAPP MESSAGE BUILDER
    ────────────────────────────────────────────── */
 
-export function buildWaMessage(data: FormSubmitData, nivel: Nivel, isAtRisk: (q: QId) => boolean) {
+export function buildWaMessage(data: FormSubmitData, nivel: Nivel, isAtRisk: (q: QId) => boolean, ref?: string) {
   const matriculaLabel =
     data.matricula === "menos150"
       ? "Menos de 150 alumnos"
@@ -432,7 +428,7 @@ export function buildWaMessage(data: FormSubmitData, nivel: Nivel, isAtRisk: (q:
       guideUrl,
   )
   const shareMsg = encodeURIComponent(
-    "¿Ya evaluaste el nivel de exposición legal de tu colegio? Hazlo gratis aquí: https://www.ekole.app/diagnostico",
+    `Encontré este diagnóstico para directores — revisa SEP y derechos ARCO de tu colegio en 90 segundos. Vale la pena: https://www.ekole.app/diagnostico${ref ? `?ref=${ref}` : ""}`,
   )
   return {
     waUrl: "https://wa.me/" + waNum + "?text=" + msg,
