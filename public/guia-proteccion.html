@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     <style>
         :root {
             --paper:        #F7F3ED;
@@ -38,13 +40,52 @@
             --border-soft:  #EDE9E3;
             --gold:         #B8860B;
             --gold-light:   #D4A820;
+
+            /* === EKOLE DESIGN SYSTEM === */
+            --color-primary: #173E75;
+            --color-primary-light: #2EB4E9;
+            --color-navy-dark: #0F2A4F;
+            --color-teal: #1A8FA8;
+            --color-sky: #5ECCE6;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-error: #EF4444;
+            --color-info: #3B82F6;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F9FAFB;
+            --color-gray-100: #F3F4F6;
+            --color-gray-200: #E5E7EB;
+            --color-gray-300: #D1D5DB;
+            --color-gray-400: #9CA3AF;
+            --color-gray-500: #6B7280;
+            --color-gray-600: #4B5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1F2937;
+            --space-1: 4px;   --space-2: 8px;
+            --space-3: 12px;  --space-4: 16px;
+            --space-5: 20px;  --space-6: 24px;
+            --space-8: 32px;  --space-10: 40px;
+            --space-12: 48px; --space-16: 64px;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-size-xs: 12px;  --font-size-sm: 14px;
+            --font-size-base: 16px; --font-size-lg: 18px;
+            --font-size-h4: 20px;  --font-size-h3: 24px;
+            --font-size-h2: 32px;  --font-size-h1: 40px;
+            --radius-sm: 4px;  --radius-md: 8px;
+            --radius-lg: 12px; --radius-xl: 16px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 2px rgba(15,42,79,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(15,42,79,0.08), 0 2px 4px -2px rgba(15,42,79,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(15,42,79,0.08), 0 4px 6px -4px rgba(15,42,79,0.05);
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'IBM Plex Sans', sans-serif;
-            background: var(--paper);
+            background-color: #F9FAFB;
             color: var(--ink);
             -webkit-font-smoothing: antialiased;
         }
@@ -95,7 +136,7 @@
         }
 
         .doc-ref-badge {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 9px;
             letter-spacing: 0.08em;
             color: rgba(255,255,255,0.3);
@@ -103,6 +144,19 @@
             padding: 3px 8px;
             border-radius: 2px;
             text-transform: uppercase;
+        }
+
+        .legal-credential {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: #374151;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
         }
 
         .doc-title {
@@ -115,8 +169,10 @@
         }
 
         .doc-title em {
-            font-style: italic;
-            color: rgba(255,255,255,0.55);
+            font-style: normal;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #5ECCE6;
+            font-weight: 600;
         }
 
         .doc-subtitle {
@@ -144,7 +200,7 @@
             padding: 8px 14px;
         }
         .personalization-label {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 9px;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -161,11 +217,11 @@
         .personalization-value.risk-critico  { color: #FCA5A5; }
 
         .doc-instructions {
-            background: rgba(255,255,255,0.05);
+            background: rgba(59, 130, 246, 0.05);
             border: 1px solid rgba(255,255,255,0.08);
-            border-left: 3px solid var(--gold);
-            padding: 14px 18px;
-            border-radius: 2px;
+            border-left: 4px solid #3B82F6;
+            padding: 16px 20px;
+            border-radius: 8px;
         }
 
         .doc-instructions p {
@@ -179,14 +235,16 @@
 
         /* ──────────── CONTEXT BANNER ──────────── */
         .context-banner {
-            background: var(--green-bg);
-            border-bottom: 2px solid var(--green-border);
-            padding: 14px 40px;
+            border-left: 4px solid #F59E0B;
+            background: rgba(245, 158, 11, 0.05);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 12px 40px;
         }
 
         .context-banner p {
             font-size: 13px;
-            color: var(--green-deep);
+            color: var(--ink-light);
             line-height: 1.55;
         }
 
@@ -207,7 +265,7 @@
             align-items: flex-start;
             gap: 14px;
             padding-bottom: 12px;
-            border-bottom: 2px solid var(--navy);
+            border-bottom: 3px solid #2EB4E9;
             margin-bottom: 16px;
         }
 
@@ -217,15 +275,17 @@
         }
 
         .section-num {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            color: var(--gold);
-            background: var(--navy);
-            padding: 4px 8px;
-            border-radius: 2px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #FFFFFF;
+            background: #173E75;
+            padding: 4px 16px;
+            border-radius: 9999px;
             white-space: nowrap;
             margin-top: 2px;
+            text-transform: uppercase;
         }
 
         .section-title-block h2 {
@@ -252,7 +312,7 @@
         }
 
         .law-ref {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 9.5px;
             color: var(--amber-mid);
             border: 1px solid var(--amber-border);
@@ -266,7 +326,9 @@
         .protection-item {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px rgba(15,42,79,0.05);
+            padding: 0;
             margin-bottom: 10px;
             overflow: hidden;
             transition: border-color 0.2s;
@@ -342,7 +404,7 @@
             min-width: 0;
         }
         .protection-item-num {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 10px;
             color: var(--ink-muted);
             letter-spacing: 0.06em;
@@ -357,7 +419,7 @@
         .status-listo .protection-item-text { color: var(--green-deep); }
 
         .priority-tag {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 9px;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -367,14 +429,28 @@
             flex-shrink: 0;
         }
         .priority-critica {
-            background: var(--red-bg);
-            color: var(--red-deep);
-            border: 1px solid var(--red-border);
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+            border: none;
+            border-radius: 9999px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
         }
         .priority-alta {
-            background: var(--amber-bg);
-            color: var(--amber-deep);
-            border: 1px solid var(--amber-border);
+            background: rgba(245, 158, 11, 0.1);
+            color: #F59E0B;
+            border: none;
+            border-radius: 9999px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
         }
 
         /* PROTECTION BODY */
@@ -391,7 +467,7 @@
             border-left: 3px solid;
         }
         .protection-block-label {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 9px;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -437,7 +513,7 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 9px;
             letter-spacing: 0.06em;
             text-transform: uppercase;
@@ -494,7 +570,7 @@
         }
 
         .lq-num {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 10px;
             color: var(--gold-light);
             flex-shrink: 0;
@@ -512,7 +588,8 @@
         .summary-section {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px rgba(15,42,79,0.05);
             padding: 24px;
             margin: 24px 0 0;
         }
@@ -538,20 +615,21 @@
             border: 1px solid;
         }
 
-        .summary-box.s-green { background: var(--green-bg); border-color: var(--green-border); }
-        .summary-box.s-red   { background: var(--red-bg);   border-color: var(--red-border); }
-        .summary-box.s-amber { background: var(--amber-bg); border-color: var(--amber-border); }
+        .summary-box.s-green { background: rgba(16, 185, 129, 0.1); border-color: var(--green-border); }
+        .summary-box.s-red   { background: rgba(239, 68, 68, 0.1);  border-color: var(--red-border); }
+        .summary-box.s-amber { background: rgba(245, 158, 11, 0.1); border-color: var(--amber-border); }
 
         .summary-box-num {
-            font-family: 'DM Serif Display', Georgia, serif;
-            font-size: 40px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 800;
+            font-size: 48px;
             line-height: 1;
             margin-bottom: 4px;
         }
 
-        .s-green .summary-box-num { color: var(--green-deep); }
-        .s-red   .summary-box-num { color: var(--red-mid); }
-        .s-amber .summary-box-num { color: var(--amber-mid); }
+        .s-green .summary-box-num { color: #10B981; }
+        .s-red   .summary-box-num { color: #EF4444; }
+        .s-amber .summary-box-num { color: #F59E0B; }
 
         .summary-box-label {
             font-size: 11px;
@@ -585,7 +663,7 @@
             display: none;
         }
         .urgent-banner-label {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 9px;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -605,7 +683,7 @@
             margin-top: 10px;
         }
         .urgent-chip {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 10px;
             background: white;
             color: var(--red-deep);
@@ -624,15 +702,17 @@
             text-align: center;
             padding: 10px;
             margin-bottom: 16px;
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 11px;
             letter-spacing: 0.04em;
             border-radius: 3px;
         }
         .critical-count.cc-danger {
-            background: var(--red-bg);
-            color: var(--red-deep);
-            border: 1px solid var(--red-border);
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+            font-family: 'Inter', sans-serif;
+            border-radius: 8px;
+            border: none;
         }
         .critical-count.cc-safe {
             background: var(--green-bg);
@@ -684,25 +764,34 @@
             gap: 10px;
         }
         .share-btn {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 12px;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 3px;
-            border: 1px solid var(--border);
-            background: var(--surface);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 8px;
+            padding: 12px 24px;
+            min-height: 44px;
+            border: 2px solid #E5E7EB;
+            color: #374151;
+            background: transparent;
             cursor: pointer;
-            color: var(--ink-light);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.15s;
+            transition: all 150ms ease;
         }
         .share-btn:hover {
             background: var(--navy);
             color: white;
             border-color: var(--navy);
+        }
+        .share-btn#share-wa-btn {
+            border-color: #173E75;
+            color: #173E75;
+        }
+        .share-btn#share-wa-btn:hover {
+            background: #173E75;
+            color: white;
         }
 
         /* ──────────── FOOTER ──────────── */
@@ -784,12 +873,12 @@
             <div class="doc-meta-row">
                 <span class="doc-org"><span>EKO</span>LE — Guía de protección</span>
                 <div class="doc-ref-badges">
-                    <span class="doc-ref-badge">LFPDPPP</span>
-                    <span class="doc-ref-badge">Derechos ARCO</span>
-                    <span class="doc-ref-badge">NOM-081-SEMARNAT</span>
-                    <span class="doc-ref-badge">CCF Art. 1920</span>
-                    <span class="doc-ref-badge">SEP</span>
-                    <span class="doc-ref-badge">DOF vigente 2025</span>
+                    <span class="doc-ref-badge legal-credential"><i class="ph ph-shield-check"></i>LFPDPPP</span>
+                    <span class="doc-ref-badge legal-credential"><i class="ph ph-shield-check"></i>Derechos ARCO</span>
+                    <span class="doc-ref-badge legal-credential"><i class="ph ph-shield-check"></i>NOM-081-SEMARNAT</span>
+                    <span class="doc-ref-badge legal-credential"><i class="ph ph-shield-check"></i>CCF Art. 1920</span>
+                    <span class="doc-ref-badge legal-credential"><i class="ph ph-shield-check"></i>SEP</span>
+                    <span class="doc-ref-badge legal-credential"><i class="ph ph-shield-check"></i>DOF vigente 2025</span>
                 </div>
             </div>
             <h1 class="doc-title">Guía de Protección Legal<br><em>para Usted y para su Colegio</em></h1>
@@ -812,7 +901,7 @@
             </div>
 
             <div class="doc-instructions">
-                <p><strong>Cómo usar esta guía:</strong> Revise cada punto de protección. Use el indicador circular para registrar su avance: <strong style="color:#FCA5A5">● Pendiente</strong> → <strong style="color:#FDE68A">● En proceso</strong> → <strong style="color:#86EFAC">● Listo</strong>. Su progreso se guarda automáticamente.</p>
+                <p><i class="ph ph-info" style="color:#3B82F6; margin-right:8px;"></i><strong>Cómo usar esta guía:</strong> Revise cada punto de protección. Use el indicador circular para registrar su avance: <strong style="color:#FCA5A5">● Pendiente</strong> → <strong style="color:#FDE68A">● En proceso</strong> → <strong style="color:#86EFAC">● Listo</strong>. Su progreso se guarda automáticamente.</p>
                 <p>Los puntos con marco <strong style="color:#FCA5A5">rojo</strong> son los que corresponden a las áreas de riesgo que identificó en su diagnóstico. Comience por ahí.</p>
             </div>
         </div>
@@ -820,7 +909,7 @@
 
     <!-- CONTEXT BANNER -->
     <div class="context-banner">
-        <p>🛡️ <strong>Cada punto de esta guía lo protege a usted.</strong> El Art. 1920 del Código Civil Federal establece que la responsabilidad civil por lo que ocurre en su colegio recae en el director personalmente. La única contención que reconoce la ley es demostrar que usted implementó protocolos y los supervisó. Esta guía construye esa evidencia.</p>
+        <p><i class="ph ph-shield-check" style="color:#F59E0B; margin-right:8px; font-size:20px;"></i><strong>Cada punto de esta guía lo protege a usted.</strong> El Art. 1920 del Código Civil Federal establece que la responsabilidad civil por lo que ocurre en su colegio recae en el director personalmente. La única contención que reconoce la ley es demostrar que usted implementó protocolos y los supervisó. Esta guía construye esa evidencia.</p>
     </div>
 
     <div class="doc-body">
