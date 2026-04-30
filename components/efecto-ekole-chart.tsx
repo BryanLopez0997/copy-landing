@@ -98,16 +98,16 @@ function ChartTooltip({ active, payload, label }: any) {
 /* ---------- Custom legend ---------- */
 function ChartLegend() {
   return (
-    <div className="mt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs">
+    <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[14px]">
       <div className="flex items-center gap-2">
         <span className="block h-2.5 w-6 rounded-full" style={{ background: COLORS.risk }} />
         <span className="font-medium text-foreground">Sin Ekole</span>
-        <span className="text-muted-foreground">· filas de 30 min después de la salida</span>
+        <span className="text-muted-foreground">· espera hasta 30 min</span>
       </div>
       <div className="flex items-center gap-2">
         <span className="block h-2.5 w-6 rounded-full" style={{ background: COLORS.safe }} />
         <span className="font-medium text-foreground">Con Ekole</span>
-        <span className="text-muted-foreground">· filas de 5 min después de la salida</span>
+        <span className="text-muted-foreground">· espera cerca de 5 min</span>
       </div>
     </div>
   )
@@ -121,30 +121,30 @@ export function EfectoEkoleChart() {
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-            Efecto Ekole
+          <p className="text-[12px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+            Impacto en la salida
           </p>
-          <h3 className="mt-1.5 text-xl font-extrabold leading-tight tracking-tight text-primary md:text-2xl">
-            Reducción de 30 a 5 minutos de espera
+          <h3 className="mt-1.5 text-[2rem] font-extrabold leading-tight text-[#173E75]">
+            De 30 minutos de espera a 5
           </h3>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Basado en un colegio tipo de 300 alumnos en hora pico de salida.
+          <p className="mt-1 text-[16px] text-[#6B7280]">
+            Estimación para un colegio de 300 alumnos en hora pico de salida.
           </p>
         </div>
 
         {/* KPI pill */}
-        <div className="inline-flex items-center gap-2 rounded-full bg-safe px-4 py-2 text-sm font-bold text-white shadow-sm">
-          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12" />
+        <div className="inline-flex items-center gap-2 rounded-full bg-[rgba(16,185,129,0.10)] px-4 py-2 text-sm font-bold text-[#047857] shadow-sm">
+          <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0" aria-hidden>
+            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z" />
           </svg>
-          70% menos de espera
+          25 min menos de espera
         </div>
       </div>
 
       {/* Chart */}
-      <div className="mt-6 h-[320px] w-full md:h-[380px]">
+      <div className="mt-6 h-[360px] w-full md:h-[420px]">
         <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data} margin={{ top: 20, right: 16, left: 0, bottom: 24 }}>
+          <ComposedChart data={data} margin={{ top: 20, right: 16, left: 0, bottom: 48 }}>
             <defs>
               <linearGradient id="gradSin" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor={COLORS.risk} stopOpacity={0.18} />
