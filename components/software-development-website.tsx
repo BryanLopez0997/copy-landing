@@ -7,12 +7,16 @@ import {
   ArrowRight,
   Check,
   ChevronDown,
+  ClipboardCheck,
   Clock,
   FileText,
+  GraduationCap,
+  KeyRound,
   Lock,
   Menu,
   MessageSquare,
   ShieldCheck,
+  Smartphone,
   Stethoscope,
   Users2,
   X,
@@ -21,13 +25,18 @@ import {
 import { EfectoEkoleChart } from "./efecto-ekole-chart"
 
 /* ==============================================================
-   TODO: reemplazar por el link real de agenda cuando exista.
-   Opciones futuras: Calendly (https://calendly.com/...), WhatsApp
-   (https://wa.me/52...?text=...) o página /demo con formulario.
-   Hoy apunta a /diagnostico como fallback para no dejar botones
-   muertos (href="#") ni bucles de scroll.
+   Launch funnel:
+   - trafico frio: diagnostico de exposicion legal.
+   - prospecto caliente: llamada por WhatsApp cuando exista el link real.
    ============================================================== */
-const DEMO_CTA_HREF = "/diagnostico"
+const CALL_CTA_HREF = "/diagnostico"
+const CALL_CTA_LABEL = "Agendar llamada"
+const CALL_CTA_FULL_LABEL = "Agendar llamada por WhatsApp"
+const CALL_CTA_MICROCOPY = "20 min · Revisamos su salida actual · Sin compromiso"
+const DIAGNOSTIC_CTA_HREF = "/diagnostico"
+const DIAGNOSTIC_CTA_LABEL = "Hacer diagnóstico en 3 min"
+const DIAGNOSTIC_CTA_SHORT_LABEL = "Diagnóstico legal"
+const DIAGNOSTIC_CTA_MICROCOPY = "Gratis · Resultado inmediato · Confidencial"
 
 /* ---------- utilities ---------- */
 
@@ -63,7 +72,7 @@ export function Reveal({
 }) {
   return (
     <motion.div
-      initial="hidden"
+      initial="visible"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       variants={{
@@ -101,7 +110,7 @@ const Logo = ({ className }: { className?: string }) => (
 
 const menuItems = [
   { name: "Por qué importa", href: "/#problema" },
-  { name: "El efecto", href: "/#efecto" },
+  { name: "Diagnóstico", href: "/#diagnostico" },
   { name: "La solución", href: "/#solucion" },
   { name: "Preguntas", href: "/#preguntas" },
 ]
@@ -146,10 +155,10 @@ export function HeroHeader() {
 
           <div className="flex items-center gap-2">
             <a
-              href={DEMO_CTA_HREF}
-              className="hidden items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-md active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 lg:inline-flex"
+              href={CALL_CTA_HREF}
+              className="hidden items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-colors duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-md active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 lg:inline-flex"
             >
-              Agendar revisión
+              {CALL_CTA_LABEL}
               <ArrowRight className="size-3.5" />
             </a>
             <button
@@ -179,11 +188,11 @@ export function HeroHeader() {
               ))}
               <li>
                 <a
-                  href="/#cta"
+                  href={CALL_CTA_HREF}
                   onClick={() => setOpen(false)}
                   className="mt-1 block rounded-lg bg-primary px-3 py-2 text-center font-medium text-primary-foreground"
                 >
-                  Agendar revisión
+                  {CALL_CTA_LABEL}
                 </a>
               </li>
             </ul>
@@ -236,7 +245,7 @@ export function PrimaryCTA({
       href={href}
       className={cn(
         // DS: hover → bg más oscuro (primary-dark) + shadow-lg; active → translate-y-px + shadow off; focus-visible → ring sky 3px
-        "group inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 transition-all duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/35 active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 md:text-base",
+        "group inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-md shadow-primary/20 ring-1 ring-primary/30 transition-colors duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/35 active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 md:text-base",
         className,
       )}
     >
@@ -260,7 +269,7 @@ export function GhostCTA({
       href={href}
       className={cn(
         // DS ghost: hover → bg primary/8 + border primary/50 + text primary; active → bg primary/14; focus-visible sky
-        "inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background/60 px-6 py-3 text-sm font-medium text-foreground/90 transition-all duration-150 hover:-translate-y-[1px] hover:border-primary/60 hover:bg-primary/[0.06] hover:text-primary hover:shadow-sm active:translate-y-px active:bg-primary/[0.12] active:shadow-none focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 md:text-base",
+        "inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-background/60 px-6 py-3 text-sm font-medium text-foreground/90 transition-colors duration-150 hover:-translate-y-[1px] hover:border-primary/60 hover:bg-primary/[0.06] hover:text-primary hover:shadow-sm active:translate-y-px active:bg-primary/[0.12] active:shadow-none focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 md:text-base",
         className,
       )}
     >
@@ -318,124 +327,186 @@ export function LegalCredentials({
    ============================================================== */
 
 function Hero() {
+  const adoptionItems = [
+    {
+      icon: Smartphone,
+      title: "Padres sin app obligatoria",
+      body: "Recogen con una clave personal. La app es opcional.",
+    },
+    {
+      icon: GraduationCap,
+      title: "Tres pasos que el maestro entiende en minutos",
+      body: "Busca la clave, confirma al alumno y registra la entrega.",
+    },
+  ]
+
+  const trustItems = [
+    {
+      icon: ShieldCheck,
+      title: "Evidencia consultable",
+      body: "Hora, tutor autorizado y personal que entregó, listo para consulta.",
+    },
+    {
+      icon: FileText,
+      title: "Contrato y confidencialidad",
+      body: "Antes de datos reales, servicio y confidencialidad quedan por escrito.",
+    },
+    {
+      icon: Clock,
+      title: "15 días acompañados",
+      body: "Activación guiada para validar valor operativo sin permanencia forzosa.",
+    },
+  ]
+
   return (
-    <section id="top" className="relative overflow-hidden bg-[#F9FAFB] pt-28 pb-20 md:pt-36 md:pb-28">
+    <section id="top" className="relative isolate overflow-hidden bg-[#F4F8FC] pt-28 pb-16 md:pt-32 md:pb-24">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-grid opacity-[0.08] mask-fade-edges" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#EAF3FC_0%,#F6FAFD_58%,#FFFFFF_100%)]" />
+        <div className="absolute inset-x-0 top-0 h-[66%] bg-grid opacity-[0.12] mask-fade-edges" />
       </div>
 
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          initial="hidden"
+          initial="visible"
           animate="visible"
           variants={containerFade}
-          className="flex flex-col items-center text-center"
+          className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14"
         >
-          <motion.div variants={itemRise}>
-            <span className="inline-flex items-center rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 text-[14px] font-semibold text-[#173E75]">
-              Software de salida escolar · Ciclo 2026-2027
-            </span>
-          </motion.div>
+          <div className="min-w-0 text-center lg:text-left">
+            <motion.div variants={itemRise}>
+              <span className="inline-flex items-center rounded-full border border-white/80 bg-white px-4 py-1.5 text-[14px] font-semibold text-[#173E75] shadow-sm">
+                Salida escolar + exposición legal
+              </span>
+            </motion.div>
 
-          <motion.h1
-            variants={itemRise}
-            className="mt-8 max-w-4xl text-balance text-[2.375rem] font-extrabold leading-[1.05] tracking-[-0.02em] text-[#173E75] sm:text-[3rem] md:text-[4rem]"
-          >
-            Salida escolar{" "}
-            <span className="text-[#2EB4E9]">más rápida</span>.{" "}
-            Con registro automático de cada entrega.
-          </motion.h1>
-
-          <motion.p
-            variants={itemRise}
-            className="mt-6 max-w-[680px] text-balance text-[17px] font-normal leading-[1.6] text-[#4B5563] md:text-[18px]"
-          >
-            Olvídese de las filas, la bocina y los grupos de WhatsApp.{" "}
-            Ekole agiliza la salida y{" "}
-            <strong className="font-semibold text-[#1F2937]">registra cada entrega automáticamente</strong>,{" "}
-            sin que las familias descarguen una app.
-          </motion.p>
-
-          {/* Dashboard preview */}
-          <motion.div
-            variants={itemRise}
-            className="relative mt-12 w-full max-w-5xl"
-          >
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl shadow-primary/10 ring-1 ring-black/[0.04] md:rounded-3xl">
-              <Image
-                src="/promotions/Macbook Dashboard 1.png"
-                alt="Dashboard Ekole en MacBook: visibilidad total de cada salida en tiempo real"
-                width={2400}
-                height={1500}
-                priority
-                className="h-auto w-full"
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1024px"
-              />
-            </div>
-            <p className="mt-4 text-center text-xs italic text-muted-foreground md:text-sm">
-              Dashboard Ekole: visibilidad total de cada salida en tiempo real.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={itemRise}
-            className="mt-10 flex flex-col items-center gap-2"
-          >
-            <a
-              href={DEMO_CTA_HREF}
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#173E75] px-6 py-3 text-[16px] font-semibold text-white shadow-sm transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2EB4E9] focus-visible:ring-offset-2 sm:w-auto"
+            <motion.h1
+              variants={itemRise}
+              className="mx-auto mt-7 max-w-[340px] break-words text-[1.95rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-[#173E75] sm:max-w-3xl sm:text-balance sm:text-[3rem] md:text-[3.75rem] lg:mx-0"
             >
-              Agendar revisión de salida de 20 min
-              <ArrowRight className="size-5 flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <p className="text-[14px] leading-[1.5] text-[#6B7280]">
-              Por videollamada · Sin compromiso · Revisamos su proceso de salida
+              Salida escolar{" "}
+              <span className="text-[#2EB4E9]">más rápida</span>, con evidencia
+              cuando una familia pregunte.
+            </motion.h1>
+
+            <motion.p
+              variants={itemRise}
+              className="mx-auto mt-6 max-w-[340px] text-[16px] font-normal leading-[1.6] text-[#4B5563] sm:max-w-[640px] sm:text-balance md:text-[18px] lg:mx-0 lg:text-left"
+            >
+              Ekole ayuda a su equipo de puerta a solicitar, validar y registrar
+              cada entrega. Reduce filas hoy y deja constancia si mañana hay un
+              reclamo, accidente o solicitud formal.
+            </motion.p>
+
+            <motion.div
+              variants={itemRise}
+              className="mx-auto mt-8 flex w-full max-w-[340px] flex-col items-center gap-3 sm:max-w-none lg:mx-0 lg:items-start"
+            >
+              <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
+                <a
+                  href={CALL_CTA_HREF}
+                  className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#173E75] px-6 py-3 text-[16px] font-semibold text-white shadow-sm transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2EB4E9] focus-visible:ring-offset-2 sm:w-auto"
+                >
+                  {CALL_CTA_FULL_LABEL}
+                  <ArrowRight className="size-5 flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
+                </a>
+                <a
+                  href={DIAGNOSTIC_CTA_HREF}
+                  className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-[#D1D5DB] bg-white/90 px-5 py-3 text-[16px] font-semibold text-[#173E75] shadow-sm transition-colors duration-150 hover:border-[#2EB4E9] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2EB4E9] focus-visible:ring-offset-2 sm:w-auto"
+                >
+                  Ver diagnóstico
+                  <ArrowRight className="size-5 flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
+                </a>
+              </div>
+              <p className="text-[14px] leading-[1.5] text-[#6B7280]">
+                {CALL_CTA_MICROCOPY}
+              </p>
+            </motion.div>
+
+            <motion.div variants={itemRise} className="mx-auto mt-7 w-full max-w-[340px] sm:max-w-[650px] lg:mx-0">
+              <div className="grid gap-2.5 rounded-[18px] border border-white/80 bg-white/55 p-2.5 shadow-[0_16px_36px_rgba(15,42,79,0.06)] backdrop-blur sm:grid-cols-2">
+              {adoptionItems.map((item) => {
+                const Icon = item.icon
+                return (
+                  <div
+                    key={item.title}
+                    className="flex items-start gap-3 rounded-[14px] px-3 py-2.5 text-left"
+                  >
+                    <span className="flex size-9 flex-shrink-0 items-center justify-center rounded-[10px] bg-[#EEF4FA] text-[#173E75]">
+                      <Icon className="size-5" strokeWidth={1.9} />
+                    </span>
+                    <div>
+                      <p className="text-[14px] font-bold leading-snug text-[#173E75]">
+                        {item.title}
+                      </p>
+                      <p className="mt-0.5 text-[14px] leading-[1.45] text-[#6B7280]">
+                        {item.body}
+                      </p>
+                    </div>
+                  </div>
+                )
+              })}
+              </div>
+            </motion.div>
+
+            <motion.div variants={itemRise} className="mt-7 flex justify-center lg:justify-start">
+              <LegalCredentials
+                items={["SEP", "LFPDPPP", "Derechos ARCO", "CCF Art. 1920"]}
+                className="max-w-[340px] justify-center sm:max-w-full lg:justify-start"
+              />
+            </motion.div>
+          </div>
+
+          <motion.div variants={itemRise} className="relative mx-auto w-full max-w-[340px] min-w-0 sm:max-w-none">
+            <div className="relative overflow-hidden rounded-[22px] border border-white/80 bg-white/60 p-3 shadow-[0_24px_60px_rgba(15,42,79,0.10)] ring-1 ring-black/[0.03] backdrop-blur">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[14px] border border-[#DDE7F2] bg-[#EEF4FA]">
+                <Image
+                  src="/promotions/Macbook Dashboard 1.png"
+                  alt="Dashboard Ekole con registro de alumnos en espera, entregados y urgentes"
+                  fill
+                  priority
+                  className="origin-center -translate-y-[2.5%] scale-[1.045] object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 600px"
+                />
+              </div>
+              <div className="grid gap-2 border-t border-[#DDE7F2]/80 bg-white/80 px-4 py-4 sm:grid-cols-3">
+                {[
+                  "Padres sin app",
+                  "3 pasos simples",
+                  "Entrega registrada",
+                ].map((label) => (
+                  <div key={label} className="flex items-center gap-2 text-[13px] font-semibold text-[#173E75]">
+                    <Check className="size-4 flex-shrink-0 text-[#10B981]" />
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <p className="mt-4 text-center text-[14px] leading-[1.5] text-[#6B7280]">
+              El producto debe dejar un historial consultable, no solo acelerar la fila.
             </p>
           </motion.div>
         </motion.div>
 
         {/* benefits strip */}
         <Reveal delay={0.2}>
-          <div className="mx-auto mt-12 max-w-3xl space-y-4">
-            {/* Fila 1 — Beneficios funcionales */}
-            <div className="overflow-hidden rounded-[12px] border border-[#E5E7EB] bg-white shadow-sm">
-              <div className="grid grid-cols-1 divide-y divide-[#D1D5DB] md:grid-cols-3 md:divide-x md:divide-y-0">
-                <div className="flex items-center gap-2.5 px-5 py-4">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-5 flex-shrink-0 text-[#173E75]" aria-hidden>
-                    <path d="M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z" />
-                  </svg>
-                  <span className="text-[16px] font-semibold text-[#173E75]">Activo en menos de 24 h</span>
+          <div className="mx-auto mt-12 max-w-5xl rounded-[20px] border border-[#DDEAF5] bg-white/70 p-3 shadow-[0_18px_44px_rgba(15,42,79,0.06)] backdrop-blur">
+            <div className="grid gap-2 md:grid-cols-3">
+            {trustItems.map((item) => {
+              const Icon = item.icon
+              return (
+                <div key={item.title} className="rounded-[14px] px-4 py-3">
+                  <div className="flex items-start gap-3">
+                    <span className="flex size-10 flex-shrink-0 items-center justify-center rounded-[10px] bg-[#EEF4FA] text-[#173E75]">
+                      <Icon className="size-5" />
+                    </span>
+                    <div>
+                      <p className="text-[16px] font-bold leading-snug text-[#173E75]">{item.title}</p>
+                      <p className="mt-1 text-[14px] leading-[1.5] text-[#6B7280]">{item.body}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2.5 px-5 py-4">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-5 flex-shrink-0 text-[#173E75]" aria-hidden>
-                    <path d="M213.92,210.62l-160-176A8,8,0,1,0,42.08,45.38L56,60.69V216a24,24,0,0,0,24,24h96a24,24,0,0,0,23.82-21.11l2.26,2.49a8,8,0,1,0,11.84-10.76ZM184,216a8,8,0,0,1-8,8H80a8,8,0,0,1-8-8V78.29l112,123.2ZM68.7,24a8,8,0,0,1,8-8H176a24,24,0,0,1,24,24V150.83a8,8,0,1,1-16,0V40a8,8,0,0,0-8-8H76.7A8,8,0,0,1,68.7,24Z" />
-                  </svg>
-                  <span className="text-[16px] font-semibold text-[#173E75]">Sin app para familias</span>
-                </div>
-                <div className="flex items-center gap-2.5 px-5 py-4">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-5 flex-shrink-0 text-[#173E75]" aria-hidden>
-                    <path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-32-80a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,168Z" />
-                  </svg>
-                  <span className="text-[16px] font-semibold text-[#173E75]">Evidencia ante reclamaciones</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Fila 2 — Legal Credentials */}
-            <div className="flex flex-wrap items-center justify-center gap-0 divide-x divide-[#D1D5DB]">
-              {[
-                "SEP",
-                "LFPDPPP",
-                "Derechos ARCO",
-                "DOF vigente 2025",
-              ].map((label) => (
-                <div key={label} className="flex items-center gap-1.5 px-4 py-1.5">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0 text-[#173E75]" aria-hidden>
-                    <path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm-34.32,69.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z" />
-                  </svg>
-                  <span className="text-[14px] font-semibold text-[#173E75]">{label}</span>
-                </div>
-              ))}
+              )
+            })}
             </div>
           </div>
         </Reveal>
@@ -450,26 +521,45 @@ function Hero() {
 
 function Problema() {
   return (
-    <section id="problema" className="relative bg-[#F9FAFB] py-24 md:py-28">
-      <div className="mx-auto max-w-4xl px-6">
-        <Reveal className="text-center">
-          <h2 className="text-balance text-[2.5rem] font-extrabold leading-[1.1] tracking-[-0.01em] text-[#111827] sm:text-[3rem]">
-            El problema no es que la salida sea lenta.{" "}
-            <span className="text-[#2EB4E9]">Es que opera sin registro.</span>
-          </h2>
-          <p className="mx-auto mt-6 max-w-[680px] text-balance text-[18px] font-normal leading-[1.6] text-[#4B5563]">
-            La mayoría de los colegios ya normalizó una salida con bocina, WhatsApp y memoria.
-            Funciona, hasta que un tutor no autorizado se presenta o alguien pregunta:{" "}
-            <strong className="font-semibold text-[#1F2937]">"¿quién recogió al alumno y a qué hora?"</strong>
-          </p>
-          <div className="mx-auto mt-8 max-w-xl rounded-[12px] border border-[#E5E7EB] bg-white px-6 py-4 shadow-sm">
-            <p className="text-[16px] font-semibold text-[#111827]">
-              Lo que no queda documentado, difícilmente se puede acreditar.
+    <section id="problema" className="relative overflow-hidden bg-white py-20 md:py-24">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent" />
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+              Por qué importa
+            </p>
+            <h2 className="mt-4 max-w-[620px] text-balance text-[2.35rem] font-extrabold leading-[1.12] tracking-[-0.01em] text-[#111827] sm:text-[3rem]">
+              El problema no aparece en la fila. Aparece cuando piden{" "}
+              <span className="text-[#2EB4E9]">evidencia.</span>
+            </h2>
+            <p className="mt-6 max-w-[620px] text-[18px] font-normal leading-[1.6] text-[#4B5563]">
+              Bocina, WhatsApp y memoria pueden funcionar en un día normal. Pero si mañana hay
+              un reclamo, accidente o solicitud formal, el colegio necesita responder con hechos.
             </p>
           </div>
-          <h3 className="mt-10 text-balance text-[2rem] font-extrabold leading-tight text-[#111827]">
-            ¿Qué significa eso en la práctica?
-          </h3>
+
+          <div className="rounded-[24px] border border-[#DDEAF5] bg-[#F4F8FC] p-5 shadow-[0_24px_60px_rgba(15,42,79,0.08)] md:p-7">
+            <div className="rounded-[18px] border border-white/80 bg-white/75 p-5 shadow-sm backdrop-blur">
+              <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+                Pregunta crítica
+              </p>
+              <p className="mt-3 text-balance text-[1.65rem] font-extrabold leading-[1.15] text-[#173E75] md:text-[2rem]">
+                ¿Quién recogió al alumno, quién lo autorizó y a qué hora?
+              </p>
+              <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                {["Autorización", "Entrega", "Hora"].map((item) => (
+                  <div key={item} className="rounded-[12px] border border-[#DDEAF5] bg-white px-4 py-3">
+                    <p className="text-[14px] font-bold text-[#173E75]">{item}</p>
+                    <p className="mt-1 text-[13px] leading-[1.45] text-[#6B7280]">Debe quedar consultable.</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-5 rounded-[14px] bg-[#173E75] px-4 py-3 text-[15px] font-semibold leading-[1.5] text-white">
+                Lo que no queda documentado, difícilmente se puede acreditar.
+              </p>
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>
@@ -483,102 +573,186 @@ function Problema() {
 function Escenarios() {
   const scenarios = [
     {
-      iconPath:
-        "M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z",
-      title: "El compañero",
-      body: "Un alumno se va con la familia de un compañero. La autorización llegó por WhatsApp, pero no quedó validada en un canal oficial del colegio.",
+      icon: Users2,
+      label: "Autorización delegada",
+      title: "Sale con la familia de un compañero",
+      body: "El flujo parece resuelto hasta que la autorización queda repartida entre chats, capturas y memoria del equipo.",
+      statusQuo:
+        "WhatsApp ayuda a coordinar, pero un mensaje no es un registro controlado por el colegio: puede perder contexto, reenviarse o borrarse.",
       quote: "“¿Quién autorizó que mi hijo se fuera con otra familia?”",
-      fallout: "Sin registro, el colegio no puede acreditar identidad, autorización ni hora de entrega.",
-      closing: "La memoria no alcanza como evidencia.",
+      evidence: ["Tutor autorizado", "Persona que recoge", "Hora de entrega"],
+      risk: "Si el registro vive fuera del colegio, el colegio no controla la evidencia.",
     },
     {
-      iconPath:
-        "M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,200H40V72H216V200Zm-56-64a8,8,0,0,1-8,8H136v16a8,8,0,0,1-16,0V144H104a8,8,0,0,1,0-16h16V112a8,8,0,0,1,16,0v16h16A8,8,0,0,1,160,136Z",
-      title: "El accidente a la salida",
-      body: "Un alumno se lastima al salir. El padre no busca explicaciones generales: pide saber exactamente cuándo salió, quién lo entregó y con quién se fue.",
-      quote: "“¿A qué hora salió? ¿Quién lo entregó?”",
-      fallout: "Sin evidencia, el colegio queda expuesto a responder desde memoria.",
-      closing: "El problema empieza cuando no hay constancia.",
+      icon: Stethoscope,
+      label: "Incidente en puerta",
+      title: "Se lastima durante la salida",
+      body: "La familia no busca una explicación general. Necesita reconstruir qué pasó, quién intervino y en qué momento.",
+      quote: "“¿A qué hora salió? ¿Quién lo entregó? ¿Quién lo autorizó?”",
+      evidence: ["Hora exacta", "Responsable de entrega", "Historial consultable"],
+      risk: "Sin constancia, una actuación correcta puede quedar como una versión difícil de sostener.",
     },
     {
-      iconPath:
-        "M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-32-80a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,168Z",
-      title: "La solicitud formal",
-      body: "Un familiar solicita los registros de recogida del último ciclo escolar: quién recogió al alumno, a qué hora y bajo qué autorización.",
-      quote: "“Necesito el historial de entregas.”",
-      fallout: "Si el colegio no conserva registros, no tiene cómo acreditar el proceso.",
-      closing: "No es un ataque. Es un derecho.",
+      icon: FileText,
+      label: "Solicitud por escrito",
+      title: "Piden historial de recogidas",
+      body: "En divorcio o custodia, una solicitud formal puede pedir fechas, personas autorizadas y procedimiento.",
+      quote: "“Necesito el historial de entregas y autorizaciones.”",
+      evidence: ["Fechas y horarios", "Autorizaciones", "Bitácora exportable"],
+      risk: "Cuando el conflicto llega por escrito, la memoria ya no alcanza.",
     },
   ]
 
   return (
-    <section className="relative overflow-hidden bg-muted/40 py-16 md:py-20">
+    <section className="relative isolate overflow-hidden bg-[#F7FAFD] py-20 md:py-24">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#F4F8FC_0%,#FFFFFF_45%,#F4F8FC_100%)]" />
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal className="mx-auto max-w-[860px] text-center">
-          <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
-            Casos cotidianos
-          </p>
-          <h2 className="mt-3 text-balance text-[2.5rem] font-extrabold leading-[1.15] tracking-[-0.01em] text-[#111827]">
-            Tres situaciones que exponen el{" "}
-            <span className="text-[#2EB4E9]">mismo vacío</span>
-          </h2>
-          <p className="mt-6 text-balance text-[18px] font-normal leading-[1.6] text-[#4B5563]">
-            No empiezan con mala intención. Terminan sin evidencia para responder.
+        <Reveal className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+          <div>
+            <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+              Casos que elevan el riesgo
+            </p>
+            <h2 className="mt-3 max-w-[680px] text-balance text-[2.3rem] font-extrabold leading-[1.15] tracking-[-0.01em] text-[#111827] sm:text-[2.8rem]">
+              Tres momentos donde la salida se convierte en{" "}
+              <span className="text-[#2EB4E9]">evidencia.</span>
+            </h2>
+          </div>
+          <p className="max-w-[560px] text-[18px] font-normal leading-[1.65] text-[#4B5563] lg:ml-auto">
+            No se trata de asustar. Se trata de mostrarle al director en qué momentos una
+            salida normal puede exigir prueba, orden y trazabilidad.
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {scenarios.map((s, i) => (
-            <Reveal key={s.title} delay={i * 0.1}>
-              <div className="flex h-full flex-col rounded-[12px] border border-[#E5E7EB] bg-white p-6 shadow-sm">
-                {/* icon container */}
-                <div className="flex size-12 flex-shrink-0 items-center justify-center rounded-[12px] bg-[rgba(23,62,117,0.06)]">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-7 text-[#173E75]" aria-hidden>
-                    <path d={s.iconPath} />
-                  </svg>
-                </div>
-                {/* title */}
-                <h3 className="mt-4 text-[20px] font-bold leading-snug text-[#111827]">{s.title}</h3>
-                {/* situation */}
-                <p className="mt-3 text-[16px] leading-[1.6] text-[#4B5563]">{s.body}</p>
-                {/* critical question */}
-                <blockquote className="mt-4 rounded-[8px] border-l-[3px] border-[#2EB4E9] bg-[#EEF4FA] px-4 py-3 text-[16px] font-bold leading-snug text-[#173E75]">
-                  {s.quote}
-                </blockquote>
-                {/* consequence */}
-                <p className="mt-4 text-[16px] leading-[1.6] text-[#4B5563]">{s.fallout}</p>
-                {/* closing phrase */}
-                <p className="mt-auto rounded-[8px] bg-[#F9FAFB] px-4 py-3 text-[15px] font-semibold text-[#173E75]">
-                  {s.closing}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="mt-11 rounded-[28px] border border-[#DDEAF5] bg-white/[0.78] p-3 shadow-[0_26px_70px_rgba(15,42,79,0.08)] backdrop-blur md:p-4">
+          <div className="grid gap-3 lg:grid-cols-3">
+            {scenarios.map((s, i) => {
+              const Icon = s.icon
+              return (
+                <Reveal key={s.title} delay={i * 0.1}>
+                  <article className="flex h-full flex-col overflow-hidden rounded-[22px] border border-[#DDEAF5] bg-white shadow-sm">
+                    <div className="border-b border-[#E5E7EB] bg-[linear-gradient(180deg,#F9FBFD_0%,#FFFFFF_100%)] px-5 py-5">
+                      <div className="flex items-center justify-between gap-4">
+                        <span className="text-[12px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+                          Caso 0{i + 1}
+                        </span>
+                        <span className="flex size-11 flex-shrink-0 items-center justify-center rounded-[14px] bg-[#EEF4FA] text-[#173E75]">
+                          <Icon className="size-5" strokeWidth={1.9} aria-hidden />
+                        </span>
+                      </div>
+                      <p className="mt-5 text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+                        {s.label}
+                      </p>
+                      <h3 className="mt-2 text-balance text-[1.45rem] font-extrabold leading-[1.15] text-[#111827]">
+                        {s.title}
+                      </h3>
+                    </div>
+
+                    <div className="flex flex-1 flex-col px-5 py-5">
+                      <p className="text-[15px] leading-[1.65] text-[#4B5563]">{s.body}</p>
+
+                      {s.statusQuo ? (
+                        <div className="mt-4 flex gap-3 rounded-[16px] border border-[#DDEAF5] bg-white px-4 py-3 shadow-sm">
+                          <span className="mt-0.5 flex size-7 flex-shrink-0 items-center justify-center rounded-[10px] bg-[#EEF4FA] text-[#173E75]">
+                            <MessageSquare className="size-4" strokeWidth={1.9} aria-hidden />
+                          </span>
+                          <p className="text-[14px] font-semibold leading-[1.5] text-[#173E75]">
+                            {s.statusQuo}
+                          </p>
+                        </div>
+                      ) : null}
+
+                      <div className="mt-5 rounded-[16px] border border-[#DDEAF5] bg-[#F4F8FC] p-4">
+                        <p className="text-[12px] font-bold uppercase tracking-[1.1px] text-[#6B7280]">
+                          Pregunta crítica
+                        </p>
+                        <blockquote className="mt-2 text-[16px] font-extrabold leading-snug text-[#173E75]">
+                          {s.quote}
+                        </blockquote>
+                      </div>
+
+                      <div className="mt-5">
+                        <p className="text-[12px] font-bold uppercase tracking-[1.1px] text-[#6B7280]">
+                          Evidencia que debería existir
+                        </p>
+                        <div className="mt-3 grid gap-2">
+                          {s.evidence.map((item) => (
+                            <div key={item} className="flex items-center gap-2 text-[14px] font-semibold text-[#173E75]">
+                              <Check className="size-4 flex-shrink-0 text-[#2EB4E9]" strokeWidth={2.2} aria-hidden />
+                              {item}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <p className="mt-6 border-t border-[#E5E7EB] pt-4 text-[15px] font-semibold leading-[1.5] text-[#173E75]">
+                        {s.risk}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
+              )
+            })}
+          </div>
         </div>
 
         <Reveal delay={0.3}>
-          <div className="mx-auto mt-16 max-w-[680px] rounded-[12px] border border-[#E5E7EB] bg-white p-8 text-center shadow-sm md:p-10">
-            <p className="text-balance text-[20px] font-semibold leading-[1.6] text-[#4B5563]">
-              Mientras usted no lo ve, las familias sí lo sienten.
-            </p>
-            <p className="mt-4 text-balance text-[18px] font-normal leading-[1.6] text-[#4B5563]">
-              Esperar en fila, depender de la bocina y no saber si ya llamaron a su hijo no siempre genera quejas formales. A veces genera cambios de colegio.
-            </p>
-            <p className="mt-4 text-balance text-[18px] font-normal leading-[1.6] text-[#4B5563]">
-              La salida es la primera y última impresión del día, y se repite cerca de 180 veces al año.
-            </p>
-            <p className="mt-8 text-balance text-[2.5rem] font-extrabold leading-tight text-[#173E75]">
-              Las familias no siempre se quejan. A veces simplemente{" "}
-              <span className="text-[#2EB4E9]">se van</span>.
-            </p>
-          </div>
-        </Reveal>
+          <div className="mx-auto mt-9 max-w-5xl overflow-hidden rounded-[26px] border border-[#173E75]/15 bg-[#173E75] shadow-[0_28px_70px_rgba(15,42,79,0.14)]">
+            <div className="grid lg:grid-cols-[1fr_0.72fr]">
+              <div className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#173E75_0%,#0F2A4F_100%)] p-5 text-white md:p-7">
+                <div aria-hidden className="absolute inset-y-0 right-0 -z-10 w-1/2 bg-[radial-gradient(circle_at_80%_30%,rgba(94,204,230,0.24),transparent_58%)]" />
+                <div className="flex items-center gap-3">
+                  <span className="flex size-10 flex-shrink-0 items-center justify-center rounded-[14px] bg-white/10 text-[#5ECCE6]">
+                    <ShieldCheck className="size-5" strokeWidth={1.9} aria-hidden />
+                  </span>
+                  <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-white/70">
+                    Siguiente paso
+                  </p>
+                </div>
+                <p className="mt-5 max-w-[620px] text-balance text-[1.75rem] font-extrabold leading-[1.15] md:text-[2.15rem]">
+                  Mida si su salida puede sostener una{" "}
+                  <span className="text-[#5ECCE6]">solicitud formal.</span>
+                </p>
+                <p className="mt-4 max-w-[620px] text-[16px] leading-[1.65] text-white/80">
+                  Si cualquiera de estos casos le suena familiar, el diagnóstico ayuda a detectar
+                  dónde se pierde evidencia antes de comprar una solución.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {["3 min", "Resultado inmediato", "Confidencial"].map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[13px] font-semibold text-white/90"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-        <Reveal delay={0.4}>
-          <p className="mx-auto mt-10 max-w-[600px] text-center text-[22px] font-semibold leading-[1.5] text-[#374151]">
-            Entonces la pregunta no es si debe registrar.
-            Es cómo hacerlo sin frenar la salida.
-          </p>
+              <div className="bg-white p-5 md:p-6">
+                <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+                  Diagnóstico de exposición legal
+                </p>
+                <div className="mt-5 grid gap-3">
+                  {["Autorizaciones", "Evidencia documental", "Datos bajo control"].map((item) => (
+                    <div key={item} className="flex items-center gap-2 text-[14px] font-semibold text-[#173E75]">
+                      <Check className="size-4 flex-shrink-0 text-[#2EB4E9]" strokeWidth={2.2} aria-hidden />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href={DIAGNOSTIC_CTA_HREF}
+                  className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-[12px] bg-[#173E75] px-5 py-3.5 text-[15px] font-semibold text-white shadow-sm transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2"
+                >
+                  {DIAGNOSTIC_CTA_LABEL}
+                  <ArrowRight className="size-4 flex-shrink-0" />
+                </a>
+                <p className="mt-3 text-[13px] leading-[1.5] text-[#6B7280]">
+                  No requiere instalar nada para obtener el primer resultado.
+                </p>
+              </div>
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>
@@ -586,161 +760,166 @@ function Escenarios() {
 }
 
 /* ==============================================================
-   FALSO DILEMA (tabla SIN vs MANUAL)
+   FALSO DILEMA (tabla SIN vs MANUAL vs EKOLE)
    ============================================================== */
 
-function FalsoDilema() {
-  const CLOCK    = "M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z"
-  const CLIP     = "M168,152a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,152Zm-8-40H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm56-64V216a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V48A16,16,0,0,1,56,32H92.26a47.92,47.92,0,0,1,71.48,0H200A16,16,0,0,1,216,48ZM96,64h64a32,32,0,0,0-64,0ZM200,48H173.25A47.93,47.93,0,0,1,176,64v8a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V64a47.93,47.93,0,0,1,2.75-16H56V216H200Z"
-  const USERS    = "M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"
-  const WARN     = "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm-8,56a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,104a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"
-  const CHECK    = "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"
-
-  const rows = [
-    { sinPath: CLOCK,  sinColor: "#173E75", sinText: "40-60 min de salida",        manualPath: CLOCK,  manualColor: "#173E75", manualText: "200-400 min de salida" },
-    { sinPath: CLIP,   sinColor: "#173E75", sinText: "0 registros",                 manualPath: CLIP,   manualColor: "#173E75", manualText: "Registros en papel" },
-    { sinPath: USERS,  sinColor: "#173E75", sinText: "Las familias esperan",        manualPath: USERS,  manualColor: "#173E75", manualText: "Las familias esperan más" },
-    { sinPath: WARN,   sinColor: "#EF4444", sinText: "El colegio queda expuesto",   manualPath: CHECK,  manualColor: "#10B981", manualText: "El colegio gana evidencia, pero pierde fluidez" },
-  ]
-
-  return (
-    <section className="relative bg-[#F9FAFB] pt-10 pb-16 md:pb-20">
-      <div className="mx-auto max-w-5xl px-6">
-
-        {/* Encabezado */}
-        <Reveal className="mx-auto max-w-[780px] text-center">
-          <h2 className="text-balance text-[2.5rem] font-extrabold leading-[1.1] tracking-[-0.01em] text-[#111827]">
-            Registrar cada salida a mano{" "}
-            <span className="text-[#2EB4E9]">no es viable</span>.
-          </h2>
-          <p className="mt-6 text-[18px] font-normal leading-[1.6] text-[#4B5563]">
-            Registrar cada salida a mano tomaría 1-2 minutos por alumno.
-            Con 200 alumnos, eso suma 3-6 horas adicionales de operación.
-          </p>
-          <p className="mt-4 text-[18px] font-bold text-[#111827]">
-            No es viable. Por eso muchos colegios terminan operando sin registro.
-          </p>
-          <p className="mt-4 text-[18px] font-normal leading-[1.6] text-[#4B5563]">
-            Pero el problema no es elegir entre velocidad y evidencia.
-            Es no tener una forma simple de tener ambas.
-          </p>
-        </Reveal>
-
-        {/* Tabla comparativa */}
-        <Reveal delay={0.15}>
-          {/* Desktop */}
-          <div className="mx-auto mt-12 hidden max-w-3xl overflow-hidden rounded-[12px] border border-[#E5E7EB] bg-white shadow-sm md:block">
-            <div className="grid grid-cols-2 border-b border-[#E5E7EB]">
-              <div className="px-6 py-4">
-                <span className="text-[13px] font-bold uppercase tracking-[0.8px] text-[#173E75]">Sin documentación</span>
-              </div>
-              <div className="border-l border-[#E5E7EB] px-6 py-4">
-                <span className="text-[13px] font-bold uppercase tracking-[0.8px] text-[#173E75]">Documentación manual</span>
-              </div>
-            </div>
-            {rows.map((r, i) => (
-              <div key={i} className={cn("grid grid-cols-2", i !== rows.length - 1 && "border-b border-[#E5E7EB]")}>
-                <div className="flex items-center gap-2.5 px-6 py-4 text-[16px] leading-[1.5] text-[#4B5563]">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0" style={{ color: r.sinColor }} aria-hidden>
-                    <path d={r.sinPath} />
-                  </svg>
-                  <span>{r.sinText}</span>
-                </div>
-                <div className="flex items-center gap-2.5 border-l border-[#E5E7EB] px-6 py-4 text-[16px] leading-[1.5] text-[#4B5563]">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0" style={{ color: r.manualColor }} aria-hidden>
-                    <path d={r.manualPath} />
-                  </svg>
-                  <span>{r.manualText}</span>
-                </div>
-              </div>
-            ))}
-            <div className="grid grid-cols-2 border-t border-[#E5E7EB] bg-[#F9FAFB]">
-              <div className="px-6 py-4 text-[15px] font-semibold text-[#4B5563]">
-                Elige velocidad. Pierde evidencia.
-              </div>
-              <div className="border-l border-[#E5E7EB] px-6 py-4 text-[15px] font-semibold text-[#4B5563]">
-                Elige protección. Pierde experiencia.
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile: dos cards apiladas */}
-          <div className="mt-10 flex flex-col gap-4 md:hidden">
-            {(["sin", "manual"] as const).map((col) => (
-              <div key={col} className="overflow-hidden rounded-[12px] border border-[#E5E7EB] bg-white shadow-sm">
-                <div className="border-b border-[#E5E7EB] px-5 py-3">
-                  <span className="text-[13px] font-bold uppercase tracking-[0.8px] text-[#173E75]">
-                    {col === "sin" ? "Sin documentación" : "Documentación manual"}
-                  </span>
-                </div>
-                {rows.map((r, i) => (
-                  <div key={i} className={cn("flex items-center gap-2.5 px-5 py-3.5 text-[16px] text-[#4B5563]", i !== 0 && "border-t border-[#E5E7EB]")}>
-                    <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0" style={{ color: col === "sin" ? r.sinColor : r.manualColor }} aria-hidden>
-                      <path d={col === "sin" ? r.sinPath : r.manualPath} />
-                    </svg>
-                    <span>{col === "sin" ? r.sinText : r.manualText}</span>
-                  </div>
-                ))}
-                <div className="border-t border-[#E5E7EB] bg-[#F9FAFB] px-5 py-3 text-[15px] font-semibold text-[#4B5563]">
-                  {col === "sin" ? "Elige velocidad. Pierde evidencia." : "Elige protección. Pierde experiencia."}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
-        {/* Cierre */}
-        <Reveal delay={0.3}>
-          <p className="mx-auto mt-16 max-w-[640px] text-center text-[2rem] font-extrabold leading-tight text-[#173E75]">
-            ¿Y si no tuviera que elegir?
-          </p>
-        </Reveal>
-
-      </div>
-    </section>
-  )
-}
-
 /* ==============================================================
-   EFECTO EKOLE — gráfica de campana
+   EFECTO EKOLE — comparativo de impacto
    ============================================================== */
 
 function EfectoEkole() {
-  return (
-    <section id="efecto" className="relative overflow-hidden py-16 md:py-20">
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,hsl(var(--safe)/0.10),transparent_70%)] blur-3xl" />
-      </div>
+  const CLIP  = "M168,152a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,152Zm-8-40H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm56-64V216a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V48A16,16,0,0,1,56,32H92.26a47.92,47.92,0,0,1,71.48,0H200A16,16,0,0,1,216,48ZM96,64h64a32,32,0,0,0-64,0ZM200,48H173.25A47.93,47.93,0,0,1,176,64v8a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V64a47.93,47.93,0,0,1,2.75-16H56V216H200Z"
+  const CLOCK = "M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z"
+  const CHECK = "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"
 
+  const columns = [
+    {
+      key: "sin",
+      number: "01",
+      title: "Sin documentación",
+      path: CLOCK,
+      headline: "Rápido, pero sin respaldo",
+      summary: "La fila avanza, pero la evidencia queda dispersa en memoria, chats o capturas.",
+      metrics: [
+        { label: "Tiempo", value: "Ágil al inicio" },
+        { label: "Registro", value: "Sin evidencia propia" },
+        { label: "Flujo", value: "Depende de memoria" },
+        { label: "Exposición", value: "Alta ante reclamo" },
+      ],
+      footer: "El colegio responde con versiones.",
+    },
+    {
+      key: "manual",
+      number: "02",
+      title: "Documentación manual",
+      path: CLIP,
+      headline: "Evidencia que frena la puerta",
+      summary: "El papel ayuda a documentar, pero cada registro agrega espera y retrabajo.",
+      metrics: [
+        { label: "Tiempo", value: "1-2 min por alumno" },
+        { label: "Registro", value: "Existe, cuesta consultar" },
+        { label: "Flujo", value: "Más fricción diaria" },
+        { label: "Exposición", value: "Menor, pero lento" },
+      ],
+      footer: "El respaldo aparece, la salida se cansa.",
+    },
+    {
+      key: "ekole",
+      number: "03",
+      title: "Con Ekole",
+      path: CHECK,
+      headline: "Rapidez y evidencia en el mismo flujo",
+      summary: "Ekole registra la entrega mientras el equipo opera una salida simple y ágil.",
+      metrics: [
+        { label: "Tiempo", value: "Salida ágil" },
+        { label: "Registro", value: "Historial automático" },
+        { label: "Flujo", value: "Tres pasos simples" },
+        { label: "Exposición", value: "Evidencia sin frenar" },
+      ],
+      footer: "El colegio responde con hechos.",
+    },
+  ] as const
+
+  return (
+    <section id="efecto" className="relative isolate overflow-hidden bg-[#F4F8FC] py-20 md:py-24">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#FFFFFF_0%,#F4F8FC_26%,#F8FBFE_72%,#FFFFFF_100%)]" />
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <h2 className="text-balance text-[2.5rem] font-extrabold leading-[1.1] tracking-[-0.01em] text-[#173E75] sm:text-[3rem]">
-            La diferencia no son los padres.
-            Es el tiempo que el colegio{" "}
-            <span className="text-[#2EB4E9]">pierde cada día</span>.
-          </h2>
-          <p className="mt-6 text-balance text-[18px] font-normal leading-[1.6] text-[#4B5563]">
-            En un colegio de 300 alumnos, reducir la salida de 30 minutos a 5 no es solo comodidad:
-            es menos fila, menos personal detenido y menos exposición en el momento más vulnerable del día.
+
+        <Reveal className="grid gap-6 md:grid-cols-[0.9fr_1fr] md:items-end">
+          <div>
+            <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+              Efecto Ekole
+            </p>
+            <h2 className="mt-4 max-w-[640px] text-balance text-[2.35rem] font-extrabold leading-[1.12] text-[#173E75] sm:text-[3rem]">
+              El punto crítico no es la fila. Es el control{" "}
+              <span className="text-[#2EB4E9]">documentado.</span>
+            </h2>
+          </div>
+          <p className="max-w-[620px] text-[18px] font-normal leading-[1.65] text-[#4B5563] md:pb-2">
+            Bajar tiempos importa. El salto real es que cada entrega deja rastro cuando una familia pide una explicación o una solicitud llega por escrito.
           </p>
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="mt-14">
+          <div className="mt-10">
             <EfectoEkoleChart />
           </div>
         </Reveal>
 
-        <Reveal delay={0.3}>
-          <div className="mx-auto mt-12 max-w-2xl text-center">
+        <Reveal delay={0.25}>
+          <div className="mx-auto mt-8 max-w-2xl text-center">
             <p className="text-balance text-[18px] font-semibold leading-[1.6] text-[#111827]">
               Sin Ekole: hasta 30 minutos de espera. Con Ekole: cerca de 5.
             </p>
-            <p className="mt-2 text-[16px] text-[#6B7280]">
+            <p className="mt-1 text-[16px] text-[#6B7280]">
               Mismo colegio. Mismo número de familias. Diferente sistema.
             </p>
-            <p className="mt-6 text-[17px] font-semibold text-[#4B5563]">
-              ¿Cómo lo logra? Con un flujo que su equipo aprende en 15 minutos.
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.3}>
+          <div className="mx-auto mt-10 grid gap-4 md:grid-cols-3">
+            {columns.map((col) => {
+              const isEkole = col.key === "ekole"
+              return (
+                <div
+                  key={col.key}
+                  className={cn(
+                    "relative flex h-full flex-col overflow-hidden rounded-[26px] border p-5 shadow-[0_24px_62px_rgba(15,42,79,0.08)]",
+                    isEkole
+                      ? "border-[#5ECCE6]/30 bg-[#173E75] text-white ring-1 ring-[#5ECCE6]/30"
+                      : "border-[#DDEAF5] bg-white"
+                  )}
+                >
+                  {isEkole ? (
+                    <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_72%_15%,rgba(94,204,230,0.28),transparent_62%)]" />
+                  ) : null}
+                  <div className="relative flex items-start justify-between gap-4">
+                    <div>
+                      <p className={cn("text-[12px] font-bold uppercase tracking-[1.2px]", isEkole ? "text-white/60" : "text-[#6B7280]")}>
+                        Opción {col.number}
+                      </p>
+                      <h3 className={cn("mt-2 text-[1.35rem] font-extrabold leading-tight", isEkole ? "text-white" : "text-[#111827]")}>
+                        {col.title}
+                      </h3>
+                    </div>
+                    <span className={cn("flex size-16 flex-shrink-0 items-center justify-center rounded-[20px]", isEkole ? "bg-white/10 text-[#5ECCE6]" : "bg-[#EEF4FA] text-[#173E75]")}>
+                      <svg viewBox="0 0 256 256" fill="currentColor" className="size-9" aria-hidden>
+                        <path d={col.path} />
+                      </svg>
+                    </span>
+                  </div>
+                  <p className={cn("relative mt-5 text-[1.35rem] font-extrabold leading-[1.18]", isEkole ? "text-[#5ECCE6]" : "text-[#173E75]")}>
+                    {col.headline}
+                  </p>
+                  <p className={cn("relative mt-3 text-[15px] leading-[1.6]", isEkole ? "text-white/80" : "text-[#4B5563]")}>
+                    {col.summary}
+                  </p>
+                  <div className={cn("relative mt-5 flex flex-1 flex-col divide-y", isEkole ? "divide-white/15" : "divide-[#E5E7EB]")}>
+                    {col.metrics.map((metric) => (
+                      <div key={metric.label} className="grid grid-cols-[0.72fr_1fr] gap-3 py-3">
+                        <span className={cn("text-[12px] font-bold uppercase tracking-[1px]", isEkole ? "text-white/60" : "text-[#6B7280]")}>
+                          {metric.label}
+                        </span>
+                        <span className={cn("text-[15px] font-bold leading-[1.35]", isEkole ? "text-white" : "text-[#173E75]")}>
+                          {metric.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className={cn("relative mt-4 rounded-[16px] px-4 py-3 text-[15px] font-extrabold leading-[1.45]", isEkole ? "bg-white text-[#173E75]" : "bg-[#F4F8FC] text-[#4B5563]")}>
+                    {col.footer}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.4}>
+          <div className="mx-auto mt-10 max-w-3xl rounded-[24px] border border-[#DDEAF5] bg-white/80 p-6 text-center shadow-[0_18px_44px_rgba(15,42,79,0.06)] backdrop-blur">
+            <p className="text-balance text-[1.65rem] font-extrabold leading-tight text-[#173E75] md:text-[2rem]">
+              Ekole es la tercera vía: rapidez para la familia y trazabilidad para el colegio.
             </p>
           </div>
         </Reveal>
@@ -754,367 +933,328 @@ function EfectoEkole() {
    ============================================================== */
 
 function Diagnostico() {
-  const CHK_FILL  = "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"
-  const LOCK      = "M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Z"
-
   const bullets = [
-    "Qué pasa si un tutor no autorizado se presenta en la puerta.",
-    "Si puede demostrar quién retiró a cada alumno hoy.",
-    "Si tiene registro de hora y autorización por cada salida.",
+    "Dependencia de WhatsApp, listas, bocina o memoria del personal.",
+    "Evidencia disponible sobre quién recogió, quién autorizó y a qué hora.",
+    "Brechas que conviene revisar antes de un reclamo formal.",
+  ]
+
+  const previewRows = [
+    { label: "Autorización", value: "Revisar trazabilidad" },
+    { label: "Identidad del tutor", value: "Validar evidencia" },
+    { label: "Historial consultable", value: "Fortalecer registro" },
   ]
 
   return (
-    <section id="diagnostico" className="relative bg-white py-20 md:py-24">
-      <div className="mx-auto max-w-5xl px-6">
+    <section id="diagnostico" className="relative isolate overflow-hidden bg-white py-20 md:py-24">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#FFFFFF_0%,#F4F8FC_54%,#FFFFFF_100%)]" />
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal>
+          <div className="grid gap-10 overflow-hidden rounded-[28px] border border-[#DDEAF5] bg-white/80 p-5 shadow-[0_28px_70px_rgba(15,42,79,0.10)] backdrop-blur md:p-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <div className="px-1 py-2 md:px-2">
+              <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+                Diagnóstico de exposición legal
+              </p>
+              <h2 className="mt-4 max-w-[640px] text-balance text-[2.35rem] font-extrabold leading-[1.12] tracking-[-0.01em] text-[#111827] sm:text-[3rem]">
+                Antes de comprar, vea si su salida sostiene una{" "}
+                <span className="text-[#2EB4E9]">solicitud formal.</span>
+              </h2>
+              <p className="mt-6 max-w-[620px] text-[18px] font-normal leading-[1.6] text-[#4B5563]">
+                En pocos minutos, el director identifica si su proceso actual puede responder ante
+                registros solicitados por escrito, un reclamo familiar o un caso de custodia.
+              </p>
 
-        {/* Header */}
-        <Reveal className="mx-auto max-w-[760px] text-center">
-          <h2 className="text-balance text-[2.5rem] font-extrabold leading-[1.1] tracking-[-0.01em] text-[#111827]">
-            ¿Aún no está listo para agendar una llamada?{" "}
-            <span className="text-[#2EB4E9]">Evalúe su salida en 3 minutos.</span>
-          </h2>
-          <p className="mt-5 text-balance text-[18px] font-normal leading-[1.6] text-[#4B5563]">
-            Responda 3 preguntas y detecte si su colegio puede demostrar quién recogió a cada alumno, a qué hora y bajo qué autorización.
-          </p>
-        </Reveal>
+              <ul className="mt-7 grid gap-3">
+                {bullets.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full bg-[#E7F7EE] text-[#10B981]">
+                      <Check className="size-4" strokeWidth={2.4} />
+                    </span>
+                    <span className="text-[16px] leading-[1.55] text-[#4B5563]">{item}</span>
+                  </li>
+                ))}
+              </ul>
 
-        {/* Card compacta 2 columnas */}
-        <Reveal delay={0.15}>
-          <div className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-[12px] border border-[#E5E7EB] bg-white shadow-sm">
-            <div className="grid grid-cols-1 md:grid-cols-2">
-
-              {/* Izquierda — Qué evalúa */}
-              <div className="border-b border-[#E5E7EB] px-6 py-7 md:border-b-0 md:border-r">
-                <p className="text-[13px] font-bold uppercase tracking-[1px] text-[#6B7280]">
-                  Qué evalúa
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a
+                  href={DIAGNOSTIC_CTA_HREF}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#173E75] px-6 py-3.5 text-[16px] font-semibold text-white shadow-md transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2"
+                >
+                  {DIAGNOSTIC_CTA_LABEL}
+                  <ArrowRight className="size-5 flex-shrink-0" />
+                </a>
+                <p className="text-[14px] leading-[1.5] text-[#6B7280]">
+                  {DIAGNOSTIC_CTA_MICROCOPY}
                 </p>
-                <ul className="mt-4 space-y-3">
-                  {bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2.5">
-                      <svg viewBox="0 0 256 256" fill="currentColor" className="mt-0.5 size-4 flex-shrink-0 text-[#10B981]" aria-hidden>
-                        <path d={CHK_FILL} />
-                      </svg>
-                      <span className="text-[16px] leading-[1.5] text-[#4B5563]">{b}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
+            </div>
 
-              {/* Derecha — Qué recibe + CTA */}
-              <div className="flex flex-col justify-between gap-6 px-6 py-7">
-                <div>
-                  <p className="text-[13px] font-bold uppercase tracking-[1px] text-[#6B7280]">
-                    Qué recibe
-                  </p>
-                  <p className="mt-3 text-[16px] leading-[1.6] text-[#4B5563]">
-                    Una guía de revisión de salida escolar con pasos concretos para fortalecer su proceso.
-                  </p>
+            <div className="rounded-[24px] border border-[#DDEAF5] bg-[#F4F8FC] p-4 shadow-inner md:p-5">
+              <div className="overflow-hidden rounded-[20px] border border-white/80 bg-white shadow-[0_20px_50px_rgba(15,42,79,0.10)]">
+                <div className="border-b border-[#E5E7EB] px-5 py-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-[13px] font-bold uppercase tracking-[1px] text-[#6B7280]">
+                        Vista previa
+                      </p>
+                      <p className="mt-1 text-[18px] font-bold text-[#173E75]">
+                        Resultado del diagnóstico
+                      </p>
+                    </div>
+                    <span className="rounded-full bg-[#EEF4FA] px-3 py-1 text-[12px] font-bold text-[#173E75]">
+                      Confidencial
+                    </span>
+                  </div>
                 </div>
 
-                <div className="flex flex-col gap-3">
-                  <a
-                    href="/diagnostico"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-[12px] bg-[#173E75] px-6 py-3.5 text-[16px] font-semibold text-white shadow-md transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2"
-                  >
-                    Evaluar mi salida en 3 min
-                    <ArrowRight className="size-4 flex-shrink-0" />
-                  </a>
-                  <p className="text-center text-[14px] text-[#6B7280]">
-                    Gratis · Sin compromiso · Resultado inmediato
-                  </p>
+                <div className="px-5 py-5">
+                  <div className="rounded-[16px] bg-[#173E75] p-5 text-white">
+                    <p className="text-[13px] font-semibold uppercase tracking-[1px] text-white/70">
+                      Lectura ejecutiva
+                    </p>
+                    <p className="mt-3 text-balance text-[1.65rem] font-extrabold leading-[1.12]">
+                      Brechas documentales antes de un reclamo.
+                    </p>
+                    <p className="mt-3 text-[14px] leading-[1.55] text-white/80">
+                      El resultado orienta prioridades; no sustituye asesoría jurídica.
+                    </p>
+                  </div>
 
-                  <div className="flex items-start gap-2 pt-1">
-                    <svg viewBox="0 0 256 256" fill="currentColor" className="mt-0.5 size-4 flex-shrink-0 text-[#6B7280]" aria-hidden>
-                      <path d={LOCK} />
-                    </svg>
+                  <div className="mt-4 space-y-2.5">
+                    {previewRows.map((row) => (
+                      <div key={row.label} className="flex items-center justify-between gap-4 rounded-[14px] border border-[#E5E7EB] bg-white px-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <span className="flex size-8 flex-shrink-0 items-center justify-center rounded-[10px] bg-[#EEF4FA] text-[#173E75]">
+                            <ShieldCheck className="size-4" />
+                          </span>
+                          <p className="text-[14px] font-bold text-[#111827]">{row.label}</p>
+                        </div>
+                        <p className="text-right text-[13px] font-semibold text-[#6B7280]">{row.value}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 flex items-start gap-2 rounded-[14px] bg-[#F9FAFB] px-4 py-3">
+                    <Lock className="mt-0.5 size-4 flex-shrink-0 text-[#173E75]" />
                     <p className="text-[13px] leading-[1.5] text-[#6B7280]">
-                      Sus respuestas son confidenciales. Solo usted ve el resultado. No almacenamos datos de su colegio sin su permiso explícito.
+                      Sus respuestas son confidenciales. No almacenamos datos de su colegio sin permiso explícito.
                     </p>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </Reveal>
-
       </div>
     </section>
   )
 }
 
 /* ==============================================================
-   SOLUCIÓN (explicación + tabla 3 col + beneficios)
+   SOLUCIÓN (explicación compacta + walkthrough visual)
    ============================================================== */
 
 function Solucion() {
-  const CLOCK   = "M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z"
-  const CLIP    = "M168,152a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,152Zm-8-40H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm56-64V216a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V48A16,16,0,0,1,56,32H92.26a47.92,47.92,0,0,1,71.48,0H200A16,16,0,0,1,216,48ZM96,64h64a32,32,0,0,0-64,0ZM200,48H173.25A47.93,47.93,0,0,1,176,64v8a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V64a47.93,47.93,0,0,1,2.75-16H56V216H200Z"
-  const USERS   = "M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"
-  const WARN    = "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm-8,56a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,104a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"
-  const CHKFILL = "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"
-
-  const compareRows = [
+  const solutionCards = [
     {
-      sinIcon: CLOCK,  sinColor: "#6B7280", sinText: "40-60 min de salida",
-      manIcon: CLOCK,  manColor: "#6B7280", manText: "200+ min de salida",
-      ekIcon:  CLOCK,  ekColor:  "#173E75", ekText:  "12-15 min de salida",
+      icon: KeyRound,
+      title: "Clave personal de recogida",
+      body: "Cada tutor autorizado recibe una clave única. Al recoger, Ekole registra quién recibió al alumno, a qué hora y bajo qué autorización.",
     },
     {
-      sinIcon: CLIP,   sinColor: "#6B7280", sinText: "0 registros",
-      manIcon: CLIP,   manColor: "#6B7280", manText: "Registros en papel",
-      ekIcon:  CLIP,   ekColor:  "#173E75", ekText:  "Registro automático",
+      icon: ClipboardCheck,
+      title: "Tres pasos que el maestro entiende en minutos",
+      body: "Busca la clave, confirma al alumno y registra la entrega. Sin pasos extra ni configuración compleja en puerta.",
     },
     {
-      sinIcon: USERS,  sinColor: "#6B7280", sinText: "Familias esperan",
-      manIcon: USERS,  manColor: "#6B7280", manText: "Familias esperan más",
-      ekIcon:  USERS,  ekColor:  "#173E75", ekText:  "Familias satisfechas",
-    },
-    {
-      sinIcon: WARN,   sinColor: "#F59E0B", sinText: "Colegio expuesto",
-      manIcon: WARN,   manColor: "#F59E0B", manText: "Cubierto, pero pierde fluidez",
-      ekIcon:  CHKFILL, ekColor: "#10B981", ekText:  "Protegido y con familias",
+      icon: Smartphone,
+      title: "Los padres no necesitan app",
+      body: "La app mejora la experiencia, pero no es requisito para operar. El colegio puede documentar la entrega desde el primer flujo.",
     },
   ]
 
+  const steps = [
+    {
+      title: "Clave en puerta",
+      body: "El personal ingresa los 3 dígitos. El alumno autorizado aparece al instante.",
+      img: "/promotions/Buscador iphone 089.png",
+      alt: "iPad con buscador Ekole: clave ingresada y alumno identificado",
+      tone: "#173E75",
+      tint: "bg-[#F4F8FC]",
+    },
+    {
+      title: "Confirmación del maestro",
+      body: "El maestro ve al alumno en su tablero y confirma el movimiento hacia la salida.",
+      img: "/promotions/Ipad dasboard final.png",
+      alt: "iPad con dashboard del maestro: alumno listo para enviar a puerta",
+      tone: "#2EB4E9",
+      tint: "bg-[#F7FCFE]",
+    },
+    {
+      title: "Entrega documentada",
+      body: "Nombre, hora, grado y confirmación quedan disponibles como evidencia consultable.",
+      img: "/promotions/Ipad Entregados.png",
+      alt: "iPad con pantalla de entregas confirmadas y registro de hora exacta",
+      tone: "#10B981",
+      tint: "bg-[#F6FEFA]",
+    },
+  ]
+
+  const proofItems = [
+    { label: "Alumno", value: "Nombre y grado" },
+    { label: "Hora exacta", value: "Timestamp automático" },
+    { label: "Tutor autorizado", value: "Quién recogió" },
+    { label: "Personal que confirmó", value: "Registro de quien entregó" },
+  ]
 
   return (
-    <section id="solucion" className="relative overflow-hidden bg-muted/40 py-24 md:py-32">
+    <section id="solucion" className="relative isolate overflow-hidden bg-white py-20 md:py-24">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#FFFFFF_0%,#F4F8FC_48%,#FFFFFF_100%)]" />
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <p className="text-[12px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
-            La solución
+
+        {/* Encabezado */}
+        <Reveal className="grid gap-6 md:grid-cols-[0.92fr_1fr] md:items-end">
+          <div>
+            <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+              La solución
+            </p>
+            <h2 className="mt-4 max-w-[660px] text-balance text-[2.35rem] font-extrabold leading-[1.12] text-[#173E75] sm:text-[3rem]">
+              Ekole agiliza la salida y deja cada entrega{" "}
+              <span className="text-[#2EB4E9]">documentada.</span>
+            </h2>
+          </div>
+          <p className="max-w-[620px] text-[18px] font-normal leading-[1.65] text-[#4B5563] md:pb-2">
+            El flujo se mantiene simple para puerta y maestros, mientras el colegio gana un historial consultable cuando necesita explicar qué pasó.
           </p>
-          <h2 className="mt-4 text-balance text-[3rem] font-extrabold leading-[1.1] tracking-[-0.01em] text-[#173E75]">
-            Ekole agiliza la salida y registra{" "}
-            <span className="text-[#2EB4E9]">cada entrega</span> en segundos.
-          </h2>
         </Reveal>
 
+        {/* B) Tarjetas con borde de acento */}
         <Reveal delay={0.15}>
-          <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-3">
-            {[
-              {
-                iconPath: "M216.57,39.43A80,80,0,0,0,83.91,120.78L28.69,176A15.86,15.86,0,0,0,24,187.31V216a16,16,0,0,0,16,16H72a8,8,0,0,0,8-8V208H96a8,8,0,0,0,8-8V184h16a8,8,0,0,0,5.66-2.34l9.56-9.57A79.73,79.73,0,0,0,160,176h.1A80,80,0,0,0,216.57,39.43ZM224,98.1c-1.09,34.09-29.75,61.86-63.89,61.9H160a63.7,63.7,0,0,1-23.65-4.51,8,8,0,0,0-8.84,1.68L116.69,168H96a8,8,0,0,0-8,8v16H72a8,8,0,0,0-8,8v16H40V187.31l58.83-58.82a8,8,0,0,0,1.68-8.84A63.72,63.72,0,0,1,96,95.92c0-34.14,27.81-62.8,61.9-63.89A64,64,0,0,1,224,98.1ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z",
-                title: "Clave personal de recogida",
-                body: "Cada tutor autorizado recibe una clave única. Al recoger, el sistema registra quién recibió al alumno, a qué hora y bajo qué autorización.",
-              },
-              {
-                iconPath: "M168,152a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,152Zm-8-40H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm56-64V216a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V48A16,16,0,0,1,56,32H92.26a47.92,47.92,0,0,1,71.48,0H200A16,16,0,0,1,216,48ZM96,64h64a32,32,0,0,0-64,0ZM200,48H173.25A47.93,47.93,0,0,1,176,64v8a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V64a47.93,47.93,0,0,1,2.75-16H56V216H200Z",
-                title: "Funciona desde el primer día",
-                body: "Sin app obligatoria, sin dispositivos especiales y sin semanas de capacitación. Su equipo usa lo que ya tiene.",
-              },
-              {
-                iconPath: "M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM72,64H184V192H72Zm8-32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z",
-                title: "App opcional para familias",
-                body: "La app mejora la experiencia para quien la quiera. Pero el sistema funciona completo con la clave desde el primer día.",
-              },
-            ].map((card) => (
-              <div
-                key={card.title}
-                className="flex flex-col gap-3 rounded-[12px] border border-[#E5E7EB] bg-white px-5 pt-5 pb-6 shadow-sm"
-                style={{ borderTop: "3px solid #2EB4E9" }}
-              >
-                <div className="flex size-12 flex-shrink-0 items-center justify-center rounded-[12px] bg-[rgba(23,62,117,0.08)]">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-7 text-[#173E75]" aria-hidden>
-                    <path d={card.iconPath} />
-                  </svg>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {solutionCards.map((card) => {
+              const Icon = card.icon
+              return (
+                <div
+                  key={card.title}
+                  className="flex h-full flex-col overflow-hidden rounded-[24px] border border-[#DDEAF5] bg-white shadow-[0_18px_44px_rgba(15,42,79,0.07)]"
+                >
+                  <div className="h-[3px] w-full bg-gradient-to-r from-[#173E75] via-[#2EB4E9] to-[#5ECCE6]" />
+                  <div className="flex flex-1 gap-4 p-5 md:flex-col md:p-6">
+                    <div className="flex size-11 flex-shrink-0 items-center justify-center rounded-[14px] bg-[#EEF4FA] text-[#173E75] md:size-12">
+                      <Icon className="size-6" strokeWidth={1.8} aria-hidden />
+                    </div>
+                    <div>
+                      <h3 className="text-[18px] font-bold leading-snug text-[#173E75] md:text-[20px]">
+                        {card.title}
+                      </h3>
+                      <p className="mt-2 text-[15px] leading-[1.6] text-[#4B5563] md:text-[16px]">
+                        {card.body}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-[20px] font-bold leading-snug text-[#173E75]">{card.title}</h3>
-                <p className="text-[16px] leading-[1.6] text-[#4B5563]">{card.body}</p>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </Reveal>
 
-        {/* 3-step visual walkthrough */}
-        <div className="mt-20">
-          <Reveal>
-            <div className="mx-auto max-w-3xl text-center">
-              <h3 className="text-balance text-[2rem] font-extrabold leading-[1.1] text-[#111827] sm:text-[2.5rem]">
+        {/* C) Banda — qué queda documentado */}
+        <Reveal delay={0.22}>
+          <div className="mt-6 overflow-hidden rounded-[20px] border border-[#DDEAF5] bg-[#F8FBFE]">
+            <div className="px-5 py-3 md:px-6">
+              <p className="text-[11px] font-bold uppercase tracking-[1.4px] text-[#6B7280]">
+                Qué queda registrado en cada entrega
+              </p>
+            </div>
+            <div className="grid divide-y divide-[#EEF4FA] border-t border-[#DDEAF5] sm:grid-cols-2 sm:divide-x sm:divide-y-0 md:grid-cols-4 md:divide-x md:divide-y-0">
+              {proofItems.map((item) => (
+                <div key={item.label} className="flex items-center gap-3 px-5 py-3.5 md:px-6">
+                  <span className="flex size-6 flex-shrink-0 items-center justify-center rounded-md bg-[#E7F7EE] text-[#10B981]">
+                    <Check className="size-3.5" strokeWidth={2.5} />
+                  </span>
+                  <div>
+                    <p className="text-[13px] font-bold text-[#173E75]">{item.label}</p>
+                    <p className="text-[12px] text-[#6B7280]">{item.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        {/* A) Panel oscuro — screenshots del producto */}
+        <Reveal delay={0.28}>
+          <div className="mt-8 overflow-hidden rounded-[28px] bg-[#0D2545]">
+            <div className="px-6 pt-8 pb-2 md:px-10 md:pt-10">
+              <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-white/50">
+                Flujo real de puerta
+              </p>
+              <h3 className="mt-3 text-balance text-[1.9rem] font-extrabold leading-[1.15] text-white sm:text-[2.25rem]">
                 De la clave al registro{" "}
                 <span className="text-[#2EB4E9]">en segundos</span>.
               </h3>
+              <p className="mt-3 max-w-[600px] text-[16px] leading-[1.65] text-white/60">
+                El equipo de puerta identifica, confirma y deja evidencia sin pasos manuales.
+              </p>
             </div>
-          </Reveal>
 
-          {/* Wrapper que se estira más allá del max-w-6xl en lg+ para dar tamaño real a los iPads */}
-          <div className="mt-12 md:mx-auto md:max-w-none lg:-mx-4 xl:-mx-8 2xl:-mx-16">
-          <div className="grid gap-10 md:grid-cols-3 md:gap-5 lg:gap-4">
-            {[
-              {
-                title: "El tutor da su clave en la puerta o en la fila",
-                body: "El personal ingresa los 3 dígitos. El alumno aparece al instante.",
-                img: "/promotions/Buscador iphone 089.png",
-                alt: "iPad con buscador Ekole: clave ingresada y alumno identificado",
-                numColor: "#173E75",
-                barColor: "#173E75",
-                tint: "from-[rgba(23,62,117,0.06)] via-white to-white",
-              },
-              {
-                title: "El maestro confirma y envía al alumno",
-                body: "El maestro ve al alumno autorizado en su tablero y lo envía a la puerta.",
-                img: "/promotions/Ipad dasboard final.png",
-                alt: "iPad con dashboard del maestro: alumno listo para enviar a puerta",
-                numColor: "#2EB4E9",
-                barColor: "#2EB4E9",
-                tint: "from-[rgba(46,180,233,0.08)] via-white to-white",
-              },
-              {
-                title: "La entrega queda documentada automáticamente",
-                body: "Nombre, hora, grado y confirmación. Evidencia de entrega sin trabajo adicional.",
-                img: "/promotions/Ipad Entregados.png",
-                alt: "iPad con pantalla de entregas confirmadas y registro de hora exacta",
-                numColor: "#10B981",
-                barColor: "#10B981",
-                tint: "from-[rgba(16,185,129,0.07)] via-white to-white",
-              },
-            ].map((step, i) => (
-              <Reveal key={step.title} delay={0.1 + i * 0.08}>
-                <div className="flex h-full flex-col">
-                  {/* Image frame */}
+            <div className="mt-6 grid gap-4 px-4 pb-6 md:grid-cols-3 md:px-6 md:pb-8">
+              {steps.map((step, i) => (
+                <div key={step.title} className="flex flex-col overflow-hidden rounded-[20px] bg-white/[0.06] ring-1 ring-white/10">
                   <div
                     className={cn(
-                      "relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-[16px] border border-[rgba(0,0,0,0.08)] bg-gradient-to-br transition-shadow hover:shadow-lg md:aspect-[5/4] lg:aspect-[4/3]",
+                      "relative flex aspect-[16/10] items-center justify-center overflow-hidden",
                       step.tint,
                     )}
-                    style={{ boxShadow: "0 20px 40px rgba(15,42,79,0.12)" }}
                   >
-                    {/* Accent bar */}
                     <div
                       aria-hidden
-                      className="absolute inset-x-0 top-0 h-1 rounded-t-[16px]"
-                      style={{ background: step.barColor }}
-                    />
-                    {/* Step badge */}
-                    <div
-                      aria-hidden
-                      className="absolute left-4 top-4 z-10 flex size-9 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[15px] font-bold shadow-sm md:left-5 md:top-5"
-                      style={{ color: step.numColor }}
+                      className="absolute left-3 top-3 z-10 rounded-md bg-white/90 px-2.5 py-1 text-[12px] font-bold shadow-sm backdrop-blur"
+                      style={{ color: step.tone }}
                     >
-                      {i + 1}
+                      0{i + 1}
                     </div>
-
                     <Image
                       src={step.img}
                       alt={step.alt}
                       fill
                       quality={95}
-                      className="rounded-[8px] object-contain object-center p-3 lg:p-2"
-                      sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 420px"
+                      className="object-contain object-center p-2"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 360px"
                     />
                   </div>
-
-                  {/* Copy */}
-                  <div className="mt-5 flex-1">
-                    <div className="flex items-start gap-3">
-                      <span
-                        className="mt-0.5 flex size-9 flex-shrink-0 items-center justify-center rounded-full border border-[#E5E7EB] text-[15px] font-bold"
-                        style={{ color: step.numColor }}
-                        aria-hidden
-                      >
-                        {i + 1}
-                      </span>
-                      <div>
-                        <h4 className="text-[20px] font-bold leading-snug text-[#111827]">
-                          {step.title}
-                        </h4>
-                        <p className="mt-2 text-[16px] leading-[1.6] text-[#4B5563]">{step.body}</p>
-                      </div>
-                    </div>
+                  <div className="px-4 py-4">
+                    <h4 className="text-[17px] font-bold leading-snug text-white">
+                      {step.title}
+                    </h4>
+                    <p className="mt-1.5 text-[14px] leading-[1.6] text-white/55">{step.body}</p>
                   </div>
                 </div>
-              </Reveal>
-            ))}
-          </div>
-          </div>
-        </div>
-
-        {/* comparison: table en desktop, cards apiladas en móvil */}
-        <Reveal delay={0.25}>
-          {/* Desktop: tabla 3 col */}
-          <div className="mx-auto mt-16 hidden max-w-5xl overflow-hidden rounded-[12px] border border-[#E5E7EB] bg-white shadow-sm md:block">
-            {/* Headers */}
-            <div className="grid grid-cols-3 border-b border-[#E5E7EB]">
-              <div className="px-5 py-4 text-[13px] font-bold uppercase tracking-[0.8px] text-[#4B5563]">
-                Sin documentación
-              </div>
-              <div className="border-l border-[#E5E7EB] px-5 py-4 text-[13px] font-bold uppercase tracking-[0.8px] text-[#4B5563]">
-                Documentación manual
-              </div>
-              <div className="border-l border-[#E5E7EB] bg-[#F0FDF4] px-5 py-4 text-[13px] font-bold uppercase tracking-[0.8px] text-[#047857]">
-                Con Ekole
-              </div>
+              ))}
             </div>
-            {/* Rows */}
-            {compareRows.map((r, i) => (
-              <div
-                key={i}
-                className={cn("grid grid-cols-3", i !== compareRows.length - 1 && "border-b border-[#E5E7EB]")}
-              >
-                <div className="flex items-center gap-2.5 px-5 py-4 text-[16px] leading-[1.5] text-[#4B5563]">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0" style={{ color: r.sinColor }} aria-hidden><path d={r.sinIcon} /></svg>
-                  <span>{r.sinText}</span>
-                </div>
-                <div className="flex items-center gap-2.5 border-l border-[#E5E7EB] px-5 py-4 text-[16px] leading-[1.5] text-[#4B5563]">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0" style={{ color: r.manColor }} aria-hidden><path d={r.manIcon} /></svg>
-                  <span>{r.manText}</span>
-                </div>
-                <div className="flex items-center gap-2.5 border-l border-[#E5E7EB] bg-[#F0FDF4] px-5 py-4 text-[16px] font-bold leading-[1.5] text-[#111827]">
-                  <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0" style={{ color: r.ekColor }} aria-hidden><path d={r.ekIcon} /></svg>
-                  <span>{r.ekText}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile: cards apiladas — 3 variantes por fila */}
-          <div className="mt-10 flex flex-col gap-4 md:hidden">
-            {compareRows.map((r, i) => (
-              <div key={i} className="overflow-hidden rounded-[12px] border border-[#E5E7EB] bg-white shadow-sm">
-                <div className="divide-y divide-[#E5E7EB]">
-                  <div className="flex items-center gap-3 px-5 py-3.5">
-                    <span className="w-[120px] flex-shrink-0 text-[12px] font-bold uppercase tracking-[0.8px] text-[#4B5563]">Sin doc.</span>
-                    <div className="flex items-center gap-2 text-[15px] text-[#4B5563]">
-                      <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0" style={{ color: r.sinColor }} aria-hidden><path d={r.sinIcon} /></svg>
-                      <span>{r.sinText}</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 px-5 py-3.5">
-                    <span className="w-[120px] flex-shrink-0 text-[12px] font-bold uppercase tracking-[0.8px] text-[#4B5563]">Manual</span>
-                    <div className="flex items-center gap-2 text-[15px] text-[#4B5563]">
-                      <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0" style={{ color: r.manColor }} aria-hidden><path d={r.manIcon} /></svg>
-                      <span>{r.manText}</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 bg-[#F0FDF4] px-5 py-3.5">
-                    <span className="w-[120px] flex-shrink-0 text-[12px] font-bold uppercase tracking-[0.8px] text-[#047857]">Con Ekole</span>
-                    <div className="flex items-center gap-2 text-[15px] font-bold text-[#111827]">
-                      <svg viewBox="0 0 256 256" fill="currentColor" className="size-4 flex-shrink-0" style={{ color: r.ekColor }} aria-hidden><path d={r.ekIcon} /></svg>
-                      <span>{r.ekText}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </Reveal>
 
+        {/* CTA */}
         <Reveal delay={0.35}>
-          <div className="mt-10 flex flex-col items-center">
+          <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-[24px] border border-[#DDEAF5] bg-[#F8FBFE] p-5 text-center shadow-[0_18px_44px_rgba(15,42,79,0.06)] md:flex-row md:text-left">
+            <div>
+              <p className="text-[18px] font-bold leading-snug text-[#173E75]">
+                ¿Quiere ver este flujo aplicado a su colegio?
+              </p>
+              <p className="mt-1 text-[14px] leading-[1.5] text-[#6B7280]">
+                {CALL_CTA_MICROCOPY}
+              </p>
+            </div>
             <a
-              href={DEMO_CTA_HREF}
-              className="inline-flex items-center gap-2.5 rounded-[12px] bg-[#173E75] px-8 py-4 text-[17px] font-semibold text-white shadow-md transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2"
+              href={CALL_CTA_HREF}
+              className="inline-flex flex-shrink-0 items-center justify-center gap-2.5 rounded-lg bg-[#173E75] px-6 py-3.5 text-[16px] font-semibold text-white shadow-md transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2"
             >
-              Agendar revisión de salida de 20 min
-              <ArrowRight className="size-5 flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
+              {CALL_CTA_FULL_LABEL}
+              <ArrowRight className="size-5 flex-shrink-0" />
             </a>
-            <p className="mt-4 text-[14px] leading-[1.5] text-[#6B7280]">
-              Por videollamada · Sin compromiso · Revisamos su proceso de salida
-            </p>
           </div>
         </Reveal>
-
       </div>
     </section>
   )
@@ -1125,84 +1265,254 @@ function Solucion() {
    ============================================================== */
 
 function ComoFunciona() {
-  const CHAT  = "M168,112a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,112Zm-8,24H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm72-8A104,104,0,0,1,79.12,219.82L45.07,231.17a16,16,0,0,1-20.24-20.24l11.35-34.05A104,104,0,1,1,232,128Zm-16,0A88,88,0,1,0,51.81,172.06a8,8,0,0,1,.66,6.54L40,216,77.4,203.53a7.85,7.85,0,0,1,2.53-.42,8,8,0,0,1,4,1.08A88,88,0,0,0,216,128Z"
-  const CLOCK = "M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z"
-  const CHK   = "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"
-
   const steps = [
     {
-      iconPath: CHAT,
-      num: "1",
-      title: "Diagnóstico de 20 min",
-      body: "Entendemos puertas, alumnos y flujo actual.",
+      icon: MessageSquare,
+      num: "01",
+      title: "Llamada de 20 min",
+      body: "Entendemos puertas, horarios, alumnos, tutores y dónde hoy se pierde control documental.",
     },
     {
-      iconPath: CLOCK,
-      num: "2",
-      title: "Configuración en menos de 24 h",
-      body: "Cargamos alumnos, tutores y personal autorizado.",
+      icon: FileText,
+      num: "02",
+      title: "Configuración con datos listos",
+      body: "Cargamos alumnos, tutores autorizados, personal y reglas básicas para operar sin fricción.",
     },
     {
-      iconPath: CHK,
-      num: "3",
+      icon: ShieldCheck,
+      num: "03",
       title: "Salida documentada desde el día uno",
-      body: "Su equipo opera con clave, registro automático e historial.",
+      body: "Su equipo opera con clave, registro automático e historial consultable para dirección.",
     },
   ]
 
+  const adoptionPoints = [
+    "Configuración inicial con los datos del colegio.",
+    "Ajustes al flujo real de puerta y horarios.",
+    "Acompañamiento mientras el equipo adopta el proceso.",
+  ]
+
   return (
-    <section className="relative bg-[#F9FAFB] py-20 md:py-24">
-      <div className="mx-auto max-w-5xl px-6">
-
-        {/* Header */}
-        <Reveal className="mx-auto max-w-[860px] text-center">
-          <h2 className="text-balance text-[2.5rem] font-extrabold leading-[1.1] tracking-[-0.01em] text-[#173E75]">
-            De primera llamada a salida documentada{" "}
-            <span className="text-[#2EB4E9]">en menos de 24 horas</span>.
-          </h2>
-          <p className="mx-auto mt-5 max-w-[720px] text-balance text-[18px] font-normal leading-[1.6] text-[#4B5563]">
-            Usted nos comparte los datos básicos. Nosotros configuramos Ekole, cargamos tutores autorizados y capacitamos a su equipo en 15 minutos.
-          </p>
-          <p className="mx-auto mt-3 max-w-[720px] text-balance text-[18px] font-normal leading-[1.6] text-[#4B5563]">
-            Desde el primer día, su salida puede operar con clave de recogida, registro automático e historial consultable.
-          </p>
-        </Reveal>
-
-        {/* Mini steps — horizontal en desktop, vertical en móvil */}
-        <Reveal delay={0.15}>
-          <div className="mx-auto mt-10 flex max-w-3xl flex-col items-center gap-6 md:flex-row md:items-start md:gap-0">
-            {steps.map((s, i) => (
-              <React.Fragment key={s.num}>
-                <div className="flex flex-1 flex-col items-center gap-2.5 text-center">
-                  <div className="flex size-10 flex-shrink-0 items-center justify-center rounded-full border-2 border-[#2EB4E9] bg-white text-[15px] font-bold text-[#173E75]">
-                    {s.num}
-                  </div>
-                  <p className="max-w-[140px] text-[15px] font-semibold leading-snug text-[#111827]">{s.title}</p>
-                </div>
-                {i < 2 && (
-                  <ArrowRight className="hidden size-5 flex-shrink-0 self-start text-[#D1D5DB] md:block" style={{ marginTop: "12px" }} />
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        </Reveal>
-
-        {/* CTA */}
-        <Reveal delay={0.3}>
-          <div className="mt-10 flex flex-col items-center">
-            <a
-              href={DEMO_CTA_HREF}
-              className="inline-flex items-center gap-2.5 rounded-[12px] bg-[#173E75] px-8 py-4 text-[17px] font-semibold text-white shadow-md transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2"
-            >
-              Agendar revisión de salida de 20 min
-              <ArrowRight className="size-5 flex-shrink-0" />
-            </a>
-            <p className="mt-4 text-[14px] leading-[1.5] text-[#6B7280]">
-              Por videollamada · Sin compromiso · Revisamos su proceso de salida
+    <section className="relative isolate overflow-hidden bg-[#F9FAFB] py-20 md:py-24">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#FFFFFF_0%,#F4F8FC_44%,#F9FAFB_100%)]" />
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal className="grid gap-6 md:grid-cols-[0.92fr_1fr] md:items-end">
+          <div>
+            <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+              Implementación acompañada
             </p>
+            <h2 className="mt-4 max-w-[660px] text-balance text-[2.35rem] font-extrabold leading-[1.12] text-[#173E75] sm:text-[3rem]">
+              De primera llamada a salida documentada sin cargar{" "}
+              <span className="text-[#2EB4E9]">al equipo.</span>
+            </h2>
           </div>
+          <p className="max-w-[620px] text-[18px] font-normal leading-[1.65] text-[#4B5563] md:pb-2">
+            Ekole no entra como un proyecto largo. Se configura con datos básicos, se valida en operación real y se acompaña la adopción de puerta.
+          </p>
         </Reveal>
 
+        <div className="mt-10 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+          <Reveal delay={0.1}>
+            <div className="relative overflow-hidden rounded-[28px] bg-[#173E75] p-6 text-white shadow-[0_28px_70px_rgba(15,42,79,0.18)] md:p-8">
+              <div aria-hidden className="absolute inset-x-0 top-0 h-1 bg-[#5ECCE6]" />
+              <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-white/70">
+                Acompañamiento de adopción
+              </p>
+              <h3 className="mt-4 max-w-[520px] text-balance text-[2rem] font-extrabold leading-[1.12] md:text-[2.4rem]">
+                Primeros 15 días por cuenta de{" "}
+                <span className="text-[#5ECCE6]">Ekole.</span>
+              </h3>
+              <p className="mt-5 max-w-[560px] text-[16px] leading-[1.65] text-white/80">
+                Un periodo para validar valor operativo, ajustar detalles de puerta y acompañar al equipo sin permanencia forzosa.
+              </p>
+
+              <div className="mt-7 space-y-3">
+                {adoptionPoints.map((point) => (
+                  <div key={point} className="flex items-start gap-3">
+                    <span className="mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-[#5ECCE6]">
+                      <Check className="size-4" strokeWidth={2.4} />
+                    </span>
+                    <p className="text-[15px] leading-[1.55] text-white/90">{point}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a
+                  href={CALL_CTA_HREF}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-[16px] font-semibold text-[#173E75] shadow-md transition-colors duration-150 hover:bg-[#EEF4FA] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#173E75]"
+                >
+                  {CALL_CTA_FULL_LABEL}
+                  <ArrowRight className="size-5 flex-shrink-0" />
+                </a>
+                <p className="text-[14px] leading-[1.5] text-white/70">
+                  {CALL_CTA_MICROCOPY}
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.18}>
+            <div className="rounded-[28px] border border-[#DDEAF5] bg-white/90 p-5 shadow-[0_24px_60px_rgba(15,42,79,0.09)] backdrop-blur md:p-6">
+              <div className="flex items-start justify-between gap-4 border-b border-[#E5E7EB] pb-5">
+                <div>
+                  <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+                    Ruta de activación
+                  </p>
+                  <h3 className="mt-2 text-[1.45rem] font-extrabold leading-tight text-[#173E75]">
+                    Rápido para empezar. Claro para dirección.
+                  </h3>
+                </div>
+                <span className="hidden rounded-full bg-[#EEF4FA] px-3 py-1 text-[12px] font-bold text-[#173E75] sm:inline-flex">
+                  3 pasos
+                </span>
+              </div>
+
+              <div className="divide-y divide-[#E5E7EB]">
+                {steps.map((step) => {
+                  const Icon = step.icon
+                  return (
+                    <div key={step.num} className="grid gap-4 py-5 sm:grid-cols-[64px_1fr]">
+                      <div className="flex items-center gap-3 sm:block">
+                        <div className="flex size-12 items-center justify-center rounded-[16px] bg-[#EEF4FA] text-[#173E75]">
+                          <Icon className="size-6" strokeWidth={1.8} aria-hidden />
+                        </div>
+                        <span className="text-[13px] font-extrabold tracking-[1px] text-[#2EB4E9] sm:mt-3 sm:block">
+                          {step.num}
+                        </span>
+                      </div>
+                      <div>
+                        <h4 className="text-[18px] font-bold leading-snug text-[#111827]">
+                          {step.title}
+                        </h4>
+                        <p className="mt-2 text-[15px] leading-[1.6] text-[#4B5563] md:text-[16px]">
+                          {step.body}
+                        </p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div className="mt-2 rounded-[18px] bg-[#F4F8FC] px-4 py-4">
+                <p className="text-[15px] font-semibold leading-[1.55] text-[#173E75]">
+                  Resultado: una salida operable, historial consultable y equipo acompañado mientras adopta el proceso.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ==============================================================
+   CONFIANZA — contrato, confidencialidad y datos
+   ============================================================== */
+
+function ConfianzaDatos() {
+  const trustItems = [
+    {
+      icon: FileText,
+      title: "Contrato de servicios y confidencialidad",
+      body: "Servicio, alcance y confidencialidad quedan definidos antes de operar con información real.",
+    },
+    {
+      icon: Lock,
+      title: "Datos personales bajo control",
+      body: "La información pertenece al colegio y se usa solo para configurar y operar el servicio autorizado.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Sin permanencia forzosa",
+      body: "El acuerdo protege datos; no amarra al colegio. Si no aporta valor en 15 días, puede detenerse sin costo.",
+    },
+  ]
+
+  const credentials = ["SEP", "LFPDPPP", "Derechos ARCO", "CCF Art. 1920"]
+
+  return (
+    <section id="confianza" className="relative isolate scroll-mt-28 overflow-hidden bg-white py-20 md:py-24">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#F9FAFB_0%,#FFFFFF_45%,#F4F8FC_100%)]" />
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal>
+          <div className="grid gap-8 overflow-hidden rounded-[30px] border border-[#DDEAF5] bg-white/90 p-5 shadow-[0_28px_70px_rgba(15,42,79,0.10)] backdrop-blur md:p-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+            <div className="flex flex-col justify-between gap-8 px-1 py-2">
+              <div>
+                <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+                  Confianza antes de operar
+                </p>
+                <h2 className="mt-4 max-w-[620px] text-balance text-[2.35rem] font-extrabold leading-[1.12] text-[#111827] sm:text-[3rem]">
+                  Antes de compartir datos, todo queda{" "}
+                  <span className="text-[#2EB4E9]">por escrito.</span>
+                </h2>
+                <p className="mt-6 max-w-[620px] text-[18px] leading-[1.65] text-[#4B5563]">
+                  Ekole está pensado para que el director pueda avanzar sin sentir que expone la información del colegio.
+                </p>
+              </div>
+
+              <div>
+                <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+                  Referencias legales visibles
+                </p>
+                <div className="mt-4 flex flex-col gap-3 md:flex-row md:flex-wrap md:items-center md:gap-y-3 md:divide-x md:divide-[#D1D5DB]">
+                  {credentials.map((label) => (
+                    <div key={label} className="flex items-center gap-2 md:px-4 md:first:pl-0">
+                      <ShieldCheck className="size-4 flex-shrink-0 text-[#173E75]" strokeWidth={1.9} aria-hidden />
+                      <span className="text-[14px] font-semibold text-[#173E75]">{label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-[26px] bg-[#F4F8FC] p-4 shadow-inner md:p-5">
+              <div className="overflow-hidden rounded-[22px] border border-white/80 bg-white shadow-[0_20px_50px_rgba(15,42,79,0.10)]">
+                <div className="bg-[#173E75] px-5 py-5 text-white">
+                  <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-white/70">
+                    Control documental
+                  </p>
+                  <p className="mt-2 text-balance text-[1.6rem] font-extrabold leading-[1.15]">
+                    Avanzar sin improvisar el manejo de datos.
+                  </p>
+                </div>
+
+                <div className="divide-y divide-[#E5E7EB]">
+                  {trustItems.map((item) => {
+                    const Icon = item.icon
+                    return (
+                      <div key={item.title} className="grid gap-4 px-5 py-5 sm:grid-cols-[48px_1fr]">
+                        <div className="flex size-12 items-center justify-center rounded-[16px] bg-[#EEF4FA] text-[#173E75]">
+                          <Icon className="size-6" strokeWidth={1.8} aria-hidden />
+                        </div>
+                        <div>
+                          <h3 className="text-[18px] font-bold leading-snug text-[#173E75]">
+                            {item.title}
+                          </h3>
+                          <p className="mt-2 text-[15px] leading-[1.6] text-[#4B5563] md:text-[16px]">
+                            {item.body}
+                          </p>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+
+                <div className="border-t border-[#E5E7EB] bg-[#F9FAFB] px-5 py-4">
+                  <div className="flex items-start gap-3">
+                    <span className="mt-0.5 flex size-7 flex-shrink-0 items-center justify-center rounded-full bg-[#E7F7EE] text-[#10B981]">
+                      <Check className="size-4" strokeWidth={2.4} />
+                    </span>
+                    <p className="text-[14px] font-semibold leading-[1.55] text-[#173E75]">
+                      El objetivo es proteger la información del colegio antes, durante y después de la activación.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   )
@@ -1215,20 +1525,25 @@ function ComoFunciona() {
 function FAQItem({ q, a, defaultOpen = false }: { q: string; a: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = React.useState(defaultOpen)
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card transition-all">
+    <div className={cn(
+      "overflow-hidden rounded-[20px] border border-[#DDEAF5] transition-all duration-200",
+      open ? "bg-white shadow-[0_18px_44px_rgba(15,42,79,0.07)]" : "bg-white/80 shadow-sm",
+    )}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+        className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left md:px-6"
         aria-expanded={open}
       >
-        <span className="text-base font-medium text-foreground md:text-lg">{q}</span>
-        <ChevronDown
-          className={cn(
-            "size-5 flex-shrink-0 text-muted-foreground transition-transform duration-300",
-            open && "rotate-180 text-primary",
-          )}
-        />
+        <span className="text-[16px] font-bold leading-snug text-[#111827] md:text-[18px]">{q}</span>
+        <span className={cn(
+          "flex size-8 flex-shrink-0 items-center justify-center rounded-full transition-colors duration-200",
+          open ? "bg-[#EEF4FA] text-[#173E75]" : "bg-[#F9FAFB] text-[#6B7280]",
+        )}>
+          <ChevronDown
+            className={cn("size-4 transition-transform duration-300", open && "rotate-180")}
+          />
+        </span>
       </button>
       <div
         className={cn(
@@ -1237,7 +1552,7 @@ function FAQItem({ q, a, defaultOpen = false }: { q: string; a: React.ReactNode;
         )}
       >
         <div className="min-h-0">
-          <div className="px-6 pb-6 text-sm leading-relaxed text-muted-foreground md:text-base">{a}</div>
+          <div className="px-5 pb-5 text-[15px] leading-[1.65] text-[#4B5563] md:px-6 md:pb-6 md:text-[16px]">{a}</div>
         </div>
       </div>
     </div>
@@ -1248,11 +1563,11 @@ function FAQ() {
   const faqs = [
     {
       q: "¿Cuánto cuesta Ekole?",
-      a: "Planes adaptados al tamaño de su colegio. En la demo le mostramos cuánto sería y lo comparamos con su costo operativo actual. Sin costo de instalación, sin contratos forzosos, primera semana por nuestra cuenta.",
+      a: "Depende del tamaño del colegio y del flujo de salida, pero Ekole está pensado como una suscripción accesible, no como un proyecto caro de implementación. En la revisión de 20 minutos le decimos qué plan aplica, qué incluye y cómo se compara contra el costo de operar una salida lenta o sin evidencia. No hay costo de instalación, contrato forzoso ni riesgo inicial: los primeros 15 días van por cuenta de Ekole.",
     },
     {
       q: "¿Qué tan fácil es implementarlo?",
-      a: "Menos de 24 horas, y lo hacemos nosotros. Usted aprueba una configuración; nosotros activamos el sistema, entregamos las claves a los tutores y capacitamos a su equipo en 15 minutos. El primer día de clases siguiente, la salida ya cambió.",
+      a: "Cuando el colegio comparte los datos necesarios — alumnos, tutores autorizados, personal y flujo de puertas — podemos avanzar muy rápido en la configuración inicial. La activación se acompaña hasta 15 días para que el equipo opere con clave de recogida, registro automático e historial consultable sin sentirse solo.",
     },
     {
       q: "¿Los padres necesitan descargar una app?",
@@ -1272,15 +1587,15 @@ function FAQ() {
     },
     {
       q: "¿Y si mi equipo o los padres necesitan tiempo para adaptarse?",
-      a: "Es normal. Por eso la primera semana va por nuestra cuenta y los acompañamos paso a paso. La mayoría de los colegios reportan que padres y personal se adaptan en 2-3 días — la clave de recogida es tan simple que no requiere explicación. Pero si necesita ir a su ritmo, lo hacemos juntos.",
+      a: "Es normal. Por eso los primeros 15 días van por cuenta de Ekole y los acompañamos paso a paso. El flujo base son tres pasos que el maestro entiende en minutos: buscar clave, confirmar alumno y registrar entrega. Las familias pueden recoger con clave sin descargar app. Si su colegio necesita avanzar por etapas, lo hacemos juntos.",
     },
     {
       q: "¿Los datos están seguros?",
-      a: "Sí. Todos los datos van encriptados en tránsito y en reposo, cumplimos con la LFPDPPP (Ley Federal de Protección de Datos Personales en Posesión de los Particulares), y no compartimos información con terceros. Usted puede solicitar eliminación de los datos en cualquier momento y conserva la propiedad total de la información de su colegio.",
+      a: "Sí. Antes de operar con información real, formalizamos el servicio y la confidencialidad por escrito para proteger datos de alumnos, tutores autorizados y personal. Los datos se resguardan bajo reglas claras de uso, acceso y responsabilidad, alineadas con la LFPDPPP. El colegio conserva la propiedad de su información.",
     },
     {
       q: "¿Qué pasa si no me convence?",
-      a: "Sin contrato forzoso. Si no cumplimos, cancela sin costo. Nos ganamos su confianza con resultados, no con contratos.",
+      a: "No hay contrato forzoso de permanencia. Sí existe un contrato de servicios y confidencialidad para proteger la información del colegio, pero si Ekole no le aporta valor operativo durante los primeros 15 días, puede detener la activación sin costo.",
     },
     {
       q: "¿En qué se diferencia de otros sistemas escolares?",
@@ -1288,22 +1603,44 @@ function FAQ() {
     },
     {
       q: "¿El registro de salidas tiene validez como evidencia?",
-      a: "Sí. Cada salida se documenta con fecha, hora, tutor autorizado, personal receptor y timestamp automático — exactamente los elementos que sustentan un argumento de supervisión. Es su evidencia objetiva de diligencia. (Como toda evidencia, recomendamos incluirla en su estrategia de respaldo general junto con su equipo legal.)",
+      a: "Cada salida se documenta con fecha, hora, tutor autorizado, personal receptor y timestamp automático: elementos que ayudan a sustentar un argumento de supervisión. Es evidencia documental para respaldar diligencia operativa. Como toda evidencia, recomendamos integrarla a su estrategia de respaldo junto con su equipo legal.",
     },
   ]
 
   return (
-    <section id="preguntas" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-4xl px-6">
-        <Reveal className="text-center">
-          <h2 className="mt-6 text-balance text-3xl font-semibold tracking-tight md:text-5xl">
-            Preguntas que nos hacen{" "}
-            <span className="font-display italic font-normal text-primary">los directivos</span> antes de
-            empezar.
+    <section id="preguntas" className="relative isolate overflow-hidden bg-[#F4F8FC] py-20 md:py-24">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#F4F8FC_0%,#FFFFFF_50%,#F4F8FC_100%)]" />
+      <div className="mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+        <Reveal className="lg:sticky lg:top-28">
+          <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+            Preguntas frecuentes
+          </p>
+          <h2 className="mt-4 max-w-[560px] text-balance text-[2.35rem] font-extrabold leading-[1.12] text-[#111827] sm:text-[3rem]">
+            Preguntas que ayudan a decidir con{" "}
+            <span className="text-[#2EB4E9]">control.</span>
           </h2>
+          <p className="mt-6 max-w-[520px] text-[18px] leading-[1.65] text-[#4B5563]">
+            Respuestas directas sobre costo, adopción, familias, datos y evidencia documental antes de agendar una llamada.
+          </p>
+
+          <div className="mt-8 rounded-[24px] border border-[#DDEAF5] bg-white/80 p-5 shadow-[0_18px_44px_rgba(15,42,79,0.06)] backdrop-blur">
+            <p className="text-[15px] font-bold leading-snug text-[#173E75]">
+              Lo importante antes de avanzar
+            </p>
+            <div className="mt-4 grid gap-3">
+              {["Costo claro en la llamada", "15 días por cuenta de Ekole", "Datos bajo acuerdo escrito"].map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full bg-[#E7F7EE] text-[#10B981]">
+                    <Check className="size-4" strokeWidth={2.4} />
+                  </span>
+                  <span className="text-[14px] font-semibold leading-[1.5] text-[#4B5563]">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </Reveal>
 
-        <div className="mt-14 flex flex-col gap-3">
+        <div className="flex flex-col gap-3">
           {faqs.map((f, i) => (
             <Reveal key={f.q} delay={i * 0.04}>
               <FAQItem q={f.q} a={f.a} defaultOpen={i === 0} />
@@ -1320,38 +1657,70 @@ function FAQ() {
    ============================================================== */
 
 function CTAFinal() {
-  return (
-    <section id="cta" className="relative overflow-hidden bg-[#173E75] py-16 md:py-20">
-      {/* Glows decorativos */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-32 -top-32 size-[500px] rounded-full bg-[radial-gradient(closest-side,rgba(46,180,233,0.14),transparent_70%)] blur-3xl" />
-        <div className="absolute -bottom-32 -left-20 size-[400px] rounded-full bg-[radial-gradient(closest-side,rgba(255,255,255,0.06),transparent_70%)] blur-3xl" />
-      </div>
+  const callPoints = [
+    "Dónde se pierde evidencia hoy.",
+    "Qué brechas conviene cerrar primero.",
+    "Cómo activar Ekole sin cargar al equipo.",
+  ]
 
-      <div className="relative mx-auto max-w-3xl px-6 text-center">
+  return (
+    <section id="cta" className="relative isolate overflow-hidden bg-[#173E75] py-16 md:py-20">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#173E75_0%,#0F2A4F_100%)]" />
+      <div className="relative mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[1fr_0.82fr] lg:items-center">
         <Reveal>
-          <h2 className="text-balance text-[2.5rem] font-extrabold leading-[1.1] tracking-[-0.01em] text-white sm:text-[3rem]">
-            Vea cómo quedaría{" "}
-            <span className="text-[#2EB4E9]">documentada la salida</span>{" "}
-            de su colegio.
+          <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-white/70">
+            Revisión ejecutiva
+          </p>
+          <h2 className="mt-4 max-w-[700px] text-balance text-[2.35rem] font-extrabold leading-[1.12] text-white sm:text-[3rem]">
+            Antes de que una salida sea problema, revísela con ojos de{" "}
+            <span className="text-[#5ECCE6]">evidencia.</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-[620px] text-balance text-[18px] font-normal leading-[1.6] text-white/75">
-            En 20 minutos revisamos su proceso actual y le mostramos dónde está perdiendo tiempo, dónde está expuesto y cómo Ekole lo resolvería desde el primer día.
+          <p className="mt-6 max-w-[640px] text-[18px] font-normal leading-[1.65] text-white/80">
+            En 20 minutos revisamos su flujo actual, sus puntos de exposición y qué tan rápido podría operar Ekole con sus datos listos.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a
+              href={CALL_CTA_HREF}
+              className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-[16px] font-semibold text-[#173E75] shadow-md transition-colors duration-150 hover:bg-[#EEF4FA] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#173E75]"
+            >
+              {CALL_CTA_FULL_LABEL}
+              <ArrowRight className="size-5 flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
+            </a>
+            <a
+              href={DIAGNOSTIC_CTA_HREF}
+              className="inline-flex items-center justify-center rounded-lg border border-white/30 px-6 py-3.5 text-[16px] font-semibold text-white transition-colors duration-150 hover:border-white/55 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#173E75]"
+            >
+              {DIAGNOSTIC_CTA_LABEL}
+            </a>
+          </div>
+          <p className="mt-4 text-[14px] leading-[1.5] text-white/70">
+            {CALL_CTA_MICROCOPY}
           </p>
         </Reveal>
 
-        <Reveal delay={0.15}>
-          <div className="mt-10 flex flex-col items-center gap-3">
-            <a
-              href={DEMO_CTA_HREF}
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-[12px] bg-white px-8 py-4 text-[17px] font-semibold text-[#173E75] shadow-md transition-colors duration-150 hover:bg-[#F0F6FF] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#2EB4E9] focus-visible:ring-offset-2 focus-visible:ring-offset-[#173E75] sm:w-auto"
-            >
-              Agendar revisión de salida de 20 min
-              <ArrowRight className="size-5 flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <p className="text-[14px] text-white/60">
-              Por videollamada · Sin compromiso · Sin instalación previa
-            </p>
+        <Reveal delay={0.12}>
+          <div className="rounded-[28px] border border-white/15 bg-white/10 p-5 shadow-[0_28px_70px_rgba(0,0,0,0.18)] backdrop-blur md:p-6">
+            <div className="rounded-[22px] bg-white p-5 text-[#173E75] md:p-6">
+              <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+                En la llamada revisamos
+              </p>
+              <div className="mt-5 grid gap-3">
+                {callPoints.map((point) => (
+                  <div key={point} className="flex items-start gap-3 rounded-[14px] bg-[#F4F8FC] px-4 py-3">
+                    <span className="mt-0.5 flex size-6 flex-shrink-0 items-center justify-center rounded-full bg-[#E7F7EE] text-[#10B981]">
+                      <Check className="size-4" strokeWidth={2.4} />
+                    </span>
+                    <span className="text-[15px] font-semibold leading-[1.5] text-[#173E75]">{point}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 rounded-[16px] border border-[#DDEAF5] px-4 py-3">
+                <p className="text-[14px] leading-[1.55] text-[#4B5563]">
+                  Si aún no está listo para hablar, el diagnóstico ayuda a medir exposición legal primero.
+                </p>
+              </div>
+            </div>
           </div>
         </Reveal>
       </div>
@@ -1364,82 +1733,89 @@ function CTAFinal() {
    ============================================================== */
 
 export function Footer() {
+  const productLinks = [
+    { label: "Por qué importa", href: "/#problema" },
+    { label: "Diagnóstico", href: DIAGNOSTIC_CTA_HREF },
+    { label: "Solución", href: "/#solucion" },
+    { label: "Preguntas", href: "/#preguntas" },
+  ]
+
+  const contactLinks = [
+    { label: CALL_CTA_LABEL, href: CALL_CTA_HREF },
+    { label: DIAGNOSTIC_CTA_SHORT_LABEL, href: DIAGNOSTIC_CTA_HREF },
+    { label: "Política de Privacidad", href: "https://www.ekole.app/privacy-and-policy" },
+    { label: "Términos y condiciones", href: "https://www.ekole.app/terms-and-conditions" },
+  ]
+
   return (
-    <footer className="border-t border-border bg-muted/30">
-      <div className="mx-auto max-w-6xl px-6 py-16 lg:py-20">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="space-y-5 md:col-span-5">
-            <Logo />
-            <p className="max-w-md text-sm leading-[1.6] text-[#6B7280]">
-              Creemos que ningún director debería quedar expuesto personalmente por operar un proceso que,
-              hasta hoy, no tenía solución viable. Por eso creamos Ekole.
+    <footer className="relative overflow-hidden bg-[#0F2A4F] text-white">
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5ECCE6]/40 to-transparent" />
+      <div className="mx-auto max-w-6xl px-6 py-14 lg:py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.08fr_1fr] lg:items-start">
+          <div>
+            <div className="inline-flex rounded-[18px] bg-white p-1.5 shadow-sm ring-1 ring-white/10">
+              <Logo className="[&_img]:h-11 [&_img]:rounded-[14px]" />
+            </div>
+            <p className="mt-6 max-w-xl text-[15px] leading-[1.7] text-white/70">
+              Ekole ayuda a colegios privados a operar salidas escolares con rapidez, control y
+              evidencia documental. La meta es simple: que el director tenga claridad antes de que una
+              entrega se vuelva una conversación difícil.
             </p>
-            <p className="text-sm font-medium text-[#6B7280]">— El equipo de Ekole</p>
+
+            <div className="mt-7 grid gap-3 text-[14px] font-semibold text-white/90 sm:grid-cols-3">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="size-4 text-[#5ECCE6]" aria-hidden />
+                Evidencia
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="size-4 text-[#5ECCE6]" aria-hidden />
+                Rapidez
+              </div>
+              <div className="flex items-center gap-2">
+                <Lock className="size-4 text-[#5ECCE6]" aria-hidden />
+                Datos bajo control
+              </div>
+            </div>
           </div>
 
-          <div className="md:col-span-3">
-            <h3 className="text-sm font-bold text-foreground">Producto</h3>
-            <ul className="mt-4 space-y-3 text-sm text-[#6B7280]">
-              <li>
-                <a href="/#problema" className="transition-colors hover:text-primary">
-                  Problema
-                </a>
-              </li>
-              <li>
-                <a href="/diagnostico" className="transition-colors hover:text-primary">
-                  Diagnóstico
-                </a>
-              </li>
-              <li>
-                <a href="/#solucion" className="transition-colors hover:text-primary">
-                  Solución
-                </a>
-              </li>
-              <li>
-                <a href="/#preguntas" className="transition-colors hover:text-primary">
-                  Preguntas
-                </a>
-              </li>
-            </ul>
-          </div>
+          <nav className="grid gap-8 sm:grid-cols-2" aria-label="Footer">
+            <div>
+              <h3 className="text-[13px] font-bold uppercase tracking-[1.2px] text-white/50">Producto</h3>
+              <ul className="mt-4 space-y-3 text-[14px] font-medium text-white/70">
+                {productLinks.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} className="transition-colors hover:text-[#5ECCE6]">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="md:col-span-4">
-            <h3 className="text-sm font-bold text-foreground">Contacto</h3>
-            <ul className="mt-4 space-y-3 text-sm text-[#6B7280]">
-              <li>
-                <a href={DEMO_CTA_HREF} className="transition-colors hover:text-primary">
-                  Agendar revisión
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.ekole.app/privacy-and-policy"
-                  className="transition-colors hover:text-primary"
-                >
-                  Política de Privacidad
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.ekole.app/terms-and-conditions"
-                  className="transition-colors hover:text-primary"
-                >
-                  Términos y condiciones
-                </a>
-              </li>
-            </ul>
-          </div>
+            <div>
+              <h3 className="text-[13px] font-bold uppercase tracking-[1.2px] text-white/50">Contacto y legal</h3>
+              <ul className="mt-4 space-y-3 text-[14px] font-medium text-white/70">
+                {contactLinks.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} className="transition-colors hover:text-[#5ECCE6]">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </nav>
         </div>
 
         {/* legal notice */}
-        <div className="mt-14 rounded-[8px] border border-border bg-[#F3F4F6] px-5 py-4 text-xs leading-[1.5] text-[#6B7280]">
+        <div className="mt-12 rounded-[16px] border border-white/10 bg-white/[0.04] px-5 py-4 text-[12px] leading-[1.6] text-white/60">
           <div className="flex items-start gap-3">
-            <span className="mt-0.5 flex size-5 flex-shrink-0 items-center justify-center rounded-full border border-border text-[10px] font-semibold">
+            <span className="mt-0.5 flex size-5 flex-shrink-0 items-center justify-center rounded-full border border-white/20 text-[10px] font-semibold text-white/70">
               i
             </span>
             <p>
-              <strong className="font-semibold text-[#6B7280]">Aviso legal.</strong> La información legal presentada en
-              esta página — incluyendo referencias al Art. 1921 del Código Civil Federal, la Ley Federal de
+              <strong className="font-semibold text-white/80">Aviso legal.</strong> La información legal presentada en
+              esta página — incluyendo referencias al Art. 1920 del Código Civil Federal, la Ley Federal de
               Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y los deberes de
               custodia escolar — es orientativa y tiene fines informativos. No constituye asesoría jurídica
               ni sustituye la consulta con un abogado especializado. Para aplicar estos conceptos a su caso
@@ -1448,14 +1824,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-8 text-xs md:flex-row">
-          <div className="text-[#9CA3AF]">© {new Date().getFullYear()} Ekole. Todos los derechos reservados.</div>
-          <div className="flex items-center gap-1.5 font-semibold text-[#10B981]">
+        <div className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-7 text-[12px] md:flex-row md:items-center">
+          <div className="text-white/50">© {new Date().getFullYear()} Ekole. Todos los derechos reservados.</div>
+          <div className="flex items-center gap-1.5 font-semibold text-[#5ECCE6]">
             <span className="relative flex size-2 items-center justify-center">
-              <span className="absolute inline-flex size-2 animate-pulse-dot rounded-full bg-[#10B981]/60" />
-              <span className="relative inline-flex size-1.5 rounded-full bg-[#10B981]" />
+              <span className="absolute inline-flex size-2 animate-pulse-dot rounded-full bg-[#5ECCE6]/50" />
+              <span className="relative inline-flex size-1.5 rounded-full bg-[#5ECCE6]" />
             </span>
-            Cupos abiertos · ciclo 2026-2027
+            Activaciones abiertas · ciclo 2026-2027
           </div>
         </div>
       </div>
@@ -1475,11 +1851,11 @@ export default function SoftwareDevelopmentWebsite() {
         <Hero />
         <Problema />
         <Escenarios />
-        <FalsoDilema />
+        <Diagnostico />
         <EfectoEkole />
         <Solucion />
         <ComoFunciona />
-        <Diagnostico />
+        <ConfianzaDatos />
         <FAQ />
         <CTAFinal />
       </main>

@@ -50,9 +50,9 @@ export const SECTIONS: Section[] = [
       {
         id: "q2",
         num: "02 / 08",
-        ref: "LFPDPPP Art. 9 (sensibles)",
+        ref: "LFPDPPP Art. 8–9",
         refTooltip:
-          "Los datos de menores de edad se consideran sensibles. Requieren consentimiento expreso y por escrito de los padres o tutores para cualquier uso, incluidas fotografías.",
+          "El uso de imágenes y datos de menores requiere finalidades claras, consentimiento cuando corresponda y documentación suficiente para acreditar autorización.",
         text: "¿Cuentan con autorización firmada de los padres para usar imágenes de los alumnos?",
         hint: "Fotos para anuario, redes sociales, videos de eventos y material de comunicación del colegio.",
         feedback: "El uso de imágenes de menores sin consentimiento expreso es una infracción grave",
@@ -69,22 +69,22 @@ export const SECTIONS: Section[] = [
         num: "03 / 08",
         ref: "CCF Art. 1920 · LFPDPPP Art. 35",
         refTooltip:
-          "Art. 1920: la responsabilidad civil recae personalmente en el director mientras el menor está bajo su vigilancia. Art. 35: los derechos ARCO permiten al padre exigir registros formales. Además, los lineamientos de la SEP para entornos escolares seguros establecen que el director debe garantizar control visual de quién recoge a cada alumno y mantener el flujo de salida documentado.",
+          "Art. 1920: vuelve relevante acreditar diligencia mientras el menor está bajo vigilancia escolar. Art. 35: los derechos ARCO permiten al padre solicitar información formal. Además, los lineamientos de la SEP para entornos escolares seguros recomiendan control visual de quién recoge a cada alumno y flujo de salida documentado.",
         text: "¿Tienen registro formal de quién recogió a cada alumno, con hora exacta y nombre del responsable del colegio que autorizó la entrega?",
         hintCollapsible: true,
         hint: "Haga el ejercicio: ¿puede abrir ahora mismo el registro del martes pasado y decirme quién recogió al alumno Pérez a las 2:47 pm? No vale la memoria del personal ni un chat de WhatsApp — los mensajes se borran, se editan, y no identifican quién del colegio validó la entrega. Si un padre ejerce sus derechos ARCO, usted tiene 20 días hábiles para entregar el registro.",
-        feedback: "Sin registro = sin defensa ante demanda civil al patrimonio personal",
+        feedback: "Sin registro, la defensa documental del colegio se debilita",
       },
       {
         id: "q4",
         num: "04 / 08",
         ref: "LFPDPPP Art. 7 y 9 — datos de menores",
         refTooltip:
-          "Artículos que exigen que los datos personales se traten con las medidas de seguridad adecuadas. WhatsApp en teléfonos personales no cumple con estos requisitos.",
+          "Artículos que exigen que los datos personales se traten con medidas de seguridad adecuadas. WhatsApp puede elevar el riesgo cuando se usa como sistema principal en teléfonos personales y sin controles documentados.",
         text: "¿Usan WhatsApp para coordinar la salida o manejar información de alumnos?",
         hintCollapsible: true,
-        hint: "En el momento en que un nombre de alumno llega a un teléfono personal, el colegio pierde el control de ese dato para siempre. Cualquier maestro puede reenviar esa información con un dedo, perder el teléfono, o que se lo roben. El colegio no puede revocar ese acceso.",
-        feedback: "WhatsApp = datos de menores sin control en dispositivos de terceros",
+        hint: "WhatsApp puede servir como apoyo limitado, pero cuando concentra nombres de alumnos, autorizaciones o incidencias en teléfonos personales, el colegio pierde trazabilidad y control de acceso.",
+        feedback: "WhatsApp como sistema principal eleva la exposición documental",
       },
     ],
   },
@@ -111,7 +111,7 @@ export const SECTIONS: Section[] = [
           "El protocolo SEP/AEFCM establece que cada alumno debe tener un máximo de 3 personas autorizadas, registradas mediante documento firmado e identificación. Sin protocolo documentado, el director y el maestro quedan expuestos ante situaciones de custodia, restricciones o emergencias.",
         text: "¿Tienen protocolo documentado para custodias legales, restricciones de entrega o persona no registrada?",
         hint: "Un padre con orden de restricción, un menor con indicación médica, alguien que aparece sin estar en la lista.",
-        feedback: "Sin protocolo documentado, el maestro queda expuesto penalmente",
+        feedback: "Sin protocolo documentado, el equipo queda sin respaldo claro",
       },
     ],
   },
@@ -129,7 +129,7 @@ export const SECTIONS: Section[] = [
         text: "¿Usan altavoz o megáfono para llamar a los alumnos durante la salida?",
         hintCollapsible: true,
         hint: "Dos problemas simultáneos: la NOM-081 fija 55 dB en zonas residenciales y una denuncia activa inspección. Pero el altavoz también significa que no hay ningún proceso de entrega — y sin proceso no hay registro.",
-        feedback: "Altavoz = doble exposición: multa por ruido + cero registro de entrega",
+        feedback: "Altavoz = doble exposición: ruido operativo + cero registro de entrega",
       },
       {
         id: "q8",
@@ -138,8 +138,8 @@ export const SECTIONS: Section[] = [
         refTooltip:
           "Un antecedente documentado de queja por ruido significa que la siguiente queja puede generar sanción directa sin nueva medición.",
         text: "¿Han recibido alguna queja formal de vecinos o autoridades por ruido en los últimos 24 meses?",
-        hint: "Una queja documentada establece antecedente. La segunda queja no requiere nueva medición: el historial es suficiente para imponer sanción.",
-        feedback: "Un antecedente activo convierte la siguiente queja en sanción inmediata",
+        hint: "Una queja documentada establece antecedente. Si vuelve a presentarse, conviene tener proceso, medidas y evidencia de corrección.",
+        feedback: "Un antecedente activo vuelve más delicada la siguiente revisión",
       },
     ],
   },
@@ -167,13 +167,13 @@ export const ALL_SCENARIOS: Scenario[] = [
     category: "Civil",
     title: "El padre con abogado",
     body: [
-      "Un padre en proceso de divorcio exige al colegio demostrar <strong>a quién le entregaron a su hijo el 15 de noviembre del año pasado a las 12:53 pm</strong>. No pregunta por la semana pasada — pregunta por hace meses. Porque ahí es donde el abogado sabe que el colegio ya no tiene nada.",
+      "Un padre en proceso de divorcio exige al colegio demostrar <strong>a quién le entregaron a su hijo el 15 de noviembre del año pasado a las 12:53 pm</strong>. No pregunta por la semana pasada; pregunta por hace meses, cuando muchas escuelas ya no tienen registro claro.",
       "Si el colegio tiene algún registro pero no puede encontrar el dato de esa fecha, el abogado presenta ejercicio de derechos ARCO. El colegio tiene 20 días hábiles para entregar la información organizada. <strong>Los derechos ARCO no tienen fecha de vencimiento.</strong>",
-      "Si el colegio no tiene registro alguno, el problema es peor: ante una demanda civil, el Art. 1920 del CCF exige al director demostrar que entregó al menor con diligencia. Sin registro, <strong>no tiene con qué defenderse</strong>.",
+      "Si el colegio no tiene registro alguno, el problema es peor: ante una demanda civil, el Art. 1920 del CCF vuelve relevante demostrar diligencia. Sin registro, <strong>la defensa se vuelve mucho más débil</strong>.",
       '<strong>Un expediente abierto consume tiempo directivo, honorarios de abogados y reputación — incluso si usted "gana" al final.</strong>',
     ],
     consequence:
-      "Con registro incompleto: expediente ARCO + multa federal + meses de proceso. Sin registro alguno: demanda civil directa al patrimonio personal del director.",
+      "Con registro incompleto: solicitud ARCO, revisión documental y tiempo directivo. Sin registro alguno, la posición del colegio se vuelve más vulnerable ante una reclamación civil.",
   },
   {
     id: "sc-whatsapp",
@@ -181,14 +181,14 @@ export const ALL_SCENARIOS: Scenario[] = [
     tone: "amber",
     icon: "📱",
     category: "Datos personales",
-    title: "WhatsApp no es un canal neutro — es el registro que los incrimina",
+    title: "Cuando WhatsApp se vuelve el sistema de salida",
     body: [
-      "El colegio cree que WhatsApp es solo una herramienta de coordinación. La ley lo ve diferente: es tratamiento de datos personales de menores en dispositivos sin medidas de seguridad, sin base legal, y sin consentimiento específico.",
-      "Cuando un padre pone una queja o una autoridad abre una investigación, el director muestra el chat — porque es lo único que tiene. Y ese chat demuestra: nombres de alumnos en teléfonos personales, sin control de acceso, <strong>sin ninguna medida que el colegio pudiera haber tomado para proteger esa información.</strong>",
-      "El colegio no usó mal WhatsApp. El colegio usó WhatsApp. Y eso ya es suficiente para que la evidencia esté en su contra.",
+      "WhatsApp puede ser útil como apoyo puntual. El riesgo aparece cuando se vuelve el sistema principal para autorizar, coordinar y documentar la salida de menores.",
+      "Si un padre presenta una queja, el chat suele ser lo único disponible. Ese chat puede mostrar nombres de alumnos en teléfonos personales, cambios de autorizado, capturas y decisiones sin trazabilidad institucional.",
+      "El punto no es decir que WhatsApp sea ilegal por sí solo; el punto es que deja al colegio con una posición documental más frágil que un flujo controlado.",
     ],
     consequence:
-      "La LFPDPPP no distingue entre un sistema profesional y un chat de WhatsApp. Si los datos circulan sin base legal, el responsable responde — independientemente del canal.",
+      "Cuando datos de menores circulan sin controles, minimización ni trazabilidad suficiente, el responsable puede quedar expuesto frente a padres o autoridad.",
   },
   {
     id: "sc-control-perdido",
@@ -198,13 +198,13 @@ export const ALL_SCENARIOS: Scenario[] = [
     category: "Datos personales",
     title: "El dato que ya no puede recuperar",
     body: [
-      "En este momento, los nombres de sus alumnos están en los teléfonos personales de sus maestros. No en un servidor del colegio — en dispositivos que usted no administra ni controla.",
+      "Si la salida se coordina por chats personales, parte de la información de alumnos puede quedar en dispositivos que el colegio no administra ni controla.",
       "<strong>Piense en cuántas cosas pueden pasar sin que nadie tenga mala intención:</strong> una maestra reenvía por error la lista al grupo equivocado. Un maestro comparte el chat con un colega. Un teléfono se pierde. A otro se lo roban. Un maestro que renunció molesto reenvía la información.",
       "<strong>Ninguno requiere un actor malicioso. Solo requiere que la vida normal suceda.</strong>",
-      "Si una autoridad pregunta cómo operaban, el historial de WhatsApp va a demostrar que el colegio usó teléfonos personales como repositorio de datos de menores.",
+      "Si una familia pregunta cómo operaban, el historial de WhatsApp puede mostrar que el colegio dependía de teléfonos personales como repositorio informal de datos de menores.",
     ],
     consequence:
-      "El chat no es solo un canal de comunicación — es evidencia de que el colegio nunca tuvo control sobre sus propios datos.",
+      "El chat deja de ser solo comunicación cuando sustituye al registro institucional de salida.",
   },
   {
     id: "sc-registro",
@@ -220,7 +220,7 @@ export const ALL_SCENARIOS: Scenario[] = [
       '<strong>"Lo tenemos en Excel."</strong> Carece de <strong>trazabilidad inmutable</strong>. Sin candados informáticos, ante un peritaje judicial pierde valor probatorio.',
     ],
     consequence:
-      "Un registro legal necesita 4 cosas: hora exacta, identidad de quien recogió, nombre de quien autorizó, y que no se pueda alterar después. Si falta cualquiera, no protege a nadie.",
+      "Un registro defendible necesita hora exacta, identidad de quien recogió, nombre de quien autorizó y trazabilidad razonable. Si falta cualquiera, la posición del colegio se debilita.",
   },
   {
     id: "sc-altavoz",
@@ -232,11 +232,11 @@ export const ALL_SCENARIOS: Scenario[] = [
     body: [
       "<strong>Problema 1 — Ruido.</strong> La NOM-081 fija 55 dB en zonas residenciales. Un altavoz escolar supera ese límite. Una denuncia vecinal activa inspección.",
       "<strong>Problema 2 — Cero registro.</strong> Si se llama a los niños por altavoz, no hay lista, no hay validación, no hay nombre de quién autorizó.",
-      "<strong>El Art. 1920 del CCF invierte la carga de la prueba.</strong> Con un proceso de megáfono, esa prueba no existe.",
-      "En casos de menores entregados a personas no autorizadas — divorcios conflictivos, órdenes de restricción — la ausencia total de registro puede convertir la negligencia civil en responsabilidad penal del director personalmente.",
+      "<strong>El Art. 1920 del CCF vuelve relevante demostrar diligencia.</strong> Con un proceso de megáfono, esa demostración se vuelve más difícil.",
+      "En casos de menores entregados a personas no autorizadas — divorcios conflictivos, órdenes de restricción — la ausencia de registro puede dejar al director y al equipo sin una explicación documental clara.",
     ],
     consequence:
-      "Ruido + cero registro = doble exposición. La NOM-081 genera la multa. La ausencia de proceso deja al director sin defensa.",
+      "Ruido + cero registro = doble exposición operativa. La ausencia de proceso deja al colegio con menos elementos para responder.",
   },
   {
     id: "sc-antecedente",
@@ -247,11 +247,11 @@ export const ALL_SCENARIOS: Scenario[] = [
     title: "El antecedente que no desaparece",
     body: [
       "Ya recibieron una queja formal de ruido. Ese expediente existe en los registros de la autoridad.",
-      "<strong>La segunda queja no requiere nueva medición.</strong> El antecedente es suficiente para sanción directa. Y si la primera queja generó resolución, el incumplimiento activa clausura, arresto administrativo o crédito fiscal sobre el predio.",
+      "<strong>Una segunda queja puede ser más delicada cuando ya existe antecedente.</strong> Si la primera queja generó resolución, conviene revisar obligaciones pendientes y reducir frentes de exposición.",
       'Lo que parece resuelto — "pagamos la multa y ya" — dejó abierta una ventana que cualquier vecino puede usar.',
     ],
     consequence:
-      "Un antecedente convierte cualquier evento futuro con ruido en un riesgo de sanción inmediata sin necesidad de nuevo proceso.",
+      "Un antecedente vuelve más importante documentar el proceso y reducir ruido operativo antes de otra revisión.",
   },
   {
     id: "sc-critico",
@@ -263,7 +263,7 @@ export const ALL_SCENARIOS: Scenario[] = [
     body: [
       "El escenario más costoso no es una multa grande — es cuando <strong>varios frentes se activan al mismo tiempo</strong>: un padre con ARCO mientras el vecino denuncia por ruido mientras una ex empleada reporta contraseñas compartidas.",
       "Cada frente requiere atención legal por separado. Cada uno consume tiempo directivo. El conjunto crea una percepción pública que ninguna campaña puede corregir rápidamente.",
-      "Las instituciones en esta situación colapsan porque <strong>no tenían documentación para defenderse en ninguno de los frentes</strong>.",
+      "Las instituciones en esta situación pierden control porque <strong>no tienen documentación suficiente para responder con orden en ninguno de los frentes</strong>.",
     ],
     consequence:
       "La exposición crítica no es un evento — es la confluencia de varios eventos simultáneos contra una institución que no puede demostrar que hizo las cosas bien.",
@@ -274,15 +274,15 @@ export const ALL_SCENARIOS: Scenario[] = [
     tone: "risk",
     icon: "👤",
     category: "Civil",
-    title: "La demanda que llega a su nombre, no al del colegio",
+    title: "La reclamación que también toca a la dirección",
     body: [
-      "La mayoría de los directores asumen que el colegio absorbe el problema. El Código Civil Federal no funciona así. El <strong>Art. 1920 transfiere la responsabilidad civil al director personalmente</strong>.",
-      "Un padre demanda al colegio por entregar a su hijo a la ex pareja sin autorización documentada. El abogado presenta la demanda <strong>contra usted en lo personal</strong> además de contra el colegio.",
+      "La mayoría de los directores asumen que el colegio absorbe el problema. En la práctica, la dirección también debe poder explicar qué controles existían y cómo se actuó.",
+      "Un padre reclama al colegio por entregar a su hijo a la ex pareja sin autorización documentada. La conversación se centra en si hubo protocolo, registro y validación suficiente.",
       "<strong>Esta demanda puede llegar hasta 2 años después</strong> (Art. 1934 CCF). ¿Tiene el registro de hace 2 años? Esa es la ventana que el abogado va a usar.",
-      "<strong>La legislación permite la acción directa contra su patrimonio personal y cuentas bancarias.</strong>",
+      "<strong>Cuando no existe registro, la defensa depende de memoria, chats o versiones del personal.</strong>",
     ],
     consequence:
-      "Art. 1920 CCF: responsabilidad civil al director personalmente. Art. 1934: hasta 2 años después. Sin registro, no hay defensa.",
+      "Art. 1920 CCF y Art. 1934 vuelven importante conservar evidencia de entrega. Sin registro, la defensa se debilita.",
   },
   {
     id: "sc-maestro-penal",
@@ -294,10 +294,10 @@ export const ALL_SCENARIOS: Scenario[] = [
     body: [
       'Un maestro recibe a un señor que dice ser el tío del alumno. No hay lista formal. El maestro lo conoce "de vista" y entrega al niño. Esa noche, la madre llama: ese señor no debía tener al niño.',
       "La investigación llega al maestro. <strong>¿Con base en qué instrucción entregó al menor?</strong> No hay protocolo, no hay registro. El maestro queda expuesto personalmente.",
-      "Ante una denuncia por sustracción de menores, la fiscalía investiga directamente al individuo. Directivos y docentes han sido vinculados a proceso por <strong>omisión de cuidado</strong>.",
+      "Ante una denuncia delicada, la autoridad puede revisar qué instrucción recibió la persona que entregó al menor y qué controles tenía la institución.",
     ],
     consequence:
-      "La responsabilidad penal individual no se transfiere al colegio. Sin protocolo ni registro, la institución no puede proteger al maestro.",
+      "Sin protocolo ni registro, la institución tiene menos elementos para respaldar al maestro y explicar la decisión tomada.",
   },
 ]
 
@@ -315,7 +315,7 @@ export function getNivel(score: number) {
     return {
       nivel: "MODERADO" as const,
       pct,
-      tagline: `Su nivel de exposición a sanciones es del ${pct}% debido a brechas que un tercero podría documentar sin dificultad.`,
+      tagline: `Su nivel de exposición operativa y documental es del ${pct}% por brechas que una familia o tercero podría cuestionar.`,
       color: "text-risk",
       bgFill: "bg-risk",
     }
@@ -323,14 +323,14 @@ export function getNivel(score: number) {
     return {
       nivel: "ALTO" as const,
       pct,
-      tagline: `Su nivel de exposición civil y administrativa es del ${pct}% por falta de automatización documental. La documentación disponible no es suficiente para su defensa.`,
+      tagline: `Su nivel de exposición civil y administrativa es del ${pct}% por falta de documentación consistente. La información disponible podría no bastar para explicar una entrega cuestionada.`,
       color: "text-[#C2410C]",
       bgFill: "bg-[#EA580C]",
     }
   return {
     nivel: "CRÍTICO" as const,
     pct,
-    tagline: `Su nivel de exposición civil, penal y administrativa es del ${pct}%. Un evento adverso hoy detonaría consecuencias inminentes en distintos frentes legales.`,
+    tagline: `Su nivel de exposición civil, penal y administrativa es del ${pct}%. Un evento adverso podría activar varios frentes de revisión al mismo tiempo.`,
     color: "text-destructive",
     bgFill: "bg-destructive",
   }

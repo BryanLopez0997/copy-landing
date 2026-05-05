@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Clarity } from '@/components/analytics/clarity'
 import './globals.css'
@@ -14,14 +14,6 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   display: 'swap',
 })
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-serif',
-  display: 'swap',
-})
-
 export const metadata: Metadata = {
   // metadataBase permite que Next.js resuelva las URLs absolutas
   // necesarias para que las imágenes Open Graph funcionen al compartir
@@ -42,10 +34,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="es"
-      className={`${geist.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
-    >
+    <html lang="es" className={`${geist.variable} ${geistMono.variable}`}>
       <body className="font-sans antialiased" suppressHydrationWarning>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
