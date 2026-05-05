@@ -127,3 +127,227 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ==================================================
+   PASO 1 — EXTENSIÓN PREMIUM: tokens de profundidad
+   Compatibles con DS existente. No reemplazan tokens.
+   ================================================== */
+:root {
+  --surface-base:     #f8fafc;
+  --surface-elevated: #ffffff;
+  --surface-sunken:   #f1f5f9;
+
+  --glow-primary:   rgba(46, 180, 233, 0.12);
+  --glow-secondary: rgba(23,  62, 117, 0.06);
+  --glow-accent:    rgba(26, 143, 168, 0.08);
+
+  --border-subtle: rgba(148, 163, 184, 0.2);
+  --border-glass:  rgba(255, 255, 255, 0.3);
+
+  --shadow-premium:       0 4px  24px rgba(15, 42, 79, 0.06);
+  --shadow-premium-hover: 0 12px 40px rgba(15, 42, 79, 0.12);
+  --shadow-glow:          0 0    60px rgba(46, 180, 233, 0.15);
+
+  --transition-lift:   300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --section-py:        96px;
+  --section-py-mobile: 64px;
+}
+
+/* ==================================================
+   PASO 2.2 — RADIAL GLOWS
+   ::before en secciones clave.
+   z-index: -1 = detrás del contenido pero delante
+   del fondo decorativo (-z-10) en cada stacking context.
+   ================================================== */
+
+/* Hero — glow celeste detrás del mockup, lado derecho */
+section#top::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  top: 0;
+  right: -8%;
+  width: 680px;
+  height: 680px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-primary), transparent 68%);
+}
+
+/* Solución — glow teal esquina inferior derecha */
+section#solucion::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  bottom: -15%;
+  right: -6%;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-accent), transparent 70%);
+}
+
+/* CTA Final — glow sky elíptico centrado sobre fondo navy */
+section#cta::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(94, 204, 230, 0.13), transparent 65%);
+}
+
+/* ==================================================
+   PASO 2.3 — HOVER LIFT EN TARJETAS
+   article  → tarjetas de escenarios (3 casos de riesgo)
+   #efecto  → columnas de comparación rounded-[26px]
+   ================================================== */
+
+article {
+  transition: transform var(--transition-lift), box-shadow var(--transition-lift);
+  will-change: transform;
+}
+article:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-premium-hover);
+}
+
+/* Columnas EfectoEkole — solo lift, shadow ya es custom */
+section#efecto [class*="rounded-[26px]"] {
+  transition: transform var(--transition-lift);
+  will-change: transform;
+}
+section#efecto [class*="rounded-[26px]"]:hover {
+  transform: translateY(-4px);
+}
+
+/* ==================================================
+   PASO 2.4 — GLASSMORPHISM
+   Navbar: ya tiene backdrop-blur-xl en scroll (Tailwind).
+   Trust bar del Hero: reforzar blur de 8px → 12px.
+   ================================================== */
+
+section#top [class*="backdrop-blur"] {
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* ==================================================
+   PASO 2.6 — HOVER SHADOW EN BOTONES PRIMARIOS
+   Solo box-shadow — Tailwind ya maneja el translateY
+   via hover:-translate-y-[1px] en cada botón.
+   ================================================== */
+
+a[class*="bg-[#173E75]"]:not([class*="rounded-full"]):hover {
+  box-shadow: 0 8px 24px rgba(15, 42, 79, 0.22);
+}
+
+/* ==================================================
+   PASO 2.7 — NOISE TEXTURE
+   fixed + pointer-events:none + opacity 0.025
+   (imperceptible — si se nota, bajar a 0.015)
+   ================================================== */
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ==================================================
+   HERO P2 — H1 desktop: 3.75rem (60px) → 4rem (64px)
+   DS Display Large = 64px / line-height 1.05
+   Mobile y sm (640px) no se tocan — ya están en DS.
+   ================================================== */
+@media (min-width: 768px) {
+  section#top h1 {
+    font-size: 4rem;
+    line-height: 1.05;
+  }
+}
+
+/* ==================================================
+   HERO P2 — Badge pill: 14px → 12px (DS .badge spec)
+   No toca: color, peso, padding, border, radius.
+   ================================================== */
+section#top span[class*="rounded-full"][class*="border-white"] {
+  font-size: 12px;
+}
+
+/* ==================================================
+   GLOBAL P2 — Overlines: 13px → 11px
+   Selector cubre todos los p.uppercase.tracking-[1.2px]
+   del componente (section labels, card labels, etc.)
+   ================================================== */
+[class*="tracking-[1.2px]"] {
+  font-size: 11px;
+}
+
+/* ==================================================
+   PROBLEMA P1 — Card "Pregunta crítica"
+   De tono institucional (navy) → urgencia (ámbar DS)
+   Selector: section adyacente al Hero (no tiene id)
+   ================================================== */
+
+/* Card interior — amber glass sutil: señal de zona de riesgo */
+section#top + section [class*="rounded-[18px]"] {
+  background: rgba(254, 243, 199, 0.35) !important;
+  border-color: rgba(245, 158, 11, 0.18) !important;
+}
+
+/* Overline "Pregunta crítica" — amber para leer como advertencia */
+section#top + section [class*="rounded-[18px]"] > p:first-child {
+  color: #b45309;
+}
+
+/* Banda inferior "Lo que no queda documentado..."
+   navy → DS .alert--warning: fondo ámbar suave / texto dark amber */
+section#top + section p[class*="rounded-[14px]"][class*="bg-[#173E75]"] {
+  background-color: rgba(245, 158, 11, 0.1) !important;
+  color: #92400e !important;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+/* ==================================================
+   ESCENARIOS P1 — "Pregunta crítica" + línea de riesgo
+   Selector: 2da section sin id después del Hero
+   ================================================== */
+
+/* Block "Pregunta crítica" — amber wash (mismo patrón que Problema) */
+section#top + section + section article [class*="rounded-[16px]"][class*="bg-[#F4F8FC]"] {
+  background: rgba(254, 243, 199, 0.45) !important;
+  border-color: rgba(245, 158, 11, 0.2) !important;
+}
+
+/* Overline "Pregunta crítica" → amber */
+section#top + section + section article [class*="rounded-[16px]"][class*="bg-[#F4F8FC]"] > p:first-child {
+  color: #b45309;
+}
+
+/* Línea de cierre de riesgo al fondo de cada card
+   de navy frío (autoridad) → dark amber (advertencia) */
+section#top + section + section article p[class*="border-t"] {
+  color: #92400e;
+}
+
+/* ==================================================
+   EFECTO EKOLE P1 — Footers de columnas negativas
+   Col 1 "versiones" y col 2 "se cansa" deben sentirse
+   como coste, no como dato neutral.
+   Col Ekole (bg-white) no se toca.
+   ================================================== */
+section#efecto [class*="rounded-[16px]"][class*="bg-[#F4F8FC]"] {
+  background: rgba(254, 243, 199, 0.45) !important;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: #92400e !important;
+}
