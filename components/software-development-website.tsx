@@ -29,7 +29,7 @@ import { EfectoEkoleChart } from "./efecto-ekole-chart"
    - trafico frio: diagnostico de exposicion legal.
    - prospecto caliente: llamada por WhatsApp cuando exista el link real.
    ============================================================== */
-const CALL_CTA_HREF = "/diagnostico"
+const CALL_CTA_HREF = "https://wa.me/526685403658?text=Hola%2C%20me%20interesa%20agendar%20una%20revisi%C3%B3n%20de%2020%20minutos%20para%20conocer%20c%C3%B3mo%20Ekole%20puede%20mejorar%20el%20proceso%20de%20salida%20en%20mi%20colegio."
 const CALL_CTA_LABEL = "Agendar llamada"
 const CALL_CTA_FULL_LABEL = "Agendar llamada por WhatsApp"
 const CALL_CTA_MICROCOPY = "20 min · Revisamos su salida actual · Sin compromiso"
@@ -156,6 +156,8 @@ export function HeroHeader() {
           <div className="flex items-center gap-2">
             <a
               href={CALL_CTA_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-colors duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-md active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 lg:inline-flex"
             >
               {CALL_CTA_LABEL}
@@ -189,6 +191,8 @@ export function HeroHeader() {
               <li>
                 <a
                   href={CALL_CTA_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
                   className="mt-1 block rounded-lg bg-primary px-3 py-2 text-center font-medium text-primary-foreground"
                 >
@@ -363,6 +367,8 @@ function Hero() {
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,#EAF3FC_0%,#F6FAFD_58%,#FFFFFF_100%)]" />
         <div className="absolute inset-x-0 top-0 h-[66%] bg-grid opacity-[0.12] mask-fade-edges" />
+        {/* glow azul detrás del mockup derecho */}
+        <div className="absolute right-[-5%] top-[5%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.30),transparent_70%)]" />
       </div>
 
       <div className="mx-auto max-w-6xl px-6">
@@ -404,6 +410,8 @@ function Hero() {
               <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
                 <a
                   href={CALL_CTA_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#173E75] px-6 py-3 text-[16px] font-semibold text-white shadow-sm transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2EB4E9] focus-visible:ring-offset-2 sm:w-auto"
                 >
                   {CALL_CTA_FULL_LABEL}
@@ -489,7 +497,7 @@ function Hero() {
 
         {/* benefits strip */}
         <Reveal delay={0.2}>
-          <div className="mx-auto mt-12 max-w-5xl rounded-[20px] border border-[#DDEAF5] bg-white/70 p-3 shadow-[0_18px_44px_rgba(15,42,79,0.06)] backdrop-blur">
+          <div className="mx-auto mt-12 max-w-5xl rounded-[20px] border border-white/80 bg-white/55 p-3 shadow-[0_18px_44px_rgba(15,42,79,0.08)] backdrop-blur-md">
             <div className="grid gap-2 md:grid-cols-3">
             {trustItems.map((item) => {
               const Icon = item.icon
@@ -521,8 +529,10 @@ function Hero() {
 
 function Problema() {
   return (
-    <section id="problema" className="relative overflow-hidden bg-white py-20 md:py-24">
+    <section id="problema" className="relative overflow-hidden bg-white py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent" />
+      {/* glow sutil sky detrás del headline */}
+      <div aria-hidden className="pointer-events-none absolute left-[-10%] top-1/2 -z-10 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(46,180,233,0.22),transparent_70%)]" />
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
@@ -540,7 +550,7 @@ function Problema() {
           </div>
 
           <div className="rounded-[24px] border border-[#DDEAF5] bg-[#F4F8FC] p-5 shadow-[0_24px_60px_rgba(15,42,79,0.08)] md:p-7">
-            <div className="rounded-[18px] border border-white/80 bg-white/75 p-5 shadow-sm backdrop-blur">
+            <div className="rounded-[18px] border border-white/80 bg-white/75 p-5 shadow-[0_4px_24px_rgba(15,23,42,0.06)] backdrop-blur">
               <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
                 Pregunta crítica
               </p>
@@ -549,7 +559,7 @@ function Problema() {
               </p>
               <div className="mt-5 grid gap-2 sm:grid-cols-3">
                 {["Autorización", "Entrega", "Hora"].map((item) => (
-                  <div key={item} className="rounded-[12px] border border-[#DDEAF5] bg-white px-4 py-3">
+                  <div key={item} className="rounded-[12px] border border-[#DDEAF5] bg-white px-4 py-3 shadow-[0_4px_24px_rgba(15,23,42,0.06)]">
                     <p className="text-[14px] font-bold text-[#173E75]">{item}</p>
                     <p className="mt-1 text-[13px] leading-[1.45] text-[#6B7280]">Debe quedar consultable.</p>
                   </div>
@@ -604,7 +614,7 @@ function Escenarios() {
   ]
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#F7FAFD] py-20 md:py-24">
+    <section className="relative isolate overflow-hidden bg-[#F1F5F9] py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#F4F8FC_0%,#FFFFFF_45%,#F4F8FC_100%)]" />
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
@@ -629,7 +639,7 @@ function Escenarios() {
               const Icon = s.icon
               return (
                 <Reveal key={s.title} delay={i * 0.1}>
-                  <article className="flex h-full flex-col overflow-hidden rounded-[22px] border border-[#DDEAF5] bg-white shadow-sm">
+                  <article className="flex h-full flex-col overflow-hidden rounded-[22px] border border-[#DDEAF5] bg-white shadow-[0_4px_24px_rgba(15,23,42,0.06)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(15,23,42,0.12)]">
                     <div className="border-b border-[#E5E7EB] bg-[linear-gradient(180deg,#F9FBFD_0%,#FFFFFF_100%)] px-5 py-5">
                       <div className="flex items-center justify-between gap-4">
                         <span className="text-[12px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
@@ -651,7 +661,7 @@ function Escenarios() {
                       <p className="text-[15px] leading-[1.65] text-[#4B5563]">{s.body}</p>
 
                       {s.statusQuo ? (
-                        <div className="mt-4 flex gap-3 rounded-[16px] border border-[#DDEAF5] bg-white px-4 py-3 shadow-sm">
+                        <div className="mt-4 flex gap-3 rounded-[16px] border border-[#DDEAF5] bg-white px-4 py-3 shadow-[0_4px_24px_rgba(15,23,42,0.06)]">
                           <span className="mt-0.5 flex size-7 flex-shrink-0 items-center justify-center rounded-[10px] bg-[#EEF4FA] text-[#173E75]">
                             <MessageSquare className="size-4" strokeWidth={1.9} aria-hidden />
                           </span>
@@ -821,7 +831,7 @@ function EfectoEkole() {
   ] as const
 
   return (
-    <section id="efecto" className="relative isolate overflow-hidden bg-[#F4F8FC] py-20 md:py-24">
+    <section id="efecto" className="relative isolate overflow-hidden bg-white py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#FFFFFF_0%,#F4F8FC_26%,#F8FBFE_72%,#FFFFFF_100%)]" />
       <div className="mx-auto max-w-6xl px-6">
 
@@ -865,7 +875,7 @@ function EfectoEkole() {
                 <div
                   key={col.key}
                   className={cn(
-                    "relative flex h-full flex-col overflow-hidden rounded-[26px] border p-5 shadow-[0_24px_62px_rgba(15,42,79,0.08)]",
+                    "relative flex h-full flex-col overflow-hidden rounded-[26px] border p-5 shadow-[0_24px_62px_rgba(15,42,79,0.08)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_32px_72px_rgba(15,42,79,0.14)]",
                     isEkole
                       ? "border-[#5ECCE6]/30 bg-[#173E75] text-white ring-1 ring-[#5ECCE6]/30"
                       : "border-[#DDEAF5] bg-white"
@@ -946,7 +956,7 @@ function Diagnostico() {
   ]
 
   return (
-    <section id="diagnostico" className="relative isolate overflow-hidden bg-white py-20 md:py-24">
+    <section id="diagnostico" className="relative isolate overflow-hidden bg-[#F1F5F9] py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#FFFFFF_0%,#F4F8FC_54%,#FFFFFF_100%)]" />
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
@@ -1108,8 +1118,10 @@ function Solucion() {
   ]
 
   return (
-    <section id="solucion" className="relative isolate overflow-hidden bg-white py-20 md:py-24">
+    <section id="solucion" className="relative isolate overflow-hidden bg-white py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#FFFFFF_0%,#F4F8FC_48%,#FFFFFF_100%)]" />
+      {/* glow cyan-azul detrás de feature cards */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-1/3 -z-10 mx-auto h-[500px] w-[900px] rounded-full bg-[radial-gradient(ellipse,rgba(46,180,233,0.22),transparent_70%)]" />
       <div className="mx-auto max-w-6xl px-6">
 
         {/* Encabezado */}
@@ -1136,7 +1148,7 @@ function Solucion() {
               return (
                 <div
                   key={card.title}
-                  className="flex h-full flex-col overflow-hidden rounded-[24px] border border-[#DDEAF5] bg-white shadow-[0_18px_44px_rgba(15,42,79,0.07)]"
+                  className="flex h-full flex-col overflow-hidden rounded-[24px] border border-white/70 bg-white/75 shadow-[0_18px_44px_rgba(15,42,79,0.07)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_28px_60px_rgba(15,42,79,0.14)]"
                 >
                   <div className="h-[3px] w-full bg-gradient-to-r from-[#173E75] via-[#2EB4E9] to-[#5ECCE6]" />
                   <div className="flex flex-1 gap-4 p-5 md:flex-col md:p-6">
@@ -1248,6 +1260,8 @@ function Solucion() {
             </div>
             <a
               href={CALL_CTA_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex flex-shrink-0 items-center justify-center gap-2.5 rounded-lg bg-[#173E75] px-6 py-3.5 text-[16px] font-semibold text-white shadow-md transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2"
             >
               {CALL_CTA_FULL_LABEL}
@@ -1293,7 +1307,7 @@ function ComoFunciona() {
   ]
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#F9FAFB] py-20 md:py-24">
+    <section className="relative isolate overflow-hidden bg-[#F1F5F9] py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#FFFFFF_0%,#F4F8FC_44%,#F9FAFB_100%)]" />
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="grid gap-6 md:grid-cols-[0.92fr_1fr] md:items-end">
@@ -1340,6 +1354,8 @@ function ComoFunciona() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <a
                   href={CALL_CTA_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-[16px] font-semibold text-[#173E75] shadow-md transition-colors duration-150 hover:bg-[#EEF4FA] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#173E75]"
                 >
                   {CALL_CTA_FULL_LABEL}
@@ -1433,7 +1449,7 @@ function ConfianzaDatos() {
   const credentials = ["SEP", "LFPDPPP", "Derechos ARCO", "CCF Art. 1920"]
 
   return (
-    <section id="confianza" className="relative isolate scroll-mt-28 overflow-hidden bg-white py-20 md:py-24">
+    <section id="confianza" className="relative isolate scroll-mt-28 overflow-hidden bg-white py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#F9FAFB_0%,#FFFFFF_45%,#F4F8FC_100%)]" />
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
@@ -1454,7 +1470,7 @@ function ConfianzaDatos() {
 
               <div>
                 <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
-                  Referencias legales visibles
+                  Referencias legales
                 </p>
                 <div className="mt-4 flex flex-col gap-3 md:flex-row md:flex-wrap md:items-center md:gap-y-3 md:divide-x md:divide-[#D1D5DB]">
                   {credentials.map((label) => (
@@ -1608,7 +1624,7 @@ function FAQ() {
   ]
 
   return (
-    <section id="preguntas" className="relative isolate overflow-hidden bg-[#F4F8FC] py-20 md:py-24">
+    <section id="preguntas" className="relative isolate overflow-hidden bg-[#F1F5F9] py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#F4F8FC_0%,#FFFFFF_50%,#F4F8FC_100%)]" />
       <div className="mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
         <Reveal className="lg:sticky lg:top-28">
@@ -1664,8 +1680,10 @@ function CTAFinal() {
   ]
 
   return (
-    <section id="cta" className="relative isolate overflow-hidden bg-[#173E75] py-16 md:py-20">
+    <section id="cta" className="relative isolate overflow-hidden bg-[#173E75] py-20 md:py-28">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#173E75_0%,#0F2A4F_100%)]" />
+      {/* glow que envuelve el área del botón CTA */}
+      <div aria-hidden className="pointer-events-none absolute bottom-[-10%] right-[-5%] -z-10 h-[450px] w-[550px] rounded-full bg-[radial-gradient(circle,rgba(94,204,230,0.40),transparent_70%)]" />
       <div className="relative mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[1fr_0.82fr] lg:items-center">
         <Reveal>
           <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-white/70">
@@ -1682,6 +1700,8 @@ function CTAFinal() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
               href={CALL_CTA_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-[16px] font-semibold text-[#173E75] shadow-md transition-colors duration-150 hover:bg-[#EEF4FA] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#173E75]"
             >
               {CALL_CTA_FULL_LABEL}
@@ -1797,7 +1817,11 @@ export function Footer() {
               <ul className="mt-4 space-y-3 text-[14px] font-medium text-white/70">
                 {contactLinks.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} className="transition-colors hover:text-[#5ECCE6]">
+                    <a
+                      href={link.href}
+                      {...(link.href.startsWith("https://") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      className="transition-colors hover:text-[#5ECCE6]"
+                    >
                       {link.label}
                     </a>
                   </li>
