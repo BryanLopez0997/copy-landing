@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Image from "next/image"
-import { motion, type Variants } from "framer-motion"
+import { motion, AnimatePresence, type Variants } from "framer-motion"
 import {
   ArrowRight,
   Check,
@@ -1061,6 +1061,243 @@ function Diagnostico() {
 }
 
 /* ==============================================================
+   FLUJO DE PUERTA — demo animada QR → confirmación → registro
+   ============================================================== */
+
+const QR_GRID = [
+  1,1,1,0,1,1,
+  1,0,1,0,0,1,
+  1,1,1,1,0,0,
+  0,1,0,1,1,1,
+  1,0,1,0,1,0,
+  1,1,0,1,0,1,
+]
+
+function FlujoPuertaDemo() {
+  const [phase, setPhase] = React.useState<"clave" | "confirm" | "result">("clave")
+  const [digits, setDigits] = React.useState<string>("")
+
+  // Ciclo principal de fases
+  React.useEffect(() => {
+    const durations: Record<string, number> = { clave: 3600, confirm: 1600, result: 3400 }
+    const next: Record<string, "clave" | "confirm" | "result"> = {
+      clave: "confirm",
+      confirm: "result",
+      result: "clave",
+    }
+    const id = setTimeout(() => setPhase(next[phase]), durations[phase])
+    return () => clearTimeout(id)
+  }, [phase])
+
+  // Animación de escritura de los 3 dígitos
+  React.useEffect(() => {
+    if (phase !== "clave") { setDigits(""); return }
+    setDigits("")
+    const t1 = setTimeout(() => setDigits("0"),    700)
+    const t2 = setTimeout(() => setDigits("07"),  1300)
+    const t3 = setTimeout(() => setDigits("072"), 1900)
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
+  }, [phase])
+
+  return (
+    <div className="px-4 pb-2 pt-0 md:px-6">
+      <p className="mb-5 text-center text-[12px] font-bold uppercase tracking-[1.4px] text-[#6B7280]">
+        Demo interactiva · Flujo de puerta en vivo
+      </p>
+
+      <div className="mx-auto w-full max-w-[360px]">
+        {/* Cuerpo del dispositivo */}
+        <div className="overflow-hidden rounded-[20px] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.55)] ring-[5px] ring-[#1A1A1E]">
+          {/* Barra de la app */}
+          <div className="flex items-center justify-between bg-[#173E75] px-4 py-2.5">
+            <span className="text-[12px] font-bold text-white">Ekole · Puerta Principal</span>
+            <span className="text-[12px] font-semibold text-white/60">13:45</span>
+          </div>
+
+          {/* Área de contenido animado */}
+          <div className="relative h-[256px] overflow-hidden">
+            <AnimatePresence mode="wait">
+
+              {/* — FASE 1: Clave de recogida — */}
+              {phase === "clave" && (
+                <motion.div
+                  key="clave"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white px-6"
+                >
+                  <div className="text-center">
+                    <p className="text-[13px] font-bold text-[#173E75]">Clave de recogida</p>
+                    <p className="mt-0.5 text-[12px] text-[#9CA3AF]">Ingrese los 3 dígitos del tutor</p>
+                  </div>
+
+                  {/* Los 3 cuadros de dígito */}
+                  <div className="flex gap-3">
+                    {[0, 1, 2].map((i) => {
+                      const filled = digits[i] !== undefined
+                      const active = digits.length === i
+                      return (
+                        <div
+                          key={i}
+                          className={cn(
+                            "relative flex size-[52px] items-center justify-center rounded-[12px] border-2 text-[22px] font-bold transition-all duration-200",
+                            filled
+                              ? "border-[#173E75] bg-[#EEF4FA] text-[#173E75]"
+                              : active
+                              ? "border-[#2EB4E9] bg-white text-transparent"
+                              : "border-[#E5E7EB] bg-[#F9FAFB] text-transparent",
+                          )}
+                        >
+                          {filled ? digits[i] : null}
+                          {/* Cursor parpadeante en el cuadro activo */}
+                          {active && (
+                            <motion.div
+                              className="absolute h-[20px] w-[2px] rounded-full bg-[#2EB4E9]"
+                              animate={{ opacity: [1, 0, 1] }}
+                              transition={{ duration: 0.9, repeat: Infinity }}
+                            />
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* Botón Buscar — se ilumina cuando están los 3 dígitos */}
+                  <motion.div
+                    animate={{
+                      opacity: digits.length === 3 ? 1 : 0.35,
+                      scale:   digits.length === 3 ? 1 : 0.97,
+                    }}
+                    transition={{ duration: 0.25 }}
+                    className="w-full rounded-[10px] bg-[#173E75] py-2.5 text-center text-[13px] font-bold text-white"
+                  >
+                    Buscar alumno
+                  </motion.div>
+
+                  {/* Alternativa QR */}
+                  <p className="text-[12px] text-[#9CA3AF]">
+                    o escanee el código QR del tutor
+                  </p>
+                </motion.div>
+              )}
+
+              {/* — FASE 2: Confirmación verde — */}
+              {phase === "confirm" && (
+                <motion.div
+                  key="confirm"
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.03 }}
+                  transition={{ duration: 0.25 }}
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white"
+                >
+                  <div className="relative flex items-center justify-center">
+                    {/* Anillo pulsante */}
+                    <motion.div
+                      className="absolute size-28 rounded-full bg-[#10B981]/12"
+                      animate={{ scale: [1, 1.6, 1], opacity: [0.8, 0, 0.8] }}
+                      transition={{ duration: 1.1, repeat: Infinity }}
+                    />
+                    {/* Círculo verde */}
+                    <motion.div
+                      className="relative flex size-[62px] items-center justify-center rounded-full bg-[#10B981]"
+                      initial={{ scale: 0, rotate: -20 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: "spring", bounce: 0.55, delay: 0.1 }}
+                    >
+                      <svg viewBox="0 0 24 24" className="size-8" fill="none" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+                        <motion.path
+                          d="M5 13l4 4L19 7"
+                          stroke="white"
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: 1 }}
+                          transition={{ duration: 0.4, delay: 0.3 }}
+                        />
+                      </svg>
+                    </motion.div>
+                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-center"
+                  >
+                    <p className="text-[16px] font-bold text-[#111827]">Tutor autorizado</p>
+                    <p className="mt-0.5 text-[12px] text-[#6B7280]">Validando alumno…</p>
+                  </motion.div>
+                </motion.div>
+              )}
+
+              {/* — FASE 3: Nombre + hora — */}
+              {phase === "result" && (
+                <motion.div
+                  key="result"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 flex flex-col justify-center gap-3 bg-[#F8FBFE] px-4"
+                >
+                  {/* Banner verde */}
+                  <div className="flex items-center gap-2 rounded-[10px] bg-[#ECFDF5] px-3 py-2 ring-1 ring-[#10B981]/20">
+                    <div className="flex size-5 flex-shrink-0 items-center justify-center rounded-full bg-[#10B981]">
+                      <Check className="size-3 text-white" strokeWidth={3} />
+                    </div>
+                    <span className="text-[12px] font-bold text-[#065F46]">
+                      Entrega registrada · 13:45:22
+                    </span>
+                  </div>
+                  {/* Tarjeta del alumno */}
+                  <div className="rounded-[14px] bg-white px-4 py-3.5 shadow-[0_2px_12px_rgba(0,0,0,0.07)] ring-1 ring-[#E5E7EB]">
+                    <div className="flex items-center gap-3">
+                      <div className="flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-[#EEF4FA] text-[15px] font-bold text-[#173E75]">
+                        S
+                      </div>
+                      <div>
+                        <p className="text-[14px] font-bold text-[#111827]">Sofía Ramírez Torres</p>
+                        <p className="text-[12px] text-[#6B7280]">3ro B · Primaria</p>
+                      </div>
+                    </div>
+                    <div className="mt-3 grid grid-cols-2 gap-2">
+                      <div className="rounded-[8px] bg-[#F4F8FC] px-3 py-2">
+                        <p className="text-[10px] text-[#9CA3AF]">Recoge</p>
+                        <p className="text-[12px] font-semibold text-[#374151]">María Torres</p>
+                      </div>
+                      <div className="rounded-[8px] bg-[#F4F8FC] px-3 py-2">
+                        <p className="text-[10px] text-[#9CA3AF]">Confirmó</p>
+                        <p className="text-[12px] font-semibold text-[#374151]">Mtra. Lucía</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Indicadores de fase (clic para saltar) */}
+        <div className="mt-4 flex justify-center gap-2">
+          {(["clave", "confirm", "result"] as const).map((p) => (
+            <button
+              key={p}
+              onClick={() => setPhase(p)}
+              aria-label={`Ver fase ${p}`}
+              className={cn(
+                "h-[5px] rounded-full transition-all duration-300",
+                phase === p ? "w-[20px] bg-[#2EB4E9]" : "w-[5px] bg-[#CBD5E1]",
+              )}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ==============================================================
    SOLUCIÓN (explicación compacta + walkthrough visual)
    ============================================================== */
 
@@ -1219,9 +1456,11 @@ function Solucion() {
                       step.tint,
                     )}
                   >
+                    {/* viñeta sutil en los bordes */}
+                    <div aria-hidden className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(0,0,0,0.06)_100%)]" />
                     <div
                       aria-hidden
-                      className="absolute left-3 top-3 z-10 rounded-md bg-white/90 px-2.5 py-1 text-[12px] font-bold shadow-sm backdrop-blur"
+                      className="absolute left-3 top-3 z-20 rounded-md bg-white/90 px-2.5 py-1 text-[12px] font-bold shadow-sm backdrop-blur"
                       style={{ color: step.tone }}
                     >
                       0{i + 1}
@@ -1231,7 +1470,7 @@ function Solucion() {
                       alt={step.alt}
                       fill
                       quality={95}
-                      className="object-contain object-center p-2"
+                      className="object-contain object-center p-5 drop-shadow-[0_10px_24px_rgba(0,0,0,0.22)]"
                       sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 360px"
                     />
                   </div>
@@ -1244,6 +1483,13 @@ function Solucion() {
                 </div>
               ))}
             </div>
+          </div>
+        </Reveal>
+
+        {/* Demo animada — fondo claro, separada del panel navy */}
+        <Reveal delay={0.2}>
+          <div className="mt-6 rounded-[28px] bg-gradient-to-b from-[#F4F8FC] to-white pb-14 pt-10">
+            <FlujoPuertaDemo />
           </div>
         </Reveal>
 
