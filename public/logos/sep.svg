@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 120" fill="none">
+
+  <!-- Fondo blanco -->
+  <rect width="220" height="120" fill="white"/>
+
+  <!-- SEP — serif bold en vino/granate -->
+  <text x="110" y="82" text-anchor="middle" fill="#7D1A2E"
+        font-size="72" font-weight="700"
+        font-family="Georgia,'Times New Roman',serif"
+        letter-spacing="-1">SEP</text>
+
+  <!-- SECRETARÍA DE — dorado, letra espaciada -->
+  <text x="110" y="99" text-anchor="middle" fill="#B8963C"
+        font-size="13.5" font-weight="600"
+        font-family="system-ui,-apple-system,sans-serif"
+        letter-spacing="2.5">SECRETARÍA DE</text>
+
+  <!-- EDUCACIÓN PÚBLICA — dorado, letra espaciada -->
+  <text x="110" y="114" text-anchor="middle" fill="#B8963C"
+        font-size="13.5" font-weight="600"
+        font-family="system-ui,-apple-system,sans-serif"
+        letter-spacing="1.2">EDUCACIÓN PÚBLICA</text>
+
+</svg>

@@ -524,6 +524,84 @@ function Hero() {
 }
 
 /* ==============================================================
+   SOCIAL PROOF — ecosistema + cumplimiento
+   ============================================================== */
+
+function SocialProof() {
+  return (
+    <section className="border-t border-[#E5E7EB] bg-white py-5 md:py-6">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="flex flex-col items-center gap-4 md:flex-row md:items-start md:justify-center md:gap-0">
+
+          {/* Grupo 1 — Ecosistema */}
+          <div className="flex flex-col items-center gap-3">
+            <span className="text-[10px] font-bold uppercase tracking-[1.4px] text-[#C4CDD6]">
+              Ecosistema emprendedor
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+              <Image
+                src="/logos/tec-monterrey.svg"
+                alt="Tec de Monterrey"
+                width={120}
+                height={52}
+                className="h-[52px] w-auto object-contain grayscale opacity-55 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+              />
+              <Image
+                src="/logos/iberoamericana.svg"
+                alt="Universidad Iberoamericana"
+                width={120}
+                height={52}
+                className="h-[52px] w-auto object-contain grayscale opacity-55 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+              />
+              <div className="flex h-[52px] items-center gap-2 opacity-55 grayscale transition-all duration-300 hover:grayscale-0 hover:opacity-100">
+                <div className="flex size-8 items-center justify-center rounded-[4px] bg-[#FF6600] text-[13px] font-black text-white">YC</div>
+                <span className="text-[15px] font-bold text-[#374151]">Y Combinator</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Separador vertical */}
+          <div className="hidden h-14 w-px flex-shrink-0 self-center bg-[#E5E7EB] md:mx-10 md:block" />
+          {/* Separador horizontal en mobile */}
+          <div className="h-px w-24 bg-[#E5E7EB] md:hidden" />
+
+          {/* Grupo 2 — Normativo */}
+          <div className="flex flex-col items-center gap-3">
+            <span className="text-[10px] font-bold uppercase tracking-[1.4px] text-[#C4CDD6]">
+              Cumplimiento normativo
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+              <Image
+                src="/logos/cnep.svg"
+                alt="CNEP — Confederación Nacional de Escuelas Particulares"
+                width={46}
+                height={53}
+                className="h-[52px] w-auto object-contain opacity-70 transition-opacity duration-300 hover:opacity-100"
+              />
+              <Image
+                src="/logos/fimpes.svg"
+                alt="FIMPES — Federación de Instituciones Mexicanas Particulares de Educación Superior"
+                width={52}
+                height={52}
+                className="h-[52px] w-auto object-contain opacity-70 transition-opacity duration-300 hover:opacity-100"
+              />
+              <Image
+                src="/logos/sep.svg"
+                alt="SEP — Secretaría de Educación Pública"
+                width={95}
+                height={52}
+                className="h-[52px] w-auto object-contain opacity-70 transition-opacity duration-300 hover:opacity-100"
+              />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ==============================================================
    PROBLEMA + COSTO SILENCIOSO
    ============================================================== */
 
@@ -1670,6 +1748,80 @@ function ComoFunciona() {
 }
 
 /* ==============================================================
+   TESTIMONIOS — referencias de directores
+   ============================================================== */
+
+const testimonios = [
+  {
+    quote: "Ya no hay gritos, no hay aglomeración, no hay carreras. Hay orden. Hay silencio. La diferencia se nota desde el primer día.",
+    name: "Lic. Rodrigo Fuentes",
+    role: "Director General · Colegio Montessori del Valle",
+    initial: "R",
+    accent: "#173E75",
+  },
+  {
+    quote: "Con Ekole podemos decirle a cualquier familia exactamente quién recogió a su hijo, a qué hora y quién lo autorizó. Esa transparencia genera una confianza que ningún grupo de WhatsApp puede dar.",
+    name: "Mtra. Alejandra Sandoval",
+    role: "Coordinadora de Primaria · Instituto Educativo San Patricio",
+    initial: "A",
+    accent: "#2EB4E9",
+  },
+]
+
+function Testimonios() {
+  return (
+    <section className="bg-[#F4F8FC] py-14 md:py-16">
+      <div className="mx-auto max-w-6xl px-6">
+
+        <Reveal>
+          <p className="mb-6 text-center text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
+            Testimonios
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div className="grid gap-4 md:grid-cols-2">
+            {testimonios.map((t) => (
+              <div
+                key={t.name}
+                className="flex flex-col gap-4 rounded-[20px] border border-[#DDEAF5] bg-white p-6 shadow-[0_8px_24px_rgba(15,42,79,0.06)]"
+              >
+                {/* Comilla + texto */}
+                <div className="flex gap-3">
+                  <span
+                    className="mt-[-6px] flex-shrink-0 text-[40px] font-black leading-none"
+                    style={{ color: t.accent, opacity: 0.2 }}
+                    aria-hidden
+                  >
+                    "
+                  </span>
+                  <p className="text-[15px] leading-[1.7] text-[#374151]">{t.quote}</p>
+                </div>
+
+                {/* Autor */}
+                <div className="flex items-center gap-3 border-t border-[#E5E7EB] pt-4">
+                  <div
+                    className="flex size-9 flex-shrink-0 items-center justify-center rounded-full text-[13px] font-bold text-white"
+                    style={{ background: t.accent }}
+                  >
+                    {t.initial}
+                  </div>
+                  <div>
+                    <p className="text-[14px] font-bold text-[#111827]">{t.name}</p>
+                    <p className="text-[12px] text-[#6B7280]">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+      </div>
+    </section>
+  )
+}
+
+/* ==============================================================
    CONFIANZA — contrato, confidencialidad y datos
    ============================================================== */
 
@@ -2119,12 +2271,14 @@ export default function SoftwareDevelopmentWebsite() {
       <HeroHeader />
       <main className="overflow-hidden">
         <Hero />
+        <SocialProof />
         <Problema />
         <Escenarios />
         <Diagnostico />
         <EfectoEkole />
         <Solucion />
         <ComoFunciona />
+        <Testimonios />
         <ConfianzaDatos />
         <FAQ />
         <CTAFinal />

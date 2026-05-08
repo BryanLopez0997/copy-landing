@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 116">
+  <defs>
+    <clipPath id="c">
+      <rect width="100" height="100" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <!-- Fondo blanco con esquinas redondeadas -->
+  <rect width="100" height="100" rx="14" fill="white"/>
+
+  <!-- Formas clipeadas al contorno redondeado -->
+  <g clip-path="url(#c)">
+    <circle cx="24.5" cy="24.5" r="23" fill="#C47575"/>
+    <polygon points="51,0 100,0 100,49" fill="#D4A840"/>
+    <rect x="0" y="51" width="49" height="24" fill="#BCC9D9"/>
+    <rect x="0" y="75" width="49" height="25" fill="#8A6E97"/>
+    <rect x="51" y="51" width="49" height="49" fill="#4B6FA2"/>
+  </g>
+
+  <!-- Etiqueta CNEP debajo del ícono -->
+  <text x="50" y="113" text-anchor="middle" fill="#6B7280"
+        font-size="11" font-weight="700"
+        font-family="system-ui,-apple-system,sans-serif"
+        letter-spacing="1.5">CNEP</text>
+</svg>

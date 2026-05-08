@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <!-- Un pétalo que se reutiliza rotado 8 veces -->
+    <path id="fp" d="M 0 -2 C 6 -4 7 -20 0 -23 C -7 -20 -6 -4 0 -2"/>
+  </defs>
+
+  <!-- Fondo círculo navy -->
+  <circle cx="50" cy="50" r="50" fill="#1C2E6B"/>
+
+  <!-- Círculo blanco interior -->
+  <circle cx="50" cy="50" r="40" fill="white"/>
+
+  <!-- Cuadro redondeado contenedor del florón -->
+  <rect x="24" y="20" width="52" height="52" rx="7" fill="none" stroke="#C5B49A" stroke-width="1.5"/>
+
+  <!-- Florón: 8 pétalos beige rotados 45° cada uno -->
+  <g transform="translate(50 46)">
+    <use href="#fp" fill="#C5B49A" transform="rotate(0)"/>
+    <use href="#fp" fill="#C5B49A" transform="rotate(45)"/>
+    <use href="#fp" fill="#C5B49A" transform="rotate(90)"/>
+    <use href="#fp" fill="#C5B49A" transform="rotate(135)"/>
+    <use href="#fp" fill="#C5B49A" transform="rotate(180)"/>
+    <use href="#fp" fill="#C5B49A" transform="rotate(225)"/>
+    <use href="#fp" fill="#C5B49A" transform="rotate(270)"/>
+    <use href="#fp" fill="#C5B49A" transform="rotate(315)"/>
+  </g>
+
+  <!-- Texto FIMPES en navy -->
+  <text x="50" y="84" text-anchor="middle" fill="#1C2E6B"
+        font-size="11.5" font-weight="900"
+        font-family="system-ui,-apple-system,BlinkMacSystemFont,sans-serif"
+        letter-spacing="1">FIMPES</text>
+  <text x="73" y="80" fill="#1C2E6B" font-size="6" font-family="system-ui,sans-serif">®</text>
+</svg>
