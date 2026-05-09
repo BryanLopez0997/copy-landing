@@ -23,6 +23,7 @@ import {
   Zap,
 } from "lucide-react"
 import { EfectoEkoleChart } from "./efecto-ekole-chart"
+import { EkoleDashboardMockup } from "./ekole-dashboard-mockup"
 
 /* ==============================================================
    Launch funnel:
@@ -935,12 +936,31 @@ function EfectoEkole() {
         </Reveal>
 
         <Reveal delay={0.25}>
-          <div className="mx-auto mt-8 max-w-2xl text-center">
-            <p className="text-balance text-[18px] font-semibold leading-[1.6] text-[#111827]">
-              Sin Ekole: hasta 30 minutos de espera. Con Ekole: cerca de 5.
-            </p>
-            <p className="mt-1 text-[16px] text-[#6B7280]">
-              Mismo colegio. Mismo número de familias. Diferente sistema.
+          <div className="mx-auto mt-10 flex max-w-2xl flex-col items-center gap-5 rounded-[20px] border border-[#DCFCE7] bg-[#F0FDF4] px-8 py-6 sm:flex-row sm:gap-0">
+            {/* Stat principal */}
+            <div className="flex-shrink-0 text-center">
+              <p className="text-[3.2rem] font-black leading-none text-[#16A34A]">−70%</p>
+              <p className="mt-1 text-[11px] font-bold uppercase tracking-[1.4px] text-[#16A34A]/70">tiempo de espera</p>
+            </div>
+            <div className="hidden h-12 w-px flex-shrink-0 bg-[#BBF7D0] sm:mx-8 sm:block" />
+            <div className="h-px w-16 bg-[#BBF7D0] sm:hidden" />
+            {/* Antes → Después */}
+            <div className="flex items-center gap-4">
+              <div className="text-center">
+                <p className="text-[1.6rem] font-black leading-none text-[#DC2626]">~30 min</p>
+                <p className="mt-1 text-[11px] font-bold uppercase tracking-[1px] text-[#6B7280]">Sin Ekole</p>
+              </div>
+              <span className="text-[1.4rem] text-[#9CA3AF]">→</span>
+              <div className="text-center">
+                <p className="text-[1.6rem] font-black leading-none text-[#16A34A]">~5 min</p>
+                <p className="mt-1 text-[11px] font-bold uppercase tracking-[1px] text-[#6B7280]">Con Ekole</p>
+              </div>
+            </div>
+            <div className="hidden h-12 w-px flex-shrink-0 bg-[#BBF7D0] sm:mx-8 sm:block" />
+            <div className="h-px w-16 bg-[#BBF7D0] sm:hidden" />
+            {/* Tagline */}
+            <p className="text-center text-[14px] leading-[1.6] text-[#374151] sm:text-left">
+              Mismo colegio.<br className="hidden sm:block" /> Mismas familias.<br className="hidden sm:block" /> Diferente sistema.
             </p>
           </div>
         </Reveal>
@@ -1110,14 +1130,14 @@ function Diagnostico() {
 
                   <div className="mt-4 space-y-2.5">
                     {previewRows.map((row) => (
-                      <div key={row.label} className="flex items-center justify-between gap-4 rounded-[14px] border border-[#E5E7EB] bg-white px-4 py-3">
+                      <div key={row.label} className="flex flex-col gap-1.5 rounded-[14px] border border-[#E5E7EB] bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                         <div className="flex items-center gap-3">
                           <span className="flex size-8 flex-shrink-0 items-center justify-center rounded-[10px] bg-[#EEF4FA] text-[#173E75]">
                             <ShieldCheck className="size-4" />
                           </span>
                           <p className="text-[14px] font-bold text-[#111827]">{row.label}</p>
                         </div>
-                        <p className="text-right text-[13px] font-semibold text-[#6B7280]">{row.value}</p>
+                        <p className="pl-11 text-[13px] font-semibold text-[#6B7280] sm:pl-0 sm:text-right">{row.value}</p>
                       </div>
                     ))}
                   </div>
@@ -1847,21 +1867,21 @@ function ConfianzaDatos() {
   const credentials = ["SEP", "LFPDPPP", "Derechos ARCO", "CCF Art. 1920"]
 
   return (
-    <section id="confianza" className="relative isolate scroll-mt-28 overflow-hidden bg-white py-24 md:py-32">
+    <section id="confianza" className="relative isolate scroll-mt-28 overflow-hidden bg-white py-16 md:py-24 lg:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#F9FAFB_0%,#FFFFFF_45%,#F4F8FC_100%)]" />
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <div className="grid gap-8 overflow-hidden rounded-[30px] border border-[#DDEAF5] bg-white/90 p-5 shadow-[0_28px_70px_rgba(15,42,79,0.10)] backdrop-blur md:p-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
-            <div className="flex flex-col justify-between gap-8 px-1 py-2">
+          <div className="grid gap-5 overflow-hidden rounded-[30px] border border-[#DDEAF5] bg-white/90 p-5 shadow-[0_28px_70px_rgba(15,42,79,0.10)] backdrop-blur md:gap-8 md:p-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+            <div className="flex flex-col justify-between gap-5 px-1 py-2 md:gap-8">
               <div>
                 <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
                   Confianza antes de operar
                 </p>
-                <h2 className="mt-4 max-w-[620px] text-balance text-[2.35rem] font-extrabold leading-[1.12] text-[#111827] sm:text-[3rem]">
+                <h2 className="mt-4 max-w-[620px] text-balance text-[1.85rem] font-extrabold leading-[1.12] text-[#111827] sm:text-[2.35rem] md:text-[3rem]">
                   Antes de compartir datos, todo queda{" "}
                   <span className="text-[#2EB4E9]">por escrito.</span>
                 </h2>
-                <p className="mt-6 max-w-[620px] text-[18px] leading-[1.65] text-[#4B5563]">
+                <p className="mt-4 max-w-[620px] text-[16px] leading-[1.65] text-[#4B5563] md:mt-6 md:text-[18px]">
                   Ekole está pensado para que el director pueda avanzar sin sentir que expone la información del colegio.
                 </p>
               </div>
@@ -1870,7 +1890,7 @@ function ConfianzaDatos() {
                 <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
                   Referencias legales
                 </p>
-                <div className="mt-4 flex flex-col gap-3 md:flex-row md:flex-wrap md:items-center md:gap-y-3 md:divide-x md:divide-[#D1D5DB]">
+                <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 md:flex-nowrap md:items-center md:divide-x md:divide-[#D1D5DB]">
                   {credentials.map((label) => (
                     <div key={label} className="flex items-center gap-2 md:px-4 md:first:pl-0">
                       <ShieldCheck className="size-4 flex-shrink-0 text-[#173E75]" strokeWidth={1.9} aria-hidden />
@@ -1883,7 +1903,7 @@ function ConfianzaDatos() {
 
             <div className="rounded-[26px] bg-[#F4F8FC] p-4 shadow-inner md:p-5">
               <div className="overflow-hidden rounded-[22px] border border-white/80 bg-white shadow-[0_20px_50px_rgba(15,42,79,0.10)]">
-                <div className="bg-[#173E75] px-5 py-5 text-white">
+                <div className="bg-[#173E75] px-5 py-3 text-white md:py-5">
                   <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-white/70">
                     Control documental
                   </p>
@@ -1896,15 +1916,15 @@ function ConfianzaDatos() {
                   {trustItems.map((item) => {
                     const Icon = item.icon
                     return (
-                      <div key={item.title} className="grid gap-4 px-5 py-5 sm:grid-cols-[48px_1fr]">
-                        <div className="flex size-12 items-center justify-center rounded-[16px] bg-[#EEF4FA] text-[#173E75]">
-                          <Icon className="size-6" strokeWidth={1.8} aria-hidden />
+                      <div key={item.title} className="flex items-start gap-4 px-5 py-3 md:py-4">
+                        <div className="flex size-11 flex-shrink-0 items-center justify-center rounded-[16px] bg-[#EEF4FA] text-[#173E75]">
+                          <Icon className="size-5" strokeWidth={1.8} aria-hidden />
                         </div>
                         <div>
-                          <h3 className="text-[18px] font-bold leading-snug text-[#173E75]">
+                          <h3 className="text-[16px] font-bold leading-snug text-[#173E75] md:text-[18px]">
                             {item.title}
                           </h3>
-                          <p className="mt-2 text-[15px] leading-[1.6] text-[#4B5563] md:text-[16px]">
+                          <p className="mt-1.5 text-[14px] leading-[1.6] text-[#4B5563] md:text-[15px]">
                             {item.body}
                           </p>
                         </div>
@@ -1913,7 +1933,7 @@ function ConfianzaDatos() {
                   })}
                 </div>
 
-                <div className="border-t border-[#E5E7EB] bg-[#F9FAFB] px-5 py-4">
+                <div className="border-t border-[#E5E7EB] bg-[#F9FAFB] px-5 py-3 md:py-4">
                   <div className="flex items-start gap-3">
                     <span className="mt-0.5 flex size-7 flex-shrink-0 items-center justify-center rounded-full bg-[#E7F7EE] text-[#10B981]">
                       <Check className="size-4" strokeWidth={2.4} />
@@ -2271,6 +2291,7 @@ export default function SoftwareDevelopmentWebsite() {
       <HeroHeader />
       <main className="overflow-hidden">
         <Hero />
+        <EkoleDashboardMockup />
         <SocialProof />
         <Problema />
         <Escenarios />
