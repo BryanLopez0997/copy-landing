@@ -73,7 +73,7 @@ export function Reveal({
 }) {
   return (
     <motion.div
-      initial="visible"
+      initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       variants={{
@@ -113,6 +113,7 @@ const menuItems = [
   { name: "Por qué importa", href: "/#problema" },
   { name: "Diagnóstico", href: "/#diagnostico" },
   { name: "La solución", href: "/#solucion" },
+  { name: "Cómo funciona", href: "/como-funciona" },
   { name: "Preguntas", href: "/#preguntas" },
 ]
 
@@ -380,7 +381,17 @@ function Hero() {
           className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14"
         >
           <div className="min-w-0 text-center lg:text-left">
-            <motion.div variants={itemRise}>
+            <motion.div variants={itemRise} className="flex items-center justify-center gap-1.5 lg:justify-start">
+              <span className="relative flex size-2 items-center justify-center">
+                <span className="absolute inline-flex size-2 animate-pulse-dot rounded-full bg-[#10B981]/50" />
+                <span className="relative inline-flex size-1.5 rounded-full bg-[#10B981]" />
+              </span>
+              <span className="text-[12px] font-semibold text-[#4B5563]">
+                Activaciones abiertas · Ciclo 2026-2027 · Colegios privados en México
+              </span>
+            </motion.div>
+
+            <motion.div variants={itemRise} className="mt-4">
               <span className="inline-flex items-center rounded-full border border-white/80 bg-white px-4 py-1.5 text-[14px] font-semibold text-[#173E75] shadow-sm">
                 Salida escolar + exposición legal
               </span>
@@ -537,7 +548,7 @@ function SocialProof() {
           {/* Grupo 1 — Ecosistema */}
           <div className="flex flex-col items-center gap-3">
             <span className="text-[10px] font-bold uppercase tracking-[1.4px] text-[#C4CDD6]">
-              Ecosistema emprendedor
+              Desarrollado en ecosistema
             </span>
             <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
               <Image
@@ -554,10 +565,6 @@ function SocialProof() {
                 height={52}
                 className="h-[52px] w-auto object-contain grayscale opacity-55 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
               />
-              <div className="flex h-[52px] items-center gap-2 opacity-55 grayscale transition-all duration-300 hover:grayscale-0 hover:opacity-100">
-                <div className="flex size-8 items-center justify-center rounded-[4px] bg-[#FF6600] text-[13px] font-black text-white">YC</div>
-                <span className="text-[15px] font-bold text-[#374151]">Y Combinator</span>
-              </div>
             </div>
           </div>
 
@@ -857,6 +864,8 @@ function Escenarios() {
    ============================================================== */
 
 function EfectoEkole() {
+  const [comparativaAbierta, setComparativaAbierta] = React.useState(false)
+
   const CLIP  = "M168,152a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,152Zm-8-40H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm56-64V216a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V48A16,16,0,0,1,56,32H92.26a47.92,47.92,0,0,1,71.48,0H200A16,16,0,0,1,216,48ZM96,64h64a32,32,0,0,0-64,0ZM200,48H173.25A47.93,47.93,0,0,1,176,64v8a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V64a47.93,47.93,0,0,1,2.75-16H56V216H200Z"
   const CLOCK = "M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z"
   const CHECK = "M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"
@@ -965,72 +974,90 @@ function EfectoEkole() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.3}>
-          <div className="mx-auto mt-10 grid gap-4 md:grid-cols-3">
-            {columns.map((col) => {
-              const isEkole = col.key === "ekole"
-              return (
-                <div
-                  key={col.key}
-                  className={cn(
-                    "relative flex h-full flex-col overflow-hidden rounded-[26px] border p-5 shadow-[0_24px_62px_rgba(15,42,79,0.08)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_32px_72px_rgba(15,42,79,0.14)]",
-                    isEkole
-                      ? "border-[#5ECCE6]/30 bg-[#173E75] text-white ring-1 ring-[#5ECCE6]/30"
-                      : "border-[#DDEAF5] bg-white"
-                  )}
-                >
-                  {isEkole ? (
-                    <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_72%_15%,rgba(94,204,230,0.28),transparent_62%)]" />
-                  ) : null}
-                  <div className="relative flex items-start justify-between gap-4">
-                    <div>
-                      <p className={cn("text-[12px] font-bold uppercase tracking-[1.2px]", isEkole ? "text-white/60" : "text-[#6B7280]")}>
-                        Opción {col.number}
-                      </p>
-                      <h3 className={cn("mt-2 text-[1.35rem] font-extrabold leading-tight", isEkole ? "text-white" : "text-[#111827]")}>
-                        {col.title}
-                      </h3>
-                    </div>
-                    <span className={cn("flex size-16 flex-shrink-0 items-center justify-center rounded-[20px]", isEkole ? "bg-white/10 text-[#5ECCE6]" : "bg-[#EEF4FA] text-[#173E75]")}>
-                      <svg viewBox="0 0 256 256" fill="currentColor" className="size-9" aria-hidden>
-                        <path d={col.path} />
-                      </svg>
-                    </span>
-                  </div>
-                  <p className={cn("relative mt-5 text-[1.35rem] font-extrabold leading-[1.18]", isEkole ? "text-[#5ECCE6]" : "text-[#173E75]")}>
-                    {col.headline}
-                  </p>
-                  <p className={cn("relative mt-3 text-[15px] leading-[1.6]", isEkole ? "text-white/80" : "text-[#4B5563]")}>
-                    {col.summary}
-                  </p>
-                  <div className={cn("relative mt-5 flex flex-1 flex-col divide-y", isEkole ? "divide-white/15" : "divide-[#E5E7EB]")}>
-                    {col.metrics.map((metric) => (
-                      <div key={metric.label} className="grid grid-cols-[0.72fr_1fr] gap-3 py-3">
-                        <span className={cn("text-[12px] font-bold uppercase tracking-[1px]", isEkole ? "text-white/60" : "text-[#6B7280]")}>
-                          {metric.label}
-                        </span>
-                        <span className={cn("text-[15px] font-bold leading-[1.35]", isEkole ? "text-white" : "text-[#173E75]")}>
-                          {metric.value}
+        {/* Acordeón — comparativa Sin/Manual/Con Ekole (colapsado por defecto) */}
+        <div className="mt-10 flex flex-col items-center">
+          <button
+            type="button"
+            onClick={() => setComparativaAbierta(v => !v)}
+            aria-expanded={comparativaAbierta}
+            className="inline-flex items-center gap-2 rounded-lg border border-[#DDEAF5] bg-white px-5 py-3 text-[14px] font-semibold text-[#173E75] shadow-sm transition-colors duration-150 hover:border-[#2EB4E9] hover:text-[#2EB4E9] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#2EB4E9] focus-visible:ring-offset-2"
+          >
+            Ver comparativa: Sin documentación · Manual · Con Ekole
+            <ChevronDown className={cn("size-4 transition-transform duration-300", comparativaAbierta && "rotate-180")} />
+          </button>
+
+          <div
+            className={cn(
+              "grid w-full overflow-hidden transition-all duration-300 ease-in-out",
+              comparativaAbierta ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+            )}
+          >
+            <div className="min-h-0">
+              <div className="mx-auto mt-8 grid gap-4 md:grid-cols-3">
+                {columns.map((col) => {
+                  const isEkole = col.key === "ekole"
+                  return (
+                    <div
+                      key={col.key}
+                      className={cn(
+                        "relative flex h-full flex-col overflow-hidden rounded-[26px] border p-5 shadow-[0_24px_62px_rgba(15,42,79,0.08)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_32px_72px_rgba(15,42,79,0.14)]",
+                        isEkole
+                          ? "border-[#5ECCE6]/30 bg-[#173E75] text-white ring-1 ring-[#5ECCE6]/30"
+                          : "border-[#DDEAF5] bg-white"
+                      )}
+                    >
+                      {isEkole ? (
+                        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_72%_15%,rgba(94,204,230,0.28),transparent_62%)]" />
+                      ) : null}
+                      <div className="relative flex items-start justify-between gap-4">
+                        <div>
+                          <p className={cn("text-[12px] font-bold uppercase tracking-[1.2px]", isEkole ? "text-white/60" : "text-[#6B7280]")}>
+                            Opción {col.number}
+                          </p>
+                          <h3 className={cn("mt-2 text-[1.35rem] font-extrabold leading-tight", isEkole ? "text-white" : "text-[#111827]")}>
+                            {col.title}
+                          </h3>
+                        </div>
+                        <span className={cn("flex size-16 flex-shrink-0 items-center justify-center rounded-[20px]", isEkole ? "bg-white/10 text-[#5ECCE6]" : "bg-[#EEF4FA] text-[#173E75]")}>
+                          <svg viewBox="0 0 256 256" fill="currentColor" className="size-9" aria-hidden>
+                            <path d={col.path} />
+                          </svg>
                         </span>
                       </div>
-                    ))}
-                  </div>
-                  <div className={cn("relative mt-4 rounded-[16px] px-4 py-3 text-[15px] font-extrabold leading-[1.45]", isEkole ? "bg-white text-[#173E75]" : "bg-[#F4F8FC] text-[#4B5563]")}>
-                    {col.footer}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </Reveal>
+                      <p className={cn("relative mt-5 text-[1.35rem] font-extrabold leading-[1.18]", isEkole ? "text-[#5ECCE6]" : "text-[#173E75]")}>
+                        {col.headline}
+                      </p>
+                      <p className={cn("relative mt-3 text-[15px] leading-[1.6]", isEkole ? "text-white/80" : "text-[#4B5563]")}>
+                        {col.summary}
+                      </p>
+                      <div className={cn("relative mt-5 flex flex-1 flex-col divide-y", isEkole ? "divide-white/15" : "divide-[#E5E7EB]")}>
+                        {col.metrics.map((metric) => (
+                          <div key={metric.label} className="grid grid-cols-[0.72fr_1fr] gap-3 py-3">
+                            <span className={cn("text-[12px] font-bold uppercase tracking-[1px]", isEkole ? "text-white/60" : "text-[#6B7280]")}>
+                              {metric.label}
+                            </span>
+                            <span className={cn("text-[15px] font-bold leading-[1.35]", isEkole ? "text-white" : "text-[#173E75]")}>
+                              {metric.value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className={cn("relative mt-4 rounded-[16px] px-4 py-3 text-[15px] font-extrabold leading-[1.45]", isEkole ? "bg-white text-[#173E75]" : "bg-[#F4F8FC] text-[#4B5563]")}>
+                        {col.footer}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
 
-        <Reveal delay={0.4}>
-          <div className="mx-auto mt-10 max-w-3xl rounded-[24px] border border-[#DDEAF5] bg-white/80 p-6 text-center shadow-[0_18px_44px_rgba(15,42,79,0.06)] backdrop-blur">
-            <p className="text-balance text-[1.65rem] font-extrabold leading-tight text-[#173E75] md:text-[2rem]">
-              Ekole es la tercera vía: rapidez para la familia y trazabilidad para el colegio.
-            </p>
+              <div className="mx-auto mt-8 max-w-3xl rounded-[24px] border border-[#DDEAF5] bg-white/80 p-6 text-center shadow-[0_18px_44px_rgba(15,42,79,0.06)] backdrop-blur">
+                <p className="text-balance text-[1.65rem] font-extrabold leading-tight text-[#173E75] md:text-[2rem]">
+                  Ekole es la tercera vía: rapidez para la familia y trazabilidad para el colegio.
+                </p>
+              </div>
+            </div>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   )
@@ -1171,13 +1198,13 @@ const QR_GRID = [
   1,1,0,1,0,1,
 ]
 
-function FlujoPuertaDemo() {
+export function FlujoPuertaDemo() {
   const [phase, setPhase] = React.useState<"clave" | "confirm" | "result">("clave")
   const [digits, setDigits] = React.useState<string>("")
 
   // Ciclo principal de fases
   React.useEffect(() => {
-    const durations: Record<string, number> = { clave: 3600, confirm: 1600, result: 3400 }
+    const durations: Record<string, number> = { clave: 2700, confirm: 2200, result: 3400 }
     const next: Record<string, "clave" | "confirm" | "result"> = {
       clave: "confirm",
       confirm: "result",
@@ -1262,17 +1289,21 @@ function FlujoPuertaDemo() {
                     })}
                   </div>
 
-                  {/* Botón Buscar — se ilumina cuando están los 3 dígitos */}
-                  <motion.div
+                  {/* Botón Buscar — se ilumina y es clickeable cuando están los 3 dígitos */}
+                  <motion.button
+                    onClick={() => digits.length === 3 && setPhase("confirm")}
                     animate={{
                       opacity: digits.length === 3 ? 1 : 0.35,
                       scale:   digits.length === 3 ? 1 : 0.97,
                     }}
                     transition={{ duration: 0.25 }}
-                    className="w-full rounded-[10px] bg-[#173E75] py-2.5 text-center text-[13px] font-bold text-white"
+                    className={cn(
+                      "w-full rounded-[10px] bg-[#173E75] py-2.5 text-center text-[13px] font-bold text-white",
+                      digits.length === 3 ? "cursor-pointer" : "cursor-default",
+                    )}
                   >
                     Buscar alumno
-                  </motion.div>
+                  </motion.button>
 
                   {/* Alternativa QR */}
                   <p className="text-[12px] text-[#9CA3AF]">
@@ -1418,33 +1449,6 @@ function Solucion() {
     },
   ]
 
-  const steps = [
-    {
-      title: "Clave en puerta",
-      body: "El personal ingresa los 3 dígitos. El alumno autorizado aparece al instante.",
-      img: "/promotions/Buscador iphone 089.png",
-      alt: "iPad con buscador Ekole: clave ingresada y alumno identificado",
-      tone: "#173E75",
-      tint: "bg-[#F4F8FC]",
-    },
-    {
-      title: "Confirmación del maestro",
-      body: "El maestro ve al alumno en su tablero y confirma el movimiento hacia la salida.",
-      img: "/promotions/Ipad dasboard final.png",
-      alt: "iPad con dashboard del maestro: alumno listo para enviar a puerta",
-      tone: "#2EB4E9",
-      tint: "bg-[#F7FCFE]",
-    },
-    {
-      title: "Entrega documentada",
-      body: "Nombre, hora, grado y confirmación quedan disponibles como evidencia consultable.",
-      img: "/promotions/Ipad Entregados.png",
-      alt: "iPad con pantalla de entregas confirmadas y registro de hora exacta",
-      tone: "#10B981",
-      tint: "bg-[#F6FEFA]",
-    },
-  ]
-
   const proofItems = [
     { label: "Alumno", value: "Nombre y grado" },
     { label: "Hora exacta", value: "Timestamp automático" },
@@ -1473,6 +1477,13 @@ function Solucion() {
           <p className="max-w-[620px] text-[18px] font-normal leading-[1.65] text-[#4B5563] md:pb-2">
             El flujo se mantiene simple para puerta y maestros, mientras el colegio gana un historial consultable cuando necesita explicar qué pasó.
           </p>
+        </Reveal>
+
+        {/* Visual protagonista — dashboard animado */}
+        <Reveal delay={0.1}>
+          <div className="mt-10">
+            <EkoleDashboardMockup />
+          </div>
         </Reveal>
 
         {/* B) Tarjetas con borde de acento */}
@@ -1529,68 +1540,6 @@ function Solucion() {
           </div>
         </Reveal>
 
-        {/* A) Panel oscuro — screenshots del producto */}
-        <Reveal delay={0.28}>
-          <div className="mt-8 overflow-hidden rounded-[28px] bg-[#0D2545]">
-            <div className="px-6 pt-8 pb-2 md:px-10 md:pt-10">
-              <p className="text-[13px] font-bold uppercase tracking-[1.2px] text-white/50">
-                Flujo real de puerta
-              </p>
-              <h3 className="mt-3 text-balance text-[1.9rem] font-extrabold leading-[1.15] text-white sm:text-[2.25rem]">
-                De la clave al registro{" "}
-                <span className="text-[#2EB4E9]">en segundos</span>.
-              </h3>
-              <p className="mt-3 max-w-[600px] text-[16px] leading-[1.65] text-white/60">
-                El equipo de puerta identifica, confirma y deja evidencia sin pasos manuales.
-              </p>
-            </div>
-
-            <div className="mt-6 grid gap-4 px-4 pb-6 md:grid-cols-3 md:px-6 md:pb-8">
-              {steps.map((step, i) => (
-                <div key={step.title} className="flex flex-col overflow-hidden rounded-[20px] bg-white/[0.06] ring-1 ring-white/10">
-                  <div
-                    className={cn(
-                      "relative flex aspect-[16/10] items-center justify-center overflow-hidden",
-                      step.tint,
-                    )}
-                  >
-                    {/* viñeta sutil en los bordes */}
-                    <div aria-hidden className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(0,0,0,0.06)_100%)]" />
-                    <div
-                      aria-hidden
-                      className="absolute left-3 top-3 z-20 rounded-md bg-white/90 px-2.5 py-1 text-[12px] font-bold shadow-sm backdrop-blur"
-                      style={{ color: step.tone }}
-                    >
-                      0{i + 1}
-                    </div>
-                    <Image
-                      src={step.img}
-                      alt={step.alt}
-                      fill
-                      quality={95}
-                      className="object-contain object-center p-5 drop-shadow-[0_10px_24px_rgba(0,0,0,0.22)]"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 360px"
-                    />
-                  </div>
-                  <div className="px-4 py-4">
-                    <h4 className="text-[17px] font-bold leading-snug text-white">
-                      {step.title}
-                    </h4>
-                    <p className="mt-1.5 text-[14px] leading-[1.6] text-white/55">{step.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Demo animada — fondo claro, separada del panel navy */}
-        <Reveal delay={0.2}>
-          <div className="mt-6 rounded-[28px] bg-gradient-to-b from-[#F4F8FC] to-white pb-14 pt-10">
-            <FlujoPuertaDemo />
-          </div>
-        </Reveal>
-
         {/* CTA */}
         <Reveal delay={0.35}>
           <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-[24px] border border-[#DDEAF5] bg-[#F8FBFE] p-5 text-center shadow-[0_18px_44px_rgba(15,42,79,0.06)] md:flex-row md:text-left">
@@ -1601,6 +1550,15 @@ function Solucion() {
               <p className="mt-1 text-[14px] leading-[1.5] text-[#6B7280]">
                 {CALL_CTA_MICROCOPY}
               </p>
+              <p className="mt-1.5 text-[13px] leading-[1.5] text-[#6B7280]">
+                Suscripción mensual accesible. Sin costo de instalación. Sin permanencia.
+              </p>
+              <a
+                href="/como-funciona"
+                className="mt-2 inline-flex items-center gap-1 text-[13px] font-semibold text-[#2EB4E9] hover:underline"
+              >
+                Ver flujo completo paso a paso →
+              </a>
             </div>
             <a
               href={CALL_CTA_HREF}
@@ -1651,7 +1609,7 @@ function ComoFunciona() {
   ]
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#F1F5F9] py-24 md:py-32">
+    <section id="como-funciona" className="relative isolate overflow-hidden bg-[#F1F5F9] py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,#FFFFFF_0%,#F4F8FC_44%,#F9FAFB_100%)]" />
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="grid gap-6 md:grid-cols-[0.92fr_1fr] md:items-end">
@@ -1768,74 +1726,39 @@ function ComoFunciona() {
 }
 
 /* ==============================================================
-   TESTIMONIOS — referencias de directores
+   STATS BLOCK — 3 números clave de impacto operativo
+   Reemplaza Testimonios hasta tener testimonios reales de clientes.
+   Cuando existan quotes reales, insertar sección Testimonios aquí.
    ============================================================== */
 
-const testimonios = [
-  {
-    quote: "Ya no hay gritos, no hay aglomeración, no hay carreras. Hay orden. Hay silencio. La diferencia se nota desde el primer día.",
-    name: "Lic. Rodrigo Fuentes",
-    role: "Director General · Colegio Montessori del Valle",
-    initial: "R",
-    accent: "#173E75",
-  },
-  {
-    quote: "Con Ekole podemos decirle a cualquier familia exactamente quién recogió a su hijo, a qué hora y quién lo autorizó. Esa transparencia genera una confianza que ningún grupo de WhatsApp puede dar.",
-    name: "Mtra. Alejandra Sandoval",
-    role: "Coordinadora de Primaria · Instituto Educativo San Patricio",
-    initial: "A",
-    accent: "#2EB4E9",
-  },
-]
+function StatsBlock() {
+  const stats = [
+    { value: "−70%", label: "tiempo de espera", sub: "en puerta" },
+    { value: "3 pasos", label: "el equipo entiende", sub: "en minutos" },
+    { value: "Día 1", label: "salida documentada", sub: "desde el inicio" },
+  ]
 
-function Testimonios() {
   return (
-    <section className="bg-[#F4F8FC] py-14 md:py-16">
+    <section className="bg-[#173E75] py-10 md:py-14">
       <div className="mx-auto max-w-6xl px-6">
-
-        <Reveal>
-          <p className="mb-6 text-center text-[13px] font-bold uppercase tracking-[1.2px] text-[#6B7280]">
-            Testimonios
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div className="grid gap-4 md:grid-cols-2">
-            {testimonios.map((t) => (
-              <div
-                key={t.name}
-                className="flex flex-col gap-4 rounded-[20px] border border-[#DDEAF5] bg-white p-6 shadow-[0_8px_24px_rgba(15,42,79,0.06)]"
-              >
-                {/* Comilla + texto */}
-                <div className="flex gap-3">
-                  <span
-                    className="mt-[-6px] flex-shrink-0 text-[40px] font-black leading-none"
-                    style={{ color: t.accent, opacity: 0.2 }}
-                    aria-hidden
-                  >
-                    "
-                  </span>
-                  <p className="text-[15px] leading-[1.7] text-[#374151]">{t.quote}</p>
-                </div>
-
-                {/* Autor */}
-                <div className="flex items-center gap-3 border-t border-[#E5E7EB] pt-4">
-                  <div
-                    className="flex size-9 flex-shrink-0 items-center justify-center rounded-full text-[13px] font-bold text-white"
-                    style={{ background: t.accent }}
-                  >
-                    {t.initial}
-                  </div>
-                  <div>
-                    <p className="text-[14px] font-bold text-[#111827]">{t.name}</p>
-                    <p className="text-[12px] text-[#6B7280]">{t.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
+        <div className="grid grid-cols-3 divide-x divide-white/15">
+          {stats.map((stat) => (
+            <div key={stat.value} className="flex flex-col items-center gap-1 px-4 text-center md:px-10">
+              <p className="text-[2.2rem] font-black leading-none text-[#2EB4E9] md:text-[3.5rem]">
+                {stat.value}
+              </p>
+              <p className="mt-1.5 text-[13px] font-semibold text-white md:text-[15px]">
+                {stat.label}
+              </p>
+              <p className="text-[11px] text-white/55 md:text-[12px]">
+                {stat.sub}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-5 text-center text-[11px] text-white/40">
+          Basado en operación real de salida con registro manual vs. Ekole
+        </p>
       </div>
     </section>
   )
@@ -2032,6 +1955,18 @@ function FAQ() {
       a: "No hay contrato forzoso de permanencia. Sí existe un contrato de servicios y confidencialidad para proteger la información del colegio, pero si Ekole no le aporta valor operativo durante los primeros 15 días, puede detener la activación sin costo.",
     },
     {
+      q: "¿Firmamos algo antes de compartir datos del colegio?",
+      a: "Sí. Antes de operar con información real, formalizamos el servicio y la confidencialidad por escrito. El contrato define el alcance, quién accede a los datos y bajo qué condiciones. El objetivo es que el director pueda avanzar sin sentir que expone la información del colegio.",
+    },
+    {
+      q: "¿Qué pasa con los datos si decidimos no continuar?",
+      a: "Los datos pertenecen al colegio y se usan únicamente para configurar y operar el servicio autorizado. Si decide no continuar, se acuerda el proceso de eliminación o entrega de la información conforme a lo pactado por escrito desde el inicio.",
+    },
+    {
+      q: "¿Hay contrato de permanencia forzosa?",
+      a: "No. El contrato de servicios y confidencialidad protege los datos del colegio, pero no amarra la relación. Si Ekole no aporta valor operativo durante los primeros 15 días, puede detener la activación sin costo adicional.",
+    },
+    {
       q: "¿En qué se diferencia de otros sistemas escolares?",
       a: "Otros gestionan lo de DENTRO (calificaciones, asistencia, cobro). Ekole cubre el momento que el padre VIVE todos los días: la salida. No reemplazamos su sistema — lo complementamos donde ningún otro llega.",
     },
@@ -2181,7 +2116,7 @@ export function Footer() {
   const contactLinks = [
     { label: CALL_CTA_LABEL, href: CALL_CTA_HREF },
     { label: DIAGNOSTIC_CTA_SHORT_LABEL, href: DIAGNOSTIC_CTA_HREF },
-    { label: "Política de Privacidad", href: "https://www.ekole.app/privacy-and-policy" },
+    { label: "Aviso de Privacidad", href: "/aviso-privacidad" },
     { label: "Términos y condiciones", href: "https://www.ekole.app/terms-and-conditions" },
   ]
 
@@ -2291,16 +2226,14 @@ export default function SoftwareDevelopmentWebsite() {
       <HeroHeader />
       <main className="overflow-hidden">
         <Hero />
-        <EkoleDashboardMockup />
         <SocialProof />
         <Problema />
         <Escenarios />
+        <StatsBlock />
         <Diagnostico />
         <EfectoEkole />
         <Solucion />
         <ComoFunciona />
-        <Testimonios />
-        <ConfianzaDatos />
         <FAQ />
         <CTAFinal />
       </main>
