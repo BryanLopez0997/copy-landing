@@ -387,7 +387,7 @@ function Hero() {
                 <span className="relative inline-flex size-1.5 rounded-full bg-[#10B981]" />
               </span>
               <span className="text-[12px] font-semibold text-[#4B5563]">
-                Activaciones abiertas · Ciclo 2026-2027 · Colegios privados en México
+                Ciclo 2026-2027 · Cierre de activaciones en julio · Reabre 2027
               </span>
             </motion.div>
 
@@ -401,18 +401,20 @@ function Hero() {
               variants={itemRise}
               className="mx-auto mt-7 max-w-[340px] break-words text-[1.95rem] font-extrabold leading-[1.08] tracking-[-0.02em] text-[#173E75] sm:max-w-3xl sm:text-balance sm:text-[3rem] md:text-[3.75rem] lg:mx-0"
             >
-              Salida escolar{" "}
-              <span className="text-[#2EB4E9]">más rápida</span>, con evidencia
-              cuando una familia pregunte.
+              El colegio sabe quién entra.{" "}
+              <span className="text-[#2EB4E9]">No tiene evidencia</span> de
+              quién se llevó a cada alumno.
             </motion.h1>
 
             <motion.p
               variants={itemRise}
               className="mx-auto mt-6 max-w-[340px] text-[16px] font-normal leading-[1.6] text-[#4B5563] sm:max-w-[640px] sm:text-balance md:text-[18px] lg:mx-0 lg:text-left"
             >
-              Ekole ayuda a su equipo de puerta a solicitar, validar y registrar
-              cada entrega. Reduce filas hoy y deja constancia si mañana hay un
-              reclamo, accidente o solicitud formal.
+              El sistema que reemplaza los grupos de WhatsApp de la salida con
+              un <span className="font-semibold text-[#173E75]">registro digital</span>:
+              quién recogió a cada alumno, cuándo y con qué autorización.{" "}
+              <span className="font-semibold text-[#173E75]">Constancia</span> ante
+              cualquier reclamo, accidente o solicitud formal.
             </motion.p>
 
             <motion.div
@@ -433,7 +435,7 @@ function Hero() {
                   href={DIAGNOSTIC_CTA_HREF}
                   className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-[#D1D5DB] bg-white/90 px-5 py-3 text-[16px] font-semibold text-[#173E75] shadow-sm transition-colors duration-150 hover:border-[#2EB4E9] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2EB4E9] focus-visible:ring-offset-2 sm:w-auto"
                 >
-                  Ver diagnóstico
+                  {DIAGNOSTIC_CTA_LABEL}
                   <ArrowRight className="size-5 flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
                 </a>
               </div>
@@ -677,7 +679,7 @@ function Escenarios() {
         "WhatsApp ayuda a coordinar, pero un mensaje no es un registro controlado por el colegio: puede perder contexto, reenviarse o borrarse.",
       quote: "“¿Quién autorizó que mi hijo se fuera con otra familia?”",
       evidence: ["Tutor autorizado", "Persona que recoge", "Hora de entrega"],
-      risk: "Si el registro vive fuera del colegio, el colegio no controla la evidencia.",
+      risk: "Si el adulto que recogió no era el autorizado, el colegio responde por la entrega indebida bajo LFPDPPP.",
     },
     {
       icon: Stethoscope,
@@ -686,7 +688,7 @@ function Escenarios() {
       body: "La familia no busca una explicación general. Necesita reconstruir qué pasó, quién intervino y en qué momento.",
       quote: "“¿A qué hora salió? ¿Quién lo entregó? ¿Quién lo autorizó?”",
       evidence: ["Hora exacta", "Responsable de entrega", "Historial consultable"],
-      risk: "Sin constancia, una actuación correcta puede quedar como una versión difícil de sostener.",
+      risk: "Sin bitácora, la versión del colegio depende de la memoria — y la confianza de las familias no se reconstruye con explicaciones.",
     },
     {
       icon: FileText,
@@ -695,7 +697,7 @@ function Escenarios() {
       body: "En divorcio o custodia, una solicitud formal puede pedir fechas, personas autorizadas y procedimiento.",
       quote: "“Necesito el historial de entregas y autorizaciones.”",
       evidence: ["Fechas y horarios", "Autorizaciones", "Bitácora exportable"],
-      risk: "Cuando el conflicto llega por escrito, la memoria ya no alcanza.",
+      risk: "Sin historial exportable, el colegio no puede acreditar el protocolo que siguió ante un juzgado.",
     },
   ]
 
@@ -809,8 +811,9 @@ function Escenarios() {
                   <span className="text-[#5ECCE6]">solicitud formal.</span>
                 </p>
                 <p className="mt-4 max-w-[620px] text-[16px] leading-[1.65] text-white/80">
-                  Si cualquiera de estos casos le suena familiar, el diagnóstico ayuda a detectar
-                  dónde se pierde evidencia antes de comprar una solución.
+                  Si cualquiera de estos casos le suena familiar, el diagnóstico identifica
+                  dónde se pierde evidencia y estima la exposición específica del colegio
+                  ante LFPDPPP — en 3 minutos, sin comprar nada.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {["3 min", "Resultado inmediato", "Confidencial"].map((item) => (
@@ -1733,7 +1736,7 @@ function ComoFunciona() {
 
 function StatsBlock() {
   const stats = [
-    { value: "−70%", label: "tiempo de espera", sub: "en puerta" },
+    { value: "4.5 min", label: "tiempo de salida", sub: "antes: 30 min" },
     { value: "3 pasos", label: "el equipo entiende", sub: "en minutos" },
     { value: "Día 1", label: "salida documentada", sub: "desde el inicio" },
   ]
@@ -1919,6 +1922,18 @@ function FAQItem({ q, a, defaultOpen = false }: { q: string; a: React.ReactNode;
 function FAQ() {
   const faqs = [
     {
+      q: "¿En qué se diferencia de otros sistemas escolares?",
+      a: "Otros gestionan lo de DENTRO (calificaciones, asistencia, cobro). Ekole cubre el momento que el padre VIVE todos los días: la salida. No reemplazamos su sistema — lo complementamos donde ningún otro llega.",
+    },
+    {
+      q: "¿Firmamos algo antes de compartir datos del colegio?",
+      a: "Sí. Antes de operar con información real, formalizamos el servicio y la confidencialidad por escrito. El contrato define el alcance, quién accede a los datos y bajo qué condiciones. El objetivo es que el director pueda avanzar sin sentir que expone la información del colegio.",
+    },
+    {
+      q: "¿Los datos están seguros?",
+      a: "Sí. Antes de operar con información real, formalizamos el servicio y la confidencialidad por escrito para proteger datos de alumnos, tutores autorizados y personal. Los datos se resguardan bajo reglas claras de uso, acceso y responsabilidad, alineadas con la LFPDPPP. El colegio conserva la propiedad de su información.",
+    },
+    {
       q: "¿Cuánto cuesta Ekole?",
       a: "Depende del tamaño del colegio y del flujo de salida, pero Ekole está pensado como una suscripción accesible, no como un proyecto caro de implementación. En la revisión de 20 minutos le decimos qué plan aplica, qué incluye y cómo se compara contra el costo de operar una salida lenta o sin evidencia. No hay costo de instalación, contrato forzoso ni riesgo inicial: los primeros 15 días van por cuenta de Ekole.",
     },
@@ -1947,32 +1962,20 @@ function FAQ() {
       a: "Es normal. Por eso los primeros 15 días van por cuenta de Ekole y los acompañamos paso a paso. El flujo base son tres pasos que el maestro entiende en minutos: buscar clave, confirmar alumno y registrar entrega. Las familias pueden recoger con clave sin descargar app. Si su colegio necesita avanzar por etapas, lo hacemos juntos.",
     },
     {
-      q: "¿Los datos están seguros?",
-      a: "Sí. Antes de operar con información real, formalizamos el servicio y la confidencialidad por escrito para proteger datos de alumnos, tutores autorizados y personal. Los datos se resguardan bajo reglas claras de uso, acceso y responsabilidad, alineadas con la LFPDPPP. El colegio conserva la propiedad de su información.",
-    },
-    {
       q: "¿Qué pasa si no me convence?",
       a: "No hay contrato forzoso de permanencia. Sí existe un contrato de servicios y confidencialidad para proteger la información del colegio, pero si Ekole no le aporta valor operativo durante los primeros 15 días, puede detener la activación sin costo.",
-    },
-    {
-      q: "¿Firmamos algo antes de compartir datos del colegio?",
-      a: "Sí. Antes de operar con información real, formalizamos el servicio y la confidencialidad por escrito. El contrato define el alcance, quién accede a los datos y bajo qué condiciones. El objetivo es que el director pueda avanzar sin sentir que expone la información del colegio.",
-    },
-    {
-      q: "¿Qué pasa con los datos si decidimos no continuar?",
-      a: "Los datos pertenecen al colegio y se usan únicamente para configurar y operar el servicio autorizado. Si decide no continuar, se acuerda el proceso de eliminación o entrega de la información conforme a lo pactado por escrito desde el inicio.",
     },
     {
       q: "¿Hay contrato de permanencia forzosa?",
       a: "No. El contrato de servicios y confidencialidad protege los datos del colegio, pero no amarra la relación. Si Ekole no aporta valor operativo durante los primeros 15 días, puede detener la activación sin costo adicional.",
     },
     {
-      q: "¿En qué se diferencia de otros sistemas escolares?",
-      a: "Otros gestionan lo de DENTRO (calificaciones, asistencia, cobro). Ekole cubre el momento que el padre VIVE todos los días: la salida. No reemplazamos su sistema — lo complementamos donde ningún otro llega.",
-    },
-    {
       q: "¿El registro de salidas tiene validez como evidencia?",
       a: "Cada salida se documenta con fecha, hora, tutor autorizado, personal receptor y timestamp automático: elementos que ayudan a sustentar un argumento de supervisión. Es evidencia documental para respaldar diligencia operativa. Como toda evidencia, recomendamos integrarla a su estrategia de respaldo junto con su equipo legal.",
+    },
+    {
+      q: "¿Qué pasa con los datos si decidimos no continuar?",
+      a: "Los datos pertenecen al colegio y se usan únicamente para configurar y operar el servicio autorizado. Si decide no continuar, se acuerda el proceso de eliminación o entrega de la información conforme a lo pactado por escrito desde el inicio.",
     },
   ]
 
@@ -2043,11 +2046,12 @@ function CTAFinal() {
             Revisión ejecutiva
           </p>
           <h2 className="mt-4 max-w-[700px] text-balance text-[2.35rem] font-extrabold leading-[1.12] text-white sm:text-[3rem]">
-            Antes de que una salida sea problema, revísela con ojos de{" "}
-            <span className="text-[#5ECCE6]">evidencia.</span>
+            ¿Cuánto vale la certeza de que{" "}
+            <span className="text-[#5ECCE6]">ningún alumno</span> salió con la
+            persona equivocada?
           </h2>
           <p className="mt-6 max-w-[640px] text-[18px] font-normal leading-[1.65] text-white/80">
-            En 20 minutos revisamos su flujo actual, sus puntos de exposición y qué tan rápido podría operar Ekole con sus datos listos.
+            En 20 minutos revisamos dónde el colegio está expuesto hoy y qué tan rápido podría operar Ekole con sus datos.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
