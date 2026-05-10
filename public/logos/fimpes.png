@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FIMPES</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YC3RFKQZLW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-YC3RFKQZLW');
+    </script>
+    <script type="module" crossorigin src="/assets/index-aa2d2749.js"></script>
+    <link rel="stylesheet" href="/assets/index-bebb27ab.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+  </body>
+</html>
+<script>
+  const global = globalThis;
+</script>
