@@ -33,6 +33,7 @@ import {
 import { LeadForm, ThankYou, buildWaMessage, type FormSubmitData } from "./diagnostico/form"
 import { ShareButton } from "./diagnostico/share-button"
 import { generateDirectorRef, setStoredRef } from "@/lib/attribution"
+import { supabase } from "@/lib/supabase"
 
 type Phase = "quiz" | "results" | "thankyou"
 
@@ -101,6 +102,30 @@ export default function DiagnosticoTool() {
     setTimeout(() => {
       thankyouRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
     }, 50)
+
+    // Captura UTM params
+    const params = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null
+    const areasRiesgo = (Object.keys(WEIGHTS) as QId[]).filter((q) => isAtRisk(q)).join(",")
+
+    // Guarda en Supabase en segundo plano
+    supabase.from("leads").insert({
+      nombre: data.nombre.trim(),
+      whatsapp_numero: data.telefono,
+      nombre_colegio: data.colegio.trim(),
+      matricula: data.matricula,
+      origen: "diagnostico",
+      fase_plf: "pre_prelaunch",
+      estatus: "nuevo",
+      puntaje_diagnostico: nivel,
+      areas_riesgo: areasRiesgo || null,
+      solicito_guia: true,
+      secuencia_paso: 0,
+      mensaje_enviado_count: 0,
+      utm_source: params?.get("utm_source") ?? null,
+      utm_campaign: params?.get("utm_campaign") ?? null,
+    }).then(({ error }) => {
+      if (error) console.error("Supabase error:", error)
+    })
   }
 
   const { nivel } = getNivel(score)

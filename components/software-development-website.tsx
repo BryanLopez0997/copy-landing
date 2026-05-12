@@ -24,6 +24,7 @@ import {
 } from "lucide-react"
 import { EfectoEkoleChart } from "./efecto-ekole-chart"
 import { EkoleDashboardMockup } from "./ekole-dashboard-mockup"
+import { WhatsappLeadModal } from "./whatsapp-lead-modal"
 
 /* ==============================================================
    Launch funnel:
@@ -38,6 +39,10 @@ const DIAGNOSTIC_CTA_HREF = "/diagnostico"
 const DIAGNOSTIC_CTA_LABEL = "Hacer diagnóstico en 3 min"
 const DIAGNOSTIC_CTA_SHORT_LABEL = "Diagnóstico legal"
 const DIAGNOSTIC_CTA_MICROCOPY = "Gratis · Resultado inmediato · Confidencial"
+
+/* ---------- modal context ---------- */
+const ModalContext = React.createContext<() => void>(() => {})
+function useOpenModal() { return React.useContext(ModalContext) }
 
 /* ---------- utilities ---------- */
 
@@ -120,6 +125,7 @@ const menuItems = [
 export function HeroHeader() {
   const [open, setOpen] = React.useState(false)
   const [scrolled, setScrolled] = React.useState(false)
+  const openModal = useOpenModal()
 
   React.useEffect(() => {
     if (typeof window === "undefined") return
@@ -156,15 +162,14 @@ export function HeroHeader() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <a
-              href={CALL_CTA_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={openModal}
               className="hidden items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-colors duration-150 hover:-translate-y-[1px] hover:bg-primary-dark hover:shadow-md active:translate-y-px active:shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-sky focus-visible:ring-offset-2 lg:inline-flex"
             >
               {CALL_CTA_LABEL}
               <ArrowRight className="size-3.5" />
-            </a>
+            </button>
             <button
               type="button"
               aria-label="Abrir menú"
@@ -191,15 +196,13 @@ export function HeroHeader() {
                 </li>
               ))}
               <li>
-                <a
-                  href={CALL_CTA_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
-                  className="mt-1 block rounded-lg bg-primary px-3 py-2 text-center font-medium text-primary-foreground"
+                <button
+                  type="button"
+                  onClick={() => { setOpen(false); openModal() }}
+                  className="mt-1 block w-full rounded-lg bg-primary px-3 py-2 text-center font-medium text-primary-foreground"
                 >
                   {CALL_CTA_LABEL}
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -333,6 +336,7 @@ export function LegalCredentials({
    ============================================================== */
 
 function Hero() {
+  const openModal = useOpenModal()
   const adoptionItems = [
     {
       icon: Smartphone,
@@ -378,7 +382,7 @@ function Hero() {
           initial="visible"
           animate="visible"
           variants={containerFade}
-          className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14"
+          className="grid items-start gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14"
         >
           <div className="min-w-0 text-center lg:text-left">
             <motion.div variants={itemRise} className="flex items-center justify-center gap-1.5 lg:justify-start">
@@ -422,15 +426,14 @@ function Hero() {
               className="mx-auto mt-8 flex w-full max-w-[340px] flex-col items-center gap-3 sm:max-w-none lg:mx-0 lg:items-start"
             >
               <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
-                <a
-                  href={CALL_CTA_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#173E75] px-6 py-3 text-[16px] font-semibold text-white shadow-sm transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2EB4E9] focus-visible:ring-offset-2 sm:w-auto"
+                <button
+                  type="button"
+                  onClick={openModal}
+                  className="group inline-flex w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#173E75] px-6 py-3 text-[16px] font-semibold text-white shadow-sm transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2EB4E9] focus-visible:ring-offset-2 sm:w-auto"
                 >
                   {CALL_CTA_FULL_LABEL}
                   <ArrowRight className="size-5 flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
-                </a>
+                </button>
                 <a
                   href={DIAGNOSTIC_CTA_HREF}
                   className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-[#D1D5DB] bg-white/90 px-5 py-3 text-[16px] font-semibold text-[#173E75] shadow-sm transition-colors duration-150 hover:border-[#2EB4E9] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2EB4E9] focus-visible:ring-offset-2 sm:w-auto"
@@ -478,7 +481,7 @@ function Hero() {
             </motion.div>
           </div>
 
-          <motion.div variants={itemRise} className="relative mx-auto w-full max-w-[340px] min-w-0 sm:max-w-none">
+          <motion.div variants={itemRise} className="relative mx-auto w-full max-w-[340px] min-w-0 sm:max-w-none lg:pt-24">
             <div className="relative overflow-hidden rounded-[22px] border border-white/80 bg-white/60 p-3 shadow-[0_24px_60px_rgba(15,42,79,0.10)] ring-1 ring-black/[0.03] backdrop-blur">
               <div className="relative aspect-[16/10] overflow-hidden rounded-[14px] border border-[#DDE7F2] bg-[#EEF4FA]">
                 <Image
@@ -1202,6 +1205,7 @@ const QR_GRID = [
 ]
 
 export function FlujoPuertaDemo() {
+  const openModal = useOpenModal()
   const [phase, setPhase] = React.useState<"clave" | "confirm" | "result">("clave")
   const [digits, setDigits] = React.useState<string>("")
 
@@ -1434,6 +1438,7 @@ export function FlujoPuertaDemo() {
    ============================================================== */
 
 function Solucion() {
+  const openModal = useOpenModal()
   const solutionCards = [
     {
       icon: KeyRound,
@@ -1563,15 +1568,14 @@ function Solucion() {
                 Ver flujo completo paso a paso →
               </a>
             </div>
-            <a
-              href={CALL_CTA_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={openModal}
               className="inline-flex flex-shrink-0 items-center justify-center gap-2.5 rounded-lg bg-[#173E75] px-6 py-3.5 text-[16px] font-semibold text-white shadow-md transition-colors duration-150 hover:bg-[#0F2A4F] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2"
             >
               {CALL_CTA_FULL_LABEL}
               <ArrowRight className="size-5 flex-shrink-0" />
-            </a>
+            </button>
           </div>
         </Reveal>
       </div>
@@ -1584,6 +1588,7 @@ function Solucion() {
    ============================================================== */
 
 function ComoFunciona() {
+  const openModal = useOpenModal()
   const steps = [
     {
       icon: MessageSquare,
@@ -1657,15 +1662,14 @@ function ComoFunciona() {
               </div>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <a
-                  href={CALL_CTA_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={openModal}
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-[16px] font-semibold text-[#173E75] shadow-md transition-colors duration-150 hover:bg-[#EEF4FA] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#173E75]"
                 >
                   {CALL_CTA_FULL_LABEL}
                   <ArrowRight className="size-5 flex-shrink-0" />
-                </a>
+                </button>
                 <p className="text-[14px] leading-[1.5] text-white/70">
                   {CALL_CTA_MICROCOPY}
                 </p>
@@ -2029,6 +2033,7 @@ function FAQ() {
    ============================================================== */
 
 function CTAFinal() {
+  const openModal = useOpenModal()
   const callPoints = [
     "Dónde se pierde evidencia hoy.",
     "Qué brechas conviene cerrar primero.",
@@ -2055,15 +2060,14 @@ function CTAFinal() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href={CALL_CTA_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={openModal}
               className="group inline-flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3.5 text-[16px] font-semibold text-[#173E75] shadow-md transition-colors duration-150 hover:bg-[#EEF4FA] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#173E75]"
             >
               {CALL_CTA_FULL_LABEL}
               <ArrowRight className="size-5 flex-shrink-0 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            </button>
             <a
               href={DIAGNOSTIC_CTA_HREF}
               className="inline-flex items-center justify-center rounded-lg border border-white/30 px-6 py-3.5 text-[16px] font-semibold text-white transition-colors duration-150 hover:border-white/55 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5ECCE6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#173E75]"
@@ -2225,8 +2229,16 @@ export function Footer() {
    ============================================================== */
 
 export default function SoftwareDevelopmentWebsite() {
+  const [modalOpen, setModalOpen] = React.useState(false)
+  const openModal = React.useCallback(() => setModalOpen(true), [])
+
   return (
-    <>
+    <ModalContext.Provider value={openModal}>
+      <WhatsappLeadModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        whatsappHref={CALL_CTA_HREF}
+      />
       <HeroHeader />
       <main className="overflow-hidden">
         <Hero />
@@ -2242,6 +2254,6 @@ export default function SoftwareDevelopmentWebsite() {
         <CTAFinal />
       </main>
       <Footer />
-    </>
+    </ModalContext.Provider>
   )
 }

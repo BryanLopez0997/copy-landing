@@ -69,6 +69,80 @@ El componente `components/analytics/clarity.tsx` ya está preparado:
 
 ---
 
+---
+
+# Handoff — Activar Supabase (base de datos de leads)
+
+> El código y la tabla ya están listos. Solo se requiere agregar la variable de entorno en Vercel.
+
+---
+
+## Datos del proyecto
+
+| Campo | Valor |
+|---|---|
+| Supabase URL | `https://empsvaiihiseksiyghhj.supabase.co` |
+| Variable de entorno (URL) | `NEXT_PUBLIC_SUPABASE_URL` |
+| Anon Key | `sb_publishable_RsJ8erIUaiaR1jZzbJZX8g_N48bUHtv` |
+| Variable de entorno (Key) | `NEXT_PUBLIC_SUPABASE_ANON_KEY` |
+| Tabla en Supabase | `leads` (ya creada con RLS activo) |
+
+---
+
+## Pasos
+
+### Paso 1 — Agregar las variables de entorno en Vercel
+
+1. Entrar a [vercel.com](https://vercel.com) → seleccionar el proyecto de Ekole
+2. Ir a **Settings → Environment Variables**
+3. Crear primera variable:
+   - **Name:** `NEXT_PUBLIC_SUPABASE_URL`
+   - **Value:** `https://empsvaiihiseksiyghhj.supabase.co`
+   - **Environments:** marcar Production ✓ y Preview ✓
+4. Crear segunda variable:
+   - **Name:** `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - **Value:** `sb_publishable_RsJ8erIUaiaR1jZzbJZX8g_N48bUHtv`
+   - **Environments:** marcar Production ✓ y Preview ✓
+5. Guardar ambas
+
+---
+
+### Paso 2 — Hacer redeploy
+
+1. Ir a la pestaña **Deployments** del proyecto en Vercel
+2. En el deploy más reciente, clic en los tres puntos `···` → **Redeploy**
+3. Confirmar sin cambiar nada más
+
+---
+
+### Paso 3 — Prueba rápida en producción
+
+1. Abrir `https://ekole.app` → hacer clic en "Agendar llamada por WhatsApp"
+2. Llenar el modal con datos de prueba y dar clic en "Continuar a WhatsApp"
+3. Entrar a [supabase.com](https://supabase.com) → proyecto Ekole → **Table Editor → leads**
+4. Debe aparecer el registro recién creado
+
+---
+
+## Lo que NO necesitas hacer
+
+- **No correr SQL** — la tabla `leads` y sus políticas ya están creadas en Supabase
+- **No instalar nada** — `@supabase/supabase-js` ya está en `package.json`
+- **No tocar código** — `lib/supabase.ts` ya está configurado y conectado
+
+---
+
+## Para desarrollo local
+
+Crear el archivo `.env.local` en la raíz del proyecto (no va a GitHub, está en `.gitignore`):
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://empsvaiihiseksiyghhj.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_RsJ8erIUaiaR1jZzbJZX8g_N48bUHtv
+```
+
+---
+
 ## Contacto
 
 Cualquier duda: hipolito.garzon@gmail.com
